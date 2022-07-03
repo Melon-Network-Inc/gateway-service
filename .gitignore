@@ -1,0 +1,9 @@
+.idea
+.vscode
+dist
+bazel-bin
+bazel-account-service
+bazel-out
+bazel-testlogs
+coverage**
+*.out
