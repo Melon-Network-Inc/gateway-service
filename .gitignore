@@ -2,7 +2,7 @@
 .vscode
 dist
 bazel-bin
-bazel-account-service
+bazel-gateway-service
 bazel-out
 bazel-testlogs
 coverage**
