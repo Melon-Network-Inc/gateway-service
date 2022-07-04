@@ -1,3 +1,11 @@
+.PHONY: server
+server: ## run the server
+	go run cmd/server/main.go
+
+.PHONY: run
+run: ## run the server with bazel
+	bazel run //cmd/server:main
+	
 .PHONY: build
 build: ## update dependency and build using bazel
 	bazel run //:gazelle -- update-repos -from_file=go.mod -to_macro=deps.bzl%go_dependencies

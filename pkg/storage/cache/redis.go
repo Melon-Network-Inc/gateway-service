@@ -3,9 +3,10 @@ package cache
 import (
 	"context"
 	"fmt"
-	"gateway-service/pkg/config"
 	"strconv"
 	"strings"
+
+	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 
 	"gopkg.in/vmihailenco/msgpack.v2"
 

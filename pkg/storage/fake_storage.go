@@ -1,6 +1,6 @@
 package storage
 
-import "gateway-service/pkg/storage/cache"
+import "github.com/Melon-Network-Inc/gateway-service/pkg/storage/cache"
 
 // FakeStorage exports all fields which can be necessary for tests.
 type FakeStorage struct {

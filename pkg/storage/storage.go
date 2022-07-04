@@ -2,8 +2,10 @@ package storage
 
 import (
 	"context"
-	"gateway-service/pkg/config"
-	"gateway-service/pkg/storage/cache"
+
+	"github.com/Melon-Network-Inc/gateway-service/pkg/storage/cache"
+
+	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 )
 
 type storage struct{}

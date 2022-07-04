@@ -6,7 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
-	"gateway-service/pkg/utils"
+	"github.com/Melon-Network-Inc/gateway-service/pkg/utils"
 )
 
 // Configuration keeps all config providers

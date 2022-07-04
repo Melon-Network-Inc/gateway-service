@@ -1,7 +1,7 @@
 package server
 
 import (
-	"gateway-service/pkg/config"
+	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 
 	"github.com/gin-contrib/cors"
 
