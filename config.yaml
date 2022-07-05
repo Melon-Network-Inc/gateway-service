@@ -1,32 +1,6 @@
-# DEFAULTS
-server_defaults: &server_defaults
-  auth_token_validity_period: 15m
-
 redis_defaults: &redis_defaults
   password: ""
   host: "localhost"
   port: "6379"
   db: 0
-  expiration_time: 1m # how long cache is valid
-
-defaults: &defaults
-  <<: *server_defaults
-  redis:
-    <<: *redis_defaults
-
-# CONFIGS
-development:
-  <<: *defaults
-
-production: # Docker for now
-  <<: *defaults
-  redis:
-    <<: *redis_defaults
-    host: "cache"
-
-test:
-  <<: *defaults
-  redis:
-    <<: *redis_defaults
-    port: "6380"
-    expiration_time: 50ms
+  expiration_time: 1m

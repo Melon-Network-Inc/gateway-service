@@ -1,18 +1,14 @@
 package config
 
 import (
-	"time"
-
-	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
 type redisConfig struct {
-	password       string
-	host           string
-	port           string
-	db             int
-	expirationTime time.Duration
+	host     string
+	port     string
+	password string
+	db       int
 }
 
 func (config *redisConfig) GetPassword() string {
@@ -31,36 +27,20 @@ func (config *redisConfig) GetDB() int {
 	return config.db
 }
 
-func (config *redisConfig) GetExpirationTime() time.Duration {
-	return config.expirationTime
-}
-
 type generalConfig struct {
 	*viper.Viper
 }
 
 func (config *generalConfig) getRedisConfig() *redisConfig {
-	password := config.GetString("redis.password")
-	host := config.GetString("redis.host")
-	port := config.GetString("redis.port")
-	db := config.GetInt("redis.db")
-	expirationTime := config.GetDuration("redis.expiration_time")
-
-	if host == "" || port == "" || db < 0 || expirationTime < 0 {
-		log.WithFields(log.Fields{
-			"password":        password,
-			"host":            host,
-			"port":            port,
-			"db":              db,
-			"expiration time": expirationTime,
-		}).Fatal("Config file doesn't contain valid redis access data.")
-	}
+	host := "localhost"
+	port := "6379"
+	password := ""
+	db := 0
 
 	return &redisConfig{
-		password:       password,
-		host:           host,
-		port:           port,
-		db:             db,
-		expirationTime: expirationTime,
+		host:     host,
+		port:     port,
+		password: password,
+		db:       db,
 	}
 }

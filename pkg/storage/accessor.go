@@ -1,6 +1,13 @@
 package storage
 
+import (
+	"context"
+
+	"github.com/Melon-Network-Inc/gateway-service/pkg/entity"
+)
+
 type usersDataAccessor interface {
+	GetUser(ctx context.Context, token string) (entity.User, error)
 }
 
 // Accessor is interface which defines all functions used on database/cache/fts
