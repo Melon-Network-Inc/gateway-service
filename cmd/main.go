@@ -1,9 +1,9 @@
-package cmd
+package main
 
 import (
 	"os"
 
-	"github.com/Melon-Network-Inc/gateway-service/server"
+	"github.com/Melon-Network-Inc/gateway-service/cmd/server"
 
 	"github.com/sirupsen/logrus"
 )

@@ -1,3 +1,7 @@
+# DEFAULTS
+server_defaults: &server_defaults
+  auth_token_validity_period: 15m
+
 redis_defaults: &redis_defaults
   password: ""
   host: "localhost"
@@ -22,8 +26,6 @@ production: # Docker for now
 
 test:
   <<: *defaults
-  secret_key: "secret"
-  random_password_length: 32
   redis:
     <<: *redis_defaults
     port: "6380"

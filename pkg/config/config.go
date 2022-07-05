@@ -27,10 +27,12 @@ func New() *Configuration {
 	if cp := os.Getenv(`MELON_CONFIG_PATH`); cp != "" {
 		v.AddConfigPath(cp)
 	}
-	v.AddConfigPath(`$GOPATH/src/github.com/Melon-Network-Inc/gateway-service`)
+
+	v.AddConfigPath(`../../`)
 
 	cn := utils.GetenvOrDefault(`MELON_CONFIG_NAME`, "config")
 	v.SetConfigName(cn)
+	v.SetConfigType("yaml")
 
 	err := v.ReadInConfig()
 	if err != nil {
