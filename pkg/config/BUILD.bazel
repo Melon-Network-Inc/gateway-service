@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "config",
+    srcs = [
+        "config.go",
+        "providers.go",
+        "utils.go",
+    ],
+    importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/config",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_spf13_viper//:viper"],
+)

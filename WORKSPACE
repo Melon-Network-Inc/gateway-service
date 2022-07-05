@@ -1,4 +1,4 @@
-workspace(name = "com_github_melonnetwork_account_service")
+workspace(name = "com_github_melonnetwork_gateway_service")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 

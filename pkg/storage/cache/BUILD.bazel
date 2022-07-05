@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cache",
+    srcs = [
+        "accessor.go",
+        "fake_cache.go",
+        "redis.go",
+    ],
+    importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/storage/cache",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/config",
+        "@com_github_go_redis_redis_v9//:redis",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@in_gopkg_vmihailenco_msgpack_v2//:msgpack_v2",
+    ],
+)

@@ -12,6 +12,6 @@ func New(ctx *gin.Context) Accessor {
 	accountService := newAccountService()
 	return &service{
 		paymentServiceAccessor: paymentService,
-		accountServiceAccessor: accountService
+		accountServiceAccessor: accountService,
 	}
 }

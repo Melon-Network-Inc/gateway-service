@@ -1,6 +1,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
-# gazelle:prefix github.com/Melon-Network-Inc/account-service
+# gazelle:prefix github.com/Melon-Network-Inc/gateway-service
 gazelle(name = "gazelle")
 
 gazelle(

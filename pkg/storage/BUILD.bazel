@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "storage",
+    srcs = [
+        "accessor.go",
+        "fake_storage.go",
+        "storage.go",
+        "user.go",
+    ],
+    importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/storage",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/config",
+        "//pkg/entity",
+        "//pkg/storage/cache",
+        "@com_github_sirupsen_logrus//:logrus",
+    ],
+)

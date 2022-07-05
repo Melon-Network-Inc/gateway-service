@@ -4,7 +4,7 @@ server: ## run the server
 
 .PHONY: run
 run: ## run the server with bazel
-	bazel run //cmd/server:main
+	bazel run cmd/server
 	
 .PHONY: build
 build: ## update dependency and build using bazel

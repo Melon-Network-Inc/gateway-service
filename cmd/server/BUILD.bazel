@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "server_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/Melon-Network-Inc/gateway-service/cmd/server",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//pkg/config",
+        "//pkg/middleware",
+        "//pkg/storage",
+        "@com_github_gin_contrib_cors//:cors",
+        "@com_github_gin_gonic_gin//:gin",
+        "@com_github_sirupsen_logrus//:logrus",
+    ],
+)
+
+go_binary(
+    name = "server",
+    embed = [":server_lib"],
+    visibility = ["//visibility:public"],
+)

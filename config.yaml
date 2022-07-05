@@ -1,6 +1,0 @@
-redis_defaults: &redis_defaults
-  password: ""
-  host: "localhost"
-  port: "6379"
-  db: 0
-  expiration_time: 1m
