@@ -1,7 +1,7 @@
 # MelonWallet Gateway Service
 
 ---------------------
-The MelonPay microservice responsible for service routing, rate-limiting, and account authentication.
+The MelonWallet microservice responsible for service routing, rate-limiting, and account authentication.
 
 ## Compile and build
 
