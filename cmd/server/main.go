@@ -34,8 +34,8 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	router := gin.Default()
 	router.Use(corsHandler)
 
-
-	router.Group("/account")
+	router.Group("/auth")
+	router.Group("/account", authenticator)
 	router.Group("/address", authenticator)
 	router.Group("/friend", authenticator)
 	router.Group("/transaction", authenticator)
