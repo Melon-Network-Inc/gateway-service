@@ -35,7 +35,9 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	router.Use(corsHandler)
 
 	router.Group("/auth")
+	router.Group("/whitelist")
 	router.Group("/account", authenticator)
+	router.Group("/activity", authenticator)
 	router.Group("/address", authenticator)
 	router.Group("/friend", authenticator)
 	router.Group("/transaction", authenticator)
