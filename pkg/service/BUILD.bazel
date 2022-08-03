@@ -3,10 +3,8 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "service",
     srcs = [
-        "accessor.go",
         "account.go",
         "payment.go",
-        "service.go",
     ],
     importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/service",
     visibility = ["//visibility:public"],

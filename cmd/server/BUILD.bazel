@@ -8,6 +8,7 @@ go_library(
     deps = [
         "//pkg/config",
         "//pkg/middleware",
+        "//pkg/service",
         "//pkg/storage",
         "@com_github_gin_contrib_cors//:cors",
         "@com_github_gin_gonic_gin//:gin",

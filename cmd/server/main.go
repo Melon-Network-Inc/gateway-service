@@ -6,6 +6,7 @@ import (
 
 	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/middleware"
+	"github.com/Melon-Network-Inc/gateway-service/pkg/service"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/storage"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -29,18 +30,23 @@ func New() *gin.Engine {
 
 func setupRouter(s storage.Accessor) *gin.Engine {
 	authenticator := middleware.TokenAuthenticator(s)
+	accountService := service.NewAccountService()
+	paymentService := service.NewPaymentService()
 	corsHandler := newCorsHandler()
 
 	router := gin.Default()
 	router.Use(corsHandler)
 
-	router.Group("/auth")
-	router.Group("/whitelist")
-	router.Group("/account", authenticator)
-	router.Group("/activity", authenticator)
-	router.Group("/address", authenticator)
-	router.Group("/friend", authenticator)
-	router.Group("/transaction", authenticator)
+	// Handle by Account Service
+	router.Group("/auth", accountService.HandleRequest)
+	router.Group("/whitelist", accountService.HandleRequest)
+	router.Group("/account", authenticator, accountService.HandleRequest)
+	router.Group("/activity", authenticator, accountService.HandleRequest)
+	router.Group("/address", authenticator, accountService.HandleRequest)
+	router.Group("/friend", authenticator, accountService.HandleRequest)
+
+	// Handle by Payment Service
+	router.Group("/transaction", authenticator, paymentService.HandleRequest)
 
 	return router
 }

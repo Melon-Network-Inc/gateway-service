@@ -9,9 +9,13 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+type PaymentService interface {
+	HandleRequest(ctx *gin.Context)
+}
+
 type paymentService struct {}
 
-func newPaymentService() paymentServiceAccessor {
+func NewPaymentService() PaymentService {
 	return &paymentService{}
 }
 

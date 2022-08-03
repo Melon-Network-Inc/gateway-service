@@ -9,9 +9,13 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+type AccountService interface {
+	HandleRequest(ctx *gin.Context)
+}
+
 type accountService struct {}
 
-func newAccountService() accountServiceAccessor {
+func NewAccountService() AccountService {
 	return &accountService{}
 }
 
