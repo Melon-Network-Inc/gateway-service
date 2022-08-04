@@ -46,16 +46,59 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	router := gin.Default()
 	router.Use(corsHandler)
 
+	v1 := router.Group("api/v1")
+
 	// Handle by Account Service
-	router.Group("/auth", accountService.HandleRequest)
-	router.Group("/whitelist", accountService.HandleRequest)
-	router.Group("/account", authenticator, accountService.HandleRequest)
-	router.Group("/activity", authenticator, accountService.HandleRequest)
-	router.Group("/address", authenticator, accountService.HandleRequest)
-	router.Group("/friend", authenticator, accountService.HandleRequest)
+	auth := v1.Group("/auth")
+	auth.POST("/login", accountService.HandlePostRequest)
+	auth.GET("/:id", authenticator, accountService.HandleGetRequest)
+
+	address := v1.Group("/address")
+	address.POST("/", authenticator, accountService.HandlePostRequest)
+	address.GET("/", authenticator, accountService.HandleGetRequest)
+	address.GET("/:id", authenticator, accountService.HandleGetRequest)
+	address.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
+	address.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
+
+	friend := v1.Group("/friend")
+	friend.GET("/list/", authenticator, accountService.HandleGetRequest)
+	friend.GET("/list/user/:id", authenticator, accountService.HandleGetRequest)
+	friend.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
+
+	request := v1.Group("/request")
+	request.POST("/", authenticator, accountService.HandlePostRequest)
+	request.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
+	request.PUT("/confirm/:id", authenticator, accountService.HandleUpdateRequest)
+	request.PUT("/reject/:id", authenticator, accountService.HandleUpdateRequest)
+	request.GET("/", authenticator, accountService.HandleGetRequest)
+
+	account := v1.Group("/account")
+	account.POST("/", accountService.HandlePostRequest)
+	account.GET("/:id", authenticator, accountService.HandleGetRequest)
+	account.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
+	account.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
+	account.PUT("/security/:id", authenticator, accountService.HandleUpdateRequest)
+	account.PUT("/activate", authenticator, accountService.HandleUpdateRequest)
+	account.PUT("/deactivate", authenticator, accountService.HandleUpdateRequest)
+
+	activity := v1.Group("/activity")
+	activity.GET("/", authenticator, accountService.HandleGetRequest)
+
+	whitelist := v1.Group("/whitelist")
+	whitelist.POST("/", accountService.HandlePostRequest)
+	whitelist.GET("/", accountService.HandleGetRequest)
+	whitelist.GET("/name/:name", accountService.HandleGetRequest)
+	whitelist.GET("/email/:email", accountService.HandleGetRequest)
+	whitelist.GET("/phone/:phone", accountService.HandleGetRequest)
+	whitelist.DELETE("/:id", accountService.HandleDeleteRequest)
 
 	// Handle by Payment Service
-	router.Group("/transaction", authenticator, paymentService.HandleRequest)
+	transaction := v1.Group("/transactions")
+	transaction.POST("/", authenticator, paymentService.HandlePostRequest)
+	transaction.GET("/", authenticator, paymentService.HandleGetRequest)
+	transaction.GET("/:id", authenticator, paymentService.HandleGetRequest)
+	transaction.PUT("/:id", authenticator, paymentService.HandleUpdateRequest)
+	transaction.DELETE("/:id", authenticator, paymentService.HandleDeleteRequest)
 
 	if swagHandler != nil {
 		buildSwagger()
