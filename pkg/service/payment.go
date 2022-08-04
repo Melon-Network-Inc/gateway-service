@@ -30,7 +30,7 @@ func (s *paymentService) HandleRequest(ctx *gin.Context) {
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
         SetResult(&res).
-        Post("http://localhost:8080/payment")
+        Post("http://localhost:7000/payment")
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService")
