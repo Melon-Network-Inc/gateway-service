@@ -11,21 +11,30 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+
+	"github.com/Melon-Network-Inc/gateway-service/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// Version indicates the current version of the application.
+var Version = "1.0.0"
+var swagHandler gin.HandlerFunc
+
 func init() {
+	swagHandler = ginSwagger.WrapHandler(swaggerfiles.Handler)
 	logrus.SetOutput(os.Stderr)
 }
 
-// New creates a new server.
-func New() *gin.Engine {
+func main() {
 	conf := config.New()
 	if conf == nil {
 		panic("Failed to get config.")
 	}
+
 	storage := storage.New(context.Background(), conf.Redis)
 
-	return setupRouter(storage)
+	setupRouter(storage).Run(":8080")
 }
 
 func setupRouter(s storage.Accessor) *gin.Engine {
@@ -48,6 +57,11 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	// Handle by Payment Service
 	router.Group("/transaction", authenticator, paymentService.HandleRequest)
 
+	if swagHandler != nil {
+		buildSwagger()
+		router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	}
+
 	return router
 }
 
@@ -59,7 +73,11 @@ func newCorsHandler() gin.HandlerFunc {
 	return cors.New(config)
 }
 
-func main() {
-	s := New()
-	s.Run(":5000")
+func buildSwagger() {
+	docs.SwaggerInfo.Title = "Melon Wallet Service API"
+	docs.SwaggerInfo.Description = "This is backend server for Melon Wallet."
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = "localhost:8080"
+	docs.SwaggerInfo.BasePath = "/api/v1"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 }
