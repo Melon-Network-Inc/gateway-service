@@ -1,8 +1,6 @@
 package service
 
 import (
-	"net/http"
-
 	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
@@ -29,19 +27,17 @@ func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
 		userData["user"] = ctx.Value("username").(string)
 		userData["user_id"] = ctx.Value("user_id").(string)
 	}
-	var res []byte
 
-	_, err := client.R().
+	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        SetResult(&res).
         Post("http://localhost:7000" + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService")
+        log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(http.StatusOK, &res)
+	ctx.JSON(resp.StatusCode(), resp.Body())
 }
 
 func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
@@ -51,19 +47,17 @@ func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
 		userData["user"] = ctx.Value("username").(string)
 		userData["user_id"] = ctx.Value("user_id").(string)
 	}
-	var res []byte
 
-	_, err := client.R().
+	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        SetResult(&res).
-        Patch("http://localhost:7000" + ctx.Request.URL.String())
+        Put("http://localhost:7000" + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService")
+        log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(http.StatusOK, &res)
+	ctx.JSON(resp.StatusCode(), resp.Body())
 }
 
 func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
@@ -73,19 +67,17 @@ func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
 		userData["user"] = ctx.Value("username").(string)
 		userData["user_id"] = ctx.Value("user_id").(string)
 	}
-	var res []byte
 
-	_, err := client.R().
+	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        SetResult(&res).
         Get("http://localhost:7000" + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService")
+        log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(http.StatusOK, &res)
+	ctx.JSON(resp.StatusCode(), resp.Body())
 }
 
 func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
@@ -95,17 +87,15 @@ func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
 		userData["user"] = ctx.Value("username").(string)
 		userData["user_id"] = ctx.Value("user_id").(string)
 	}
-	var res []byte
 
-	_, err := client.R().
+	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        SetResult(&res).
         Delete("http://localhost:7000" + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService")
+        log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(http.StatusOK, &res)
+	ctx.JSON(resp.StatusCode(), resp.Body())
 }

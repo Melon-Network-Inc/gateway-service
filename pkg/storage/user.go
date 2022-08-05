@@ -19,13 +19,13 @@ func newUserStorage(cache cache.Accessor) usersDataAccessor {
 	}
 }
 
-func (s *usersStorage) GetUser(ctx context.Context, token string) (entity.User, error) {
-	var user entity.User
+func (s *usersStorage) GetUser(ctx context.Context, token string) (entity.CachedUser, error) {
+	var user entity.CachedUser
 
-	key := cache.Key{"token", token}
-	if exists, err := s.cache.GetSingle(ctx, key, &user); !exists {
+	// key := cache.Key{"token", token}
+	if exists, err := s.cache.GetSingle(ctx, token, &user); !exists {
 		log.Info("User not logged in")
-		return entity.User{}, err
+		return entity.CachedUser{}, err
 	}
 	return user, nil
 }

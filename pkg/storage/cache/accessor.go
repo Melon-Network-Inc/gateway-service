@@ -13,7 +13,7 @@ type Values interface{}
 
 // Entry represents of single <key, value> pair which can be added or retrieved from cache.
 type Entry struct {
-	Key   Key
+	Key   string
 	Value Value
 }
 
@@ -25,33 +25,33 @@ type Accessor interface {
 
 	// GetSingle retrieves value for key in `entry`.
 	// If key exists `true` is returned, `false` otherwise.
-	GetSingle(ctx context.Context, key Key, value Value) (bool, error)
+	GetSingle(ctx context.Context, key string, value Value) (bool, error)
 
 	// Get retrieves values for each key in `entries`.
 	// Returns array of booleans which tells if key existed or not.
 	//
 	// Returned array is always of the same length as `entries`.
 	// Returned error is first error which occured during executing function.
-	Get(ctx context.Context, entries ...Entry) ([]bool, error)
+	// Get(ctx context.Context, entries ...Entry) ([]bool, error)
 
 	// Delete removes `key` and associated value from cache.
-	Delete(ctx context.Context, keys ...Key) error
+	Delete(ctx context.Context, keys ...string) error
 
 	// Incr increments value for each key in `keys`.
-	Incr(ctx context.Context, keys ...Key) error
+	Incr(ctx context.Context, keys ...string) error
 
 	// Decr decrements value for each key in `keys`.
-	Decr(ctx context.Context, keys ...Key) error
+	Decr(ctx context.Context, keys ...string) error
 
 	// SAdd adds array of new `values` for set stored at `key`.
-	SAdd(ctx context.Context, key Key, values Values) error
+	SAdd(ctx context.Context, key string, values Values) error
 
 	// SMembers gets all values from set stored at `key`.
 	// `values` should be an array of values to which members will be unmarshalled.
-	SMembers(ctx context.Context, key Key, values Values) (bool, error)
+	SMembers(ctx context.Context, key string, values Values) (bool, error)
 
 	// SRemove removes array of `values` from set stored at `key`.
-	SRemove(ctx context.Context, key Key, values Values) error
+	SRemove(ctx context.Context, key string, values Values) error
 
 	// Flush performs full clean on cache.
 	// In the result all keys and values should be removed from cache.

@@ -14,40 +14,40 @@ func (cache *fakeCache) Set(ctx context.Context, entries ...Entry) error {
 	return nil
 }
 
-func (cache *fakeCache) GetSingle(ctx context.Context, key Key, value Value) (bool, error) {
+func (cache *fakeCache) GetSingle(ctx context.Context, key string, value Value) (bool, error) {
 	return false, nil
 }
 
-func (cache *fakeCache) Get(ctx context.Context, entries ...Entry) ([]bool, error) {
-	results := make([]bool, len(entries))
-	for i := range results {
-		results[i] = false
-	}
+// func (cache *fakeCache) Get(ctx context.Context, entries ...Entry) ([]bool, error) {
+// 	results := make([]bool, len(entries))
+// 	for i := range results {
+// 		results[i] = false
+// 	}
 
-	return results, nil
-}
+// 	return results, nil
+// }
 
-func (cache *fakeCache) Delete(ctx context.Context, keys ...Key) error {
+func (cache *fakeCache) Delete(ctx context.Context, keys ...string) error {
 	return nil
 }
 
-func (cache *fakeCache) Incr(ctx context.Context, keys ...Key) error {
+func (cache *fakeCache) Incr(ctx context.Context, keys ...string) error {
 	return nil
 }
 
-func (cache *fakeCache) Decr(ctx context.Context, keys ...Key) error {
+func (cache *fakeCache) Decr(ctx context.Context, keys ...string) error {
 	return nil
 }
 
-func (cache *fakeCache) SAdd(ctx context.Context, key Key, values Values) error {
+func (cache *fakeCache) SAdd(ctx context.Context, key string, values Values) error {
 	return nil
 }
 
-func (cache *fakeCache) SMembers(ctx context.Context, key Key, values Values) (bool, error) {
+func (cache *fakeCache) SMembers(ctx context.Context, key string, values Values) (bool, error) {
 	return false, nil
 }
 
-func (cache *fakeCache) SRemove(ctx context.Context, key Key, values Values) error {
+func (cache *fakeCache) SRemove(ctx context.Context, key string, values Values) error {
 	return nil
 }
 

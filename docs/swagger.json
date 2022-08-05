@@ -94,7 +94,7 @@
       }
     },
     "/account/activate": {
-      "post": {
+      "put": {
         "description": "Activate a user resource",
         "consumes": [
           "application/json"
@@ -135,7 +135,7 @@
       }
     },
     "/account/deactivate": {
-      "post": {
+      "put": {
         "description": "Deactivate a user resource",
         "consumes": [
           "application/json"
