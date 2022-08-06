@@ -30,12 +30,10 @@ func GetUserData(ctx *gin.Context) (map[string]string, bool) {
 	userData := make(map[string]string)
 	username, existsName := ctx.Get(UsernameKey)
 	userID, existsID := ctx.Get(UserIDKey)
-	if existsName && existsID {
+	token, existsToken := ctx.Get(AuthorizationKey)
+	if existsName && existsID && existsToken {
 		userData[ContextUserKey] = username.(string)
 		userData[ContextUserIDKey] = userID.(string)
-	}
-	token, existsToken := ctx.Get(AuthorizationKey)
-	if existsToken {
 		userData[AuthorizationKey] = token.(string)
 	}
 	return userData, (existsName && existsID && existsToken)
