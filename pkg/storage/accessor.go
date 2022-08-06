@@ -3,7 +3,7 @@ package storage
 import (
 	"context"
 
-	"github.com/Melon-Network-Inc/gateway-service/pkg/entity"
+	"github.com/Melon-Network-Inc/entity-repo/pkg/entity"
 )
 
 type usersDataAccessor interface {

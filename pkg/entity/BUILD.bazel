@@ -1,8 +1,0 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-
-go_library(
-    name = "entity",
-    srcs = ["user.go"],
-    importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/entity",
-    visibility = ["//visibility:public"],
-)
