@@ -7,6 +7,8 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+const PaymentUrlPrefix = "http://localhost:7000"
+
 type PaymentService interface {
 	HandlePostRequest(ctx *gin.Context)
 	HandleUpdateRequest(ctx *gin.Context)
@@ -31,7 +33,7 @@ func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Post("http://localhost:7000" + ctx.Request.URL.String())
+        Post(PaymentUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
@@ -51,7 +53,7 @@ func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Put("http://localhost:7000" + ctx.Request.URL.String())
+        Put(PaymentUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
@@ -71,7 +73,7 @@ func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Get("http://localhost:7000" + ctx.Request.URL.String())
+        Get(PaymentUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
@@ -91,7 +93,7 @@ func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Delete("http://localhost:7000" + ctx.Request.URL.String())
+        Delete(PaymentUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)

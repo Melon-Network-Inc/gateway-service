@@ -7,6 +7,8 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+const AccountUrlPrefix = "http://localhost:6000"
+
 type AccountService interface {
 	HandleGetRequest(ctx *gin.Context)
 	HandlePostRequest(ctx *gin.Context)
@@ -31,7 +33,7 @@ func (s *accountService) HandleGetRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Get("http://localhost:6000" + ctx.Request.URL.String())
+        Get(AccountUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)
@@ -52,7 +54,7 @@ func (s *accountService) HandlePostRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Post("http://localhost:6000" + ctx.Request.URL.String())
+        Post(AccountUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)
@@ -71,7 +73,7 @@ func (s *accountService) HandleUpdateRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Put("http://localhost:6000" + ctx.Request.URL.String())
+        Put(AccountUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)
@@ -89,7 +91,7 @@ func (s *accountService) HandleDeleteRequest(ctx *gin.Context) {
 	resp, err := client.R().
         SetBody(ctx.Request.Body).
 		SetHeaders(userData).
-        Delete("http://localhost:6000" + ctx.Request.URL.String())
+        Delete(AccountUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)
