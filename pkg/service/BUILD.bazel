@@ -9,6 +9,7 @@ go_library(
     importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/service",
     visibility = ["//visibility:public"],
     deps = [
+        "//pkg/processor",
         "@com_github_gin_gonic_gin//:gin",
         "@com_github_go_resty_resty_v2//:resty",
         "@com_github_sirupsen_logrus//:logrus",

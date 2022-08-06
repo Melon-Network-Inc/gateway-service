@@ -1,13 +1,12 @@
 package service
 
 import (
+	"github.com/Melon-Network-Inc/gateway-service/pkg/processor"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"
 )
-
-const AccountUrlPrefix = "http://localhost:6000"
 
 type AccountService interface {
 	HandleGetRequest(ctx *gin.Context)
@@ -16,24 +15,21 @@ type AccountService interface {
 	HandleDeleteRequest(ctx *gin.Context)
 }
 
-type accountService struct {}
+type accountService struct {
+	serviceUrlPrefix string
+}
 
-func NewAccountService() AccountService {
-	return &accountService{}
+func NewAccountService(
+	serviceUrlPrefix string) AccountService {
+	return &accountService{
+		serviceUrlPrefix: serviceUrlPrefix,
+	}
 }
 
 func (s *accountService) HandleGetRequest(ctx *gin.Context) {
 	client := resty.New()
-	userData := make(map[string]string)
-	if ctx.GetString("username") != "" && ctx.GetString("user_id") != "" {
-		userData["user"] = ctx.Value("username").(string)
-		userData["user_id"] = ctx.Value("user_id").(string)
-	}
-
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Get(AccountUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Get(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)
@@ -44,17 +40,8 @@ func (s *accountService) HandleGetRequest(ctx *gin.Context) {
 
 func (s *accountService) HandlePostRequest(ctx *gin.Context) {
 	client := resty.New()
-
-	userData := make(map[string]string)
-	if ctx.GetString("username") != "" && ctx.GetString("user_id") != "" {
-		userData["user"] = ctx.Value("username").(string)
-		userData["user_id"] = ctx.Value("user_id").(string)
-	}
-
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Post(AccountUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Post(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)
@@ -65,15 +52,8 @@ func (s *accountService) HandlePostRequest(ctx *gin.Context) {
 
 func (s *accountService) HandleUpdateRequest(ctx *gin.Context) {
 	client := resty.New()
-	userData := make(map[string]string)
-	if ctx.GetString("username") != "" && ctx.GetString("user_id") != "" {
-		userData["user"] = ctx.Value("username").(string)
-		userData["user_id"] = ctx.Value("user_id").(string)
-	}
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Put(AccountUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Put(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)
@@ -84,14 +64,8 @@ func (s *accountService) HandleUpdateRequest(ctx *gin.Context) {
 
 func (s *accountService) HandleDeleteRequest(ctx *gin.Context) {
 	client := resty.New()
-	userData := make(map[string]string)
-	userData["user"] = ctx.Value("username").(string)
-	userData["user_id"] = ctx.Value("user_id").(string)
-
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Delete(AccountUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Delete(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
     	log.Println("Account Service: unable to connect AccountService due to", err)

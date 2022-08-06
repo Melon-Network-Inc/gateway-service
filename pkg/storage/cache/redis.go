@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/Melon-Network-Inc/entity-repo/pkg/entity"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 
 	"gopkg.in/vmihailenco/msgpack.v2"
@@ -247,6 +248,10 @@ func (cache *redisCache) unmarshalValue(result string, value Value) error {
 	case *int:
 		val, err = strconv.ParseInt(result, 10, 0)
 		*value = int(val)
+	case *entity.CachedUser:
+		cachedUser := entity.CachedUser{}
+		err = cachedUser.UnmarshalBinary([]byte(result))
+		*value = cachedUser
 	default:
 		err = msgpack.Unmarshal([]byte(result), value)
 	}

@@ -12,6 +12,7 @@ go_library(
     deps = [
         "//pkg/config",
         "@com_github_go_redis_redis_v9//:redis",
+        "@com_github_melon_network_inc_entity_repo//pkg/entity",
         "@com_github_sirupsen_logrus//:logrus",
         "@in_gopkg_vmihailenco_msgpack_v2//:msgpack_v2",
     ],

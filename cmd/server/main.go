@@ -39,8 +39,8 @@ func main() {
 
 func setupRouter(s storage.Accessor) *gin.Engine {
 	authenticator := middleware.TokenAuthenticator(s)
-	accountService := service.NewAccountService()
-	paymentService := service.NewPaymentService()
+	accountService := service.NewAccountService("http://localhost:6000")
+	paymentService := service.NewPaymentService("http://localhost:7000")
 	corsHandler := newCorsHandler()
 
 	router := gin.Default()

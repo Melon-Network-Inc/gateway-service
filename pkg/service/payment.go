@@ -1,13 +1,12 @@
 package service
 
 import (
+	"github.com/Melon-Network-Inc/gateway-service/pkg/processor"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"
 )
-
-const PaymentUrlPrefix = "http://localhost:7000"
 
 type PaymentService interface {
 	HandlePostRequest(ctx *gin.Context)
@@ -16,24 +15,19 @@ type PaymentService interface {
 	HandleDeleteRequest(ctx *gin.Context)
 }
 
-type paymentService struct {}
+type paymentService struct {
+	serviceUrlPrefix string
+}
 
-func NewPaymentService() PaymentService {
-	return &paymentService{}
+func NewPaymentService(serviceUrlPrefix string) PaymentService {
+	return &paymentService{
+		serviceUrlPrefix: serviceUrlPrefix}
 }
 
 func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
 	client := resty.New()
-	userData := make(map[string]string)
-	if ctx.GetString("username") != "" && ctx.GetString("user_id") != "" {
-		userData["user"] = ctx.Value("username").(string)
-		userData["user_id"] = ctx.Value("user_id").(string)
-	}
-
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Post(PaymentUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Post(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
@@ -44,16 +38,8 @@ func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
 
 func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
 	client := resty.New()
-	userData := make(map[string]string)
-	if ctx.GetString("username") != "" && ctx.GetString("user_id") != "" {
-		userData["user"] = ctx.Value("username").(string)
-		userData["user_id"] = ctx.Value("user_id").(string)
-	}
-
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Put(PaymentUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Put(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
@@ -64,16 +50,8 @@ func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
 
 func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
 	client := resty.New()
-	userData := make(map[string]string)
-	if ctx.GetString("username") != "" && ctx.GetString("user_id") != "" {
-		userData["user"] = ctx.Value("username").(string)
-		userData["user_id"] = ctx.Value("user_id").(string)
-	}
-
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Get(PaymentUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Get(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
@@ -84,16 +62,8 @@ func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
 
 func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
 	client := resty.New()
-	userData := make(map[string]string)
-	if ctx.GetString("username") != "" && ctx.GetString("user_id") != "" {
-		userData["user"] = ctx.Value("username").(string)
-		userData["user_id"] = ctx.Value("user_id").(string)
-	}
-
-	resp, err := client.R().
-        SetBody(ctx.Request.Body).
-		SetHeaders(userData).
-        Delete(PaymentUrlPrefix + ctx.Request.URL.String())
+	resp, err := processor.PrepareRequest(ctx, client).
+		Delete(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
