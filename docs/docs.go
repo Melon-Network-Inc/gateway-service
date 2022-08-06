@@ -20,1949 +20,1427 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/account": {
-          "put": {
+      "/account": {
+        "put": {
             "description": "Update a user resource",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "users"
+                "users"
             ],
             "summary": "Update a user resource",
             "operationId": "update-user",
             "parameters": [
-              {
-                "description": "User Data",
-                "name": "user",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/pkg_user.UpdateUserRequest"
+                {
+                    "description": "User Data",
+                    "name": "user",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.UpdateUserRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/user.User"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/user.User"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          },
-          "post": {
+        },
+        "post": {
             "description": "Create a user resource",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "users"
+                "users"
             ],
             "summary": "Create a user resource",
             "operationId": "create-user",
             "parameters": [
-              {
-                "description": "User Data",
-                "name": "user",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/pkg_user.CreateUserRequest"
+                {
+                    "description": "User Data",
+                    "name": "user",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.CreateUserRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "201": {
-                "description": "Created",
-                "schema": {
-                  "$ref": "#/definitions/user.User"
+                "201": {
+                    "description": "Created",
+                    "schema": {
+                        "$ref": "#/definitions/user.User"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/account/activate": {
-          "post": {
+        }
+    },
+    "/account/activate": {
+        "put": {
             "description": "Activate a user resource",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "users"
+                "users"
             ],
             "summary": "Activate a user resource",
             "operationId": "activate-user",
             "parameters": [
-              {
-                "description": "User Data",
-                "name": "user",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/pkg_user.UpdateUserStatusRequest"
+                {
+                    "description": "User Data",
+                    "name": "user",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.UpdateUserStatusRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/user.User"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/user.User"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/account/deactivate": {
-          "post": {
+        }
+    },
+    "/account/deactivate": {
+        "put": {
             "description": "Deactivate a user resource",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "users"
+                "users"
             ],
             "summary": "Deactivate a user resource",
             "operationId": "deactivate-user",
             "parameters": [
-              {
-                "description": "User Data",
-                "name": "user",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/pkg_user.UpdateUserStatusRequest"
+                {
+                    "description": "User Data",
+                    "name": "user",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.UpdateUserStatusRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/user.User"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/user.User"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/account/security/{id}": {
-          "put": {
+        }
+    },
+    "/account/security/{id}": {
+        "put": {
             "description": "Update the password for a user resource",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "users"
+                "users"
             ],
             "summary": "Update the password for a user resource",
             "operationId": "update-password",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "User ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "User ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/user.User"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/user.User"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/account/{id}": {
-          "get": {
+        }
+    },
+    "/account/{id}": {
+        "get": {
             "description": "Get a user resource",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "users"
+                "users"
             ],
             "summary": "Get a user resource",
             "operationId": "get-user",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "User ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "User ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/user.User"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/user.User"
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          },
-          "delete": {
+        },
+        "delete": {
             "description": "Delete a user resource by ID",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "users"
+                "users"
             ],
             "summary": "Delete a user resource by ID",
             "operationId": "delete-user",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "User ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "User ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/user.User"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/user.User"
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/activity": {
-          "get": {
+        }
+    },
+    "/activity": {
+        "get": {
             "description": "List activities of an account",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "activities"
+                "activities"
             ],
             "summary": "List activities of an account",
             "operationId": "list-activities",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/pkg_activity.Activity"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_activity.Activity"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/address": {
-          "get": {
+        }
+    },
+    "/address": {
+        "get": {
             "description": "Query addresses of an account by pages",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "addresses"
+                "addresses"
             ],
             "summary": "Query addresses of an account by pages",
             "operationId": "query-addresses-by-page",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/pkg_address.Address"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          },
-          "put": {
+        },
+        "put": {
             "description": "Update an addresses",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "addresses"
+                "addresses"
             ],
             "summary": "Update an address",
             "operationId": "update-address",
             "parameters": [
-              {
-                "description": "Address Data",
-                "name": "address",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.UpdateAddressRequest"
+                {
+                    "description": "Address Data",
+                    "name": "address",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.UpdateAddressRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/pkg_address.Address"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          },
-          "post": {
+        },
+        "post": {
             "description": "Add an address to account",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "addresses"
+                "addresses"
             ],
             "summary": "Add an address to account",
             "operationId": "add-address",
             "parameters": [
-              {
-                "description": "Address Data",
-                "name": "address",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.AddAddressRequest"
+                {
+                    "description": "Address Data",
+                    "name": "address",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.AddAddressRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "201": {
-                "description": "Created",
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                "201": {
+                    "description": "Created",
+                    "schema": {
+                        "$ref": "#/definitions/pkg_address.Address"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/address/{id}": {
-          "get": {
+        }
+    },
+    "/address/{id}": {
+        "get": {
             "description": "Get an address",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "addresses"
+                "addresses"
             ],
             "summary": "Get an address",
             "operationId": "get-address",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "Address ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "Address ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/pkg_address.Address"
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          },
-          "delete": {
+        },
+        "delete": {
             "description": "Delete an addresses by ID",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "addresses"
+                "addresses"
             ],
             "summary": "Delete an address by ID",
             "operationId": "delete-address",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "Address ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "Address ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/pkg_address.Address"
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/auth/login": {
-          "post": {
+        }
+    },
+    "/auth/login": {
+        "post": {
             "description": "Login an account",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "auth"
+                "auth"
             ],
             "summary": "Login an account",
             "operationId": "login",
             "parameters": [
-              {
-                "description": "Login Data",
-                "name": "request",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/user.LoginUserRequest"
+                {
+                    "description": "Login Data",
+                    "name": "request",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.LoginUserRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "202": {
-                "description": "token",
-                "schema": {
-                  "type": "string"
+                "202": {
+                    "description": "token",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/auth/logout": {
-          "get": {
+        }
+    },
+    "/auth/logout": {
+        "get": {
             "description": "Log out an account",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "auth"
+                "auth"
             ],
             "summary": "Log out an account",
             "operationId": "logout",
             "responses": {
-              "202": {
-                "description": "Logged out",
-                "schema": {
-                  "type": "string"
+                "202": {
+                    "description": "Logged out",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/friend/list": {
-          "get": {
+        }
+    },
+    "/friend/list": {
+        "get": {
             "description": "List friends of requester",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "friends"
+                "friends"
             ],
             "summary": "List friends of requester",
             "operationId": "list-friends",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/friend/list/user/{id}": {
-          "get": {
+        }
+    },
+    "/friend/list/user/{id}": {
+        "get": {
             "description": "List friend of a user",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "friends"
+                "friends"
             ],
             "summary": "List friend of a user",
             "operationId": "list-friend-request-of-user",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.User"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.User"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/friend/{id}": {
-          "delete": {
+        }
+    },
+    "/friend/{id}": {
+        "delete": {
             "description": "Remove a friend by ID",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "friends"
+                "friends"
             ],
             "summary": "Remove a friend by ID",
             "operationId": "delete-friend",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "User ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "User ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
+                "200": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
+                }
             }
-          }
-        },
-        "/request": {
-          "get": {
+        }
+    },
+    "/request": {
+        "get": {
             "description": "List friend requests of an account",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "requests"
+                "requests"
             ],
             "summary": "List friend requests of an account",
             "operationId": "list-friend-request",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/entity.FriendRequest"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          },
-          "post": {
+        },
+        "post": {
             "description": "Add friendship with another user",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "requests"
+                "requests"
             ],
             "summary": "Add friend",
             "operationId": "add-friend",
             "parameters": [
-              {
-                "description": "FriendRequest Data",
-                "name": "friend_request",
-                "in": "body",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.AddFriendRequest"
+                {
+                    "description": "FriendRequest Data",
+                    "name": "friend_request",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/api.AddFriendRequest"
+                    }
                 }
-              }
             ],
             "responses": {
-              "201": {
-                "description": "Created",
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                "201": {
+                    "description": "Created",
+                    "schema": {
+                        "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/request/confirm/{id}": {
-          "put": {
+        }
+    },
+    "/request/confirm/{id}": {
+        "put": {
             "description": "Confirm a friend request by ID",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "requests"
+                "requests"
             ],
             "summary": "Confirm a friend request by ID",
             "operationId": "confirm-friend-request",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "FriendRequest ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "FriendRequest ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/request/reject/{id}": {
-          "put": {
+        }
+    },
+    "/request/reject/{id}": {
+        "put": {
             "description": "Reject a friend request by ID",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "requests"
+                "requests"
             ],
             "summary": "Reject a friend request by ID",
             "operationId": "reject-friend-request",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "FriendRequest ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "FriendRequest ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/request/{id}": {
-          "delete": {
+        }
+    },
+    "/request/{id}": {
+        "delete": {
             "description": "Drop a friend request by ID",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "requests"
+                "requests"
             ],
             "summary": "Drop a friend request by ID",
             "operationId": "drop-friend-request",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "FriendRequest ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "FriendRequest ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
+                "200": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
+                }
             }
-          }
-        },
-        "/whitelist": {
-          "post": {
+        }
+    },
+    "/whitelist": {
+        "post": {
             "description": "List all whitelist user records",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "whitelist"
+                "whitelist"
             ],
             "summary": "List all whitelist user records",
             "operationId": "list-records",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                        }
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/whitelist/email/{email}": {
-          "get": {
+        }
+    },
+    "/whitelist/email/{email}": {
+        "get": {
             "description": "Get whitelist user records by email",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "whitelist"
+                "whitelist"
             ],
             "summary": "Get whitelist user records by email",
             "operationId": "get-record-by-email",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "Whitelist User Record ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "Whitelist User Record ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/whitelist/name/{name}": {
-          "get": {
+        }
+    },
+    "/whitelist/name/{name}": {
+        "get": {
             "description": "Get whitelist user records by name",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "whitelist"
+                "whitelist"
             ],
             "summary": "Get whitelist user records by name",
             "operationId": "get-record-by-name",
             "parameters": [
-              {
-                "type": "integer",
-                "description": "Whitelist User Record ID",
-                "name": "id",
-                "in": "path",
-                "required": true
-              }
+                {
+                    "type": "integer",
+                    "description": "Whitelist User Record ID",
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
             ],
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/whitelist/phone/{phone}": {
-          "get": {
+        }
+    },
+    "/whitelist/phone/{phone}": {
+        "get": {
             "description": "Get whitelist user records by phone",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "whitelist"
+                "whitelist"
             ],
             "summary": "Get whitelist user records by phone",
             "operationId": "get-record-by-phone",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
-                  }
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                        }
+                    }
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/whitelist/{id}": {
-          "delete": {
+        }
+    },
+    "/whitelist/{id}": {
+        "delete": {
             "description": "Delete a whitelist user record",
             "consumes": [
-              "application/json"
+                "application/json"
             ],
             "produces": [
-              "application/json"
+                "application/json"
             ],
             "tags": [
-              "whitelist"
+                "whitelist"
             ],
             "summary": "Delete a whitelist user record",
             "operationId": "delete-whitelist-user",
             "responses": {
-              "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "Object"
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                        "type": "Object"
+                    }
+                },
+                "400": {
+                    "description": ""
+                },
+                "404": {
+                    "description": ""
                 }
-              },
-              "400": {
-                "description": ""
-              },
-              "404": {
-                "description": ""
-              }
             }
-          }
-        },
-        "/transaction": {
-                "get": {
-                    "description": "List all transactiones of an account",
-                    "consumes": [
-                        "application/json"
-                    ],
-                    "produces": [
-                        "application/json"
-                    ],
-                    "tags": [
-                        "transactions"
-                    ],
-                    "summary": "List all transactiones of an account",
-                    "operationId": "list-transactions",
-                    "parameters": [
-                        {
-                            "type": "integer",
-                            "description": "Transaction ID",
-                            "name": "id",
-                            "in": "path",
-                            "required": true
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "OK",
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
-                                }
-                            }
-                        },
-                        "404": {
-                            "description": ""
-                        }
+        }
+    },
+    "/transaction": {
+            "get": {
+                "description": "List all transactiones of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "List all transactiones of an account",
+                "operationId": "list-transactions",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
-                },
-                "put": {
-                    "description": "Update a transaction",
-                    "consumes": [
-                        "application/json"
-                    ],
-                    "produces": [
-                        "application/json"
-                    ],
-                    "tags": [
-                        "transactions"
-                    ],
-                    "summary": "Update a transaction",
-                    "operationId": "update-transaction",
-                    "parameters": [
-                        {
-                            "description": "Transaction Data",
-                            "name": "transaction",
-                            "in": "body",
-                            "required": true,
-                            "schema": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.UpdateTransactionRequest"
-                            }
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "OK",
-                            "schema": {
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
                                 "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
                             }
-                        },
-                        "400": {
-                            "description": ""
-                        },
-                        "404": {
-                            "description": ""
                         }
-                    }
-                },
-                "post": {
-                    "description": "Add a transaction to account",
-                    "consumes": [
-                        "application/json"
-                    ],
-                    "produces": [
-                        "application/json"
-                    ],
-                    "tags": [
-                        "transactions"
-                    ],
-                    "summary": "Add a transaction to account",
-                    "operationId": "add-transaction",
-                    "parameters": [
-                        {
-                            "description": "Transaction Data",
-                            "name": "transaction",
-                            "in": "body",
-                            "required": true,
-                            "schema": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.AddTransactionRequest"
-                            }
-                        }
-                    ],
-                    "responses": {
-                        "201": {
-                            "description": "Created",
-                            "schema": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
-                            }
-                        },
-                        "400": {
-                            "description": ""
-                        },
-                        "404": {
-                            "description": ""
-                        }
-                    }
-                },
-                "delete": {
-                    "description": "Delete a transaction",
-                    "consumes": [
-                        "application/json"
-                    ],
-                    "produces": [
-                        "application/json"
-                    ],
-                    "tags": [
-                        "transactions"
-                    ],
-                    "summary": "Delete a transaction",
-                    "operationId": "delete-transaction",
-                    "parameters": [
-                        {
-                            "type": "integer",
-                            "description": "Transaction ID",
-                            "name": "id",
-                            "in": "path",
-                            "required": true
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "OK",
-                            "schema": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
-                            }
-                        },
-                        "400": {
-                            "description": ""
-                        },
-                        "404": {
-                            "description": ""
-                        }
+                    },
+                    "404": {
+                        "description": ""
                     }
                 }
-        },
-        "/transaction/{id}": {
-              "get": {
-                  "description": "Get an transaction",
-                  "consumes": [
-                      "application/json"
-                  ],
-                  "produces": [
-                      "application/json"
-                  ],
-                  "tags": [
-                      "transactions"
-                  ],
-                  "summary": "Get an transaction",
-                  "operationId": "get-transaction",
-                  "parameters": [
-                      {
-                          "type": "integer",
-                          "description": "Transaction ID",
-                          "name": "id",
-                          "in": "path",
-                          "required": true
+            },
+            "put": {
+                "description": "Update a transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Update a transaction",
+                "operationId": "update-transaction",
+                "parameters": [
+                    {
+                        "description": "Transaction Data",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.UpdateTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "description": "Add a transaction to account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Add a transaction to account",
+                "operationId": "add-transaction",
+                "parameters": [
+                    {
+                        "description": "Transaction Data",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.AddTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Delete a transaction",
+                "operationId": "delete-transaction",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            }
+    },
+    "/transaction/{id}": {
+          "get": {
+              "description": "Get an transaction",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "tags": [
+                  "transactions"
+              ],
+              "summary": "Get an transaction",
+              "operationId": "get-transaction",
+              "parameters": [
+                  {
+                      "type": "integer",
+                      "description": "Transaction ID",
+                      "name": "id",
+                      "in": "path",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
                       }
-                  ],
-                  "responses": {
-                      "200": {
-                          "description": "OK",
-                          "schema": {
-                              "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
-                          }
-                      },
-                      "404": {
-                          "description": ""
-                      }
+                  },
+                  "404": {
+                      "description": ""
                   }
               }
-        }
+          }
+    }
+  },
+  "definitions": {
+      "api.AddAddressRequest": {
+          "type": "object",
+          "required": [
+              "currency",
+              "is_primary",
+              "name",
+              "pubkey"
+          ],
+          "properties": {
+              "currency": {
+                  "type": "string",
+                  "enum": [
+                      "SOL",
+                      "BTC",
+                      "ETH",
+                      "BSC"
+                  ]
+              },
+              "is_primary": {
+                  "type": "boolean"
+              },
+              "name": {
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 2
+              },
+              "pubkey": {
+                  "type": "string"
+              }
+          }
       },
-      "definitions": {
-        "entity.User": {
+      "api.AddFriendRequest": {
           "type": "object",
           "required": [
-            "phone"
+              "username"
           ],
           "properties": {
-            "avatar": {
-              "type": "string"
-            },
-            "createdAt": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "email": {
-              "type": "string"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "is_disabled": {
-              "type": "boolean"
-            },
-            "last_login": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string"
-            }
+              "status": {
+                  "type": "string",
+                  "enum": [
+                      "PENDING",
+                      "COMPLETED",
+                      "CANCELLED",
+                      "REJECTED"
+                  ]
+              },
+              "user_id": {
+                  "type": "string"
+              },
+              "username": {
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 2
+              }
           }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_activity.Activity": {
-          "type": "object",
-          "properties": {
-            "amount": {
-              "type": "integer"
-            },
-            "createdAt": {
-              "type": "string"
-            },
-            "currency": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "message": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "receiver_id": {
-              "type": "integer"
-            },
-            "receiver_pk": {
-              "type": "integer"
-            },
-            "sender_id": {
-              "type": "integer"
-            },
-            "sender_pk": {
-              "type": "integer"
-            },
-            "status": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_address.AddAddressRequest": {
+      },
+      "api.CreateUserRequest": {
           "type": "object",
           "required": [
-            "currency",
-            "is_primary",
-            "name",
-            "pubkey"
+              "email",
+              "password",
+              "username"
           ],
           "properties": {
-            "currency": {
-              "type": "string",
-              "enum": [
-                "SOL",
-                "BTC",
-                "ETH",
-                "BSC"
-              ]
-            },
-            "is_primary": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            },
-            "pubkey": {
-              "type": "string"
-            }
+              "avatar": {
+                  "type": "string"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "password": {
+                  "type": "string",
+                  "minLength": 8
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "username": {
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 2
+              }
           }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_address.Address": {
-          "type": "object",
-          "properties": {
-            "createdAt": {
-              "type": "string"
-            },
-            "currency": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "is_primary": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string"
-            },
-            "owner": {
-              "type": "string"
-            },
-            "pubkey": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_address.UpdateAddressRequest": {
+      },
+      "api.CreateWhiteListUserInfoRequest": {
           "type": "object",
           "required": [
-            "is_primary",
-            "name"
+              "email",
+              "name"
           ],
           "properties": {
-            "id": {
-              "type": "string"
-            },
-            "is_primary": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            }
+              "discord": {
+                  "type": "string"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "location": {
+                  "type": "string"
+              },
+              "name": {
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 2
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "twitter": {
+                  "type": "string"
+              }
           }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_friend.AddFriendRequest": {
+      },
+      "api.LoginUserRequest": {
           "type": "object",
           "required": [
-            "username"
+              "password",
+              "username"
           ],
           "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "PENDING",
-                "COMPLETED",
-                "CANCELLED",
-                "REJECTED"
-              ]
-            },
-            "user_id": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            }
+              "password": {
+                  "type": "string",
+                  "minLength": 8
+              },
+              "username": {
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 2
+              }
           }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest": {
-          "type": "object",
-          "properties": {
-            "createdAt": {
-              "type": "string"
-            },
-            "creator_user": {
-              "$ref": "#/definitions/entity.User"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "receiver_user": {
-              "$ref": "#/definitions/entity.User"
-            },
-            "status": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_friend.User": {
+      },
+      "api.UpdateAddressRequest": {
           "type": "object",
           "required": [
-            "phone"
+              "is_primary",
+              "name"
           ],
           "properties": {
-            "avatar": {
-              "type": "string"
-            },
-            "createdAt": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "email": {
-              "type": "string"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "is_disabled": {
-              "type": "boolean"
-            },
-            "last_login": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string"
-            }
+              "id": {
+                  "type": "string"
+              },
+              "is_primary": {
+                  "type": "boolean"
+              },
+              "name": {
+                  "type": "string",
+                  "maxLength": 30,
+                  "minLength": 2
+              }
           }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_user.CreateUserRequest": {
+      },
+      "api.UpdateUserRequest": {
+          "type": "object",
+          "properties": {
+              "avatar": {
+                  "type": "string"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "phone": {
+                  "type": "string"
+              }
+          }
+      },
+      "api.UpdateUserStatusRequest": {
+          "type": "object",
+          "properties": {
+              "id": {
+                  "type": "string"
+              }
+          }
+      },
+      "entity.FriendRequest": {
+          "type": "object",
+          "properties": {
+              "createdAt": {
+                  "type": "string"
+              },
+              "creator_user": {
+                  "$ref": "#/definitions/entity.User"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "receiver_user": {
+                  "$ref": "#/definitions/entity.User"
+              },
+              "status": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "entity.User": {
           "type": "object",
           "required": [
-            "email",
-            "password",
-            "username"
+              "phone"
           ],
           "properties": {
-            "avatar": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string",
-              "minLength": 8
-            },
-            "phone": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            }
+              "avatar": {
+                  "type": "string"
+              },
+              "createdAt": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "is_disabled": {
+                  "type": "boolean"
+              },
+              "last_login": {
+                  "type": "string"
+              },
+              "password": {
+                  "type": "string"
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              },
+              "username": {
+                  "type": "string"
+              }
           }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_user.UpdateUserRequest": {
-          "type": "object",
-          "properties": {
-            "avatar": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            }
-          }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_user.UpdateUserStatusRequest": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            }
-          }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_whitelist.CreateWhiteListUserInfoRequest": {
-          "type": "object",
-          "required": [
-            "email",
-            "name"
-          ],
-          "properties": {
-            "discord": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "location": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            },
-            "phone": {
-              "type": "string"
-            },
-            "twitter": {
-              "type": "string"
-            }
-          }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo": {
-          "type": "object",
-          "properties": {
-            "createdAt": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "discord": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "location": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            },
-            "twitter": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "gorm.DeletedAt": {
-          "type": "object",
-          "properties": {
-            "time": {
-              "type": "string"
-            },
-            "valid": {
-              "description": "Valid is true if Time is not NULL",
-              "type": "boolean"
-            }
-          }
-        },
-        "pkg_activity.Activity": {
-          "type": "object",
-          "properties": {
-            "amount": {
-              "type": "integer"
-            },
-            "createdAt": {
-              "type": "string"
-            },
-            "currency": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "message": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "receiver_id": {
-              "type": "integer"
-            },
-            "receiver_pk": {
-              "type": "integer"
-            },
-            "sender_id": {
-              "type": "integer"
-            },
-            "sender_pk": {
-              "type": "integer"
-            },
-            "status": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_address.AddAddressRequest": {
-          "type": "object",
-          "required": [
-            "currency",
-            "is_primary",
-            "name",
-            "pubkey"
-          ],
-          "properties": {
-            "currency": {
-              "type": "string",
-              "enum": [
-                "SOL",
-                "BTC",
-                "ETH",
-                "BSC"
-              ]
-            },
-            "is_primary": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            },
-            "pubkey": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_address.Address": {
-          "type": "object",
-          "properties": {
-            "createdAt": {
-              "type": "string"
-            },
-            "currency": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "is_primary": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string"
-            },
-            "owner": {
-              "type": "string"
-            },
-            "pubkey": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_address.UpdateAddressRequest": {
-          "type": "object",
-          "required": [
-            "is_primary",
-            "name"
-          ],
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "is_primary": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            }
-          }
-        },
-        "pkg_friend.AddFriendRequest": {
-          "type": "object",
-          "required": [
-            "username"
-          ],
-          "properties": {
-            "status": {
-              "type": "string",
-              "enum": [
-                "PENDING",
-                "COMPLETED",
-                "CANCELLED",
-                "REJECTED"
-              ]
-            },
-            "user_id": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            }
-          }
-        },
-        "pkg_friend.FriendRequest": {
-          "type": "object",
-          "properties": {
-            "createdAt": {
-              "type": "string"
-            },
-            "creator_user": {
-              "$ref": "#/definitions/entity.User"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "receiver_user": {
-              "$ref": "#/definitions/entity.User"
-            },
-            "status": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_friend.User": {
-          "type": "object",
-          "required": [
-            "phone"
-          ],
-          "properties": {
-            "avatar": {
-              "type": "string"
-            },
-            "createdAt": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "email": {
-              "type": "string"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "is_disabled": {
-              "type": "boolean"
-            },
-            "last_login": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_user.CreateUserRequest": {
-          "type": "object",
-          "required": [
-            "email",
-            "password",
-            "username"
-          ],
-          "properties": {
-            "avatar": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string",
-              "minLength": 8
-            },
-            "phone": {
-              "type": "string"
-            },
-            "username": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            }
-          }
-        },
-        "pkg_user.UpdateUserRequest": {
-          "type": "object",
-          "properties": {
-            "avatar": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_user.UpdateUserStatusRequest": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_whitelist.CreateWhiteListUserInfoRequest": {
-          "type": "object",
-          "required": [
-            "email",
-            "name"
-          ],
-          "properties": {
-            "discord": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "location": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            },
-            "phone": {
-              "type": "string"
-            },
-            "twitter": {
-              "type": "string"
-            }
-          }
-        },
-        "pkg_whitelist.WhitelistUserInfo": {
-          "type": "object",
-          "properties": {
-            "createdAt": {
-              "type": "string"
-            },
-            "deletedAt": {
-              "$ref": "#/definitions/gorm.DeletedAt"
-            },
-            "discord": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "id": {
-              "type": "integer"
-            },
-            "location": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            },
-            "twitter": {
-              "type": "string"
-            },
-            "updatedAt": {
-              "type": "string"
-            }
-          }
-        },
-        "user.LoginUserRequest": {
-          "type": "object",
-          "required": [
-            "password",
-            "username"
-          ],
-          "properties": {
-            "password": {
-              "type": "string",
-              "minLength": 8
-            },
-            "username": {
-              "type": "string",
-              "maxLength": 30,
-              "minLength": 2
-            }
-          }
-        },
-        "user.User": {
-          "type": "object",
-          "properties": {
-            "gid": {
-              "description": "Gid is the primary group ID.\nOn POSIX systems, this is a decimal number representing the gid.\nOn Windows, this is a SID in a string format.\nOn Plan 9, this is the contents of /dev/user.",
-              "type": "string"
-            },
-            "homeDir": {
-              "description": "HomeDir is the path to the user's home directory (if they have one).",
-              "type": "string"
-            },
-            "name": {
-              "description": "Name is the user's real or display name.\nIt might be blank.\nOn POSIX systems, this is the first (or only) entry in the GECOS field\nlist.\nOn Windows, this is the user's display name.\nOn Plan 9, this is the contents of /dev/user.",
-              "type": "string"
-            },
-            "uid": {
-              "description": "Uid is the user ID.\nOn POSIX systems, this is a decimal number representing the uid.\nOn Windows, this is a security identifier (SID) in a string format.\nOn Plan 9, this is the contents of /dev/user.",
-              "type": "string"
-            },
-            "username": {
-              "description": "Username is the login name.",
-              "type": "string"
-            }
-          }
-        },
-        "github.com_Melon-Network-Inc_payment-service_pkg_transaction.AddTransactionRequest": {
+      },
+      "github.com_Melon-Network-Inc_account-service_pkg_activity.Activity": {
           "type": "object",
           "required": [
               "amount",
@@ -1975,11 +1453,21 @@ const docTemplate = `{
               "amount": {
                   "type": "integer"
               },
+              "createdAt": {
+                  "type": "string"
+              },
               "currency": {
                   "description": "currency code",
                   "type": "string"
               },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "id": {
+                  "type": "integer"
+              },
               "message": {
+                  "description": "message should be less than 200 characters",
                   "type": "string"
               },
               "name": {
@@ -2001,202 +1489,557 @@ const docTemplate = `{
               },
               "status": {
                   "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
               }
           }
-        },
-        "github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "description": "currency code",
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "message": {
-                    "description": "message should be less than 200 characters",
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
+      },
+      "github.com_Melon-Network-Inc_account-service_pkg_address.Address": {
+          "type": "object",
+          "properties": {
+              "createdAt": {
+                  "type": "string"
+              },
+              "currency": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "is_primary": {
+                  "type": "boolean"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "owner": {
+                  "type": "string"
+              },
+              "pubkey": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest": {
+          "type": "object",
+          "properties": {
+              "createdAt": {
+                  "type": "string"
+              },
+              "creator_user": {
+                  "$ref": "#/definitions/entity.User"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "receiver_user": {
+                  "$ref": "#/definitions/entity.User"
+              },
+              "status": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "github.com_Melon-Network-Inc_account-service_pkg_friend.User": {
+          "type": "object",
+          "required": [
+              "phone"
+          ],
+          "properties": {
+              "avatar": {
+                  "type": "string"
+              },
+              "createdAt": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "is_disabled": {
+                  "type": "boolean"
+              },
+              "last_login": {
+                  "type": "string"
+              },
+              "password": {
+                  "type": "string"
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              },
+              "username": {
+                  "type": "string"
+              }
+          }
+      },
+      "github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo": {
+          "type": "object",
+          "properties": {
+              "createdAt": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "discord": {
+                  "type": "string"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "location": {
+                  "type": "string"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "twitter": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "gorm.DeletedAt": {
+          "type": "object",
+          "properties": {
+              "time": {
+                  "type": "string"
+              },
+              "valid": {
+                  "description": "Valid is true if Time is not NULL",
+                  "type": "boolean"
+              }
+          }
+      },
+      "pkg_activity.Activity": {
+          "type": "object",
+          "required": [
+              "amount",
+              "currency",
+              "name",
+              "receiver_pk",
+              "sender_pk"
+          ],
+          "properties": {
+              "amount": {
+                  "type": "integer"
+              },
+              "createdAt": {
+                  "type": "string"
+              },
+              "currency": {
+                  "description": "currency code",
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "message": {
+                  "description": "message should be less than 200 characters",
+                  "type": "string"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "receiver_id": {
+                  "type": "integer"
+              },
+              "receiver_pk": {
+                  "description": "ETH or BTC address",
+                  "type": "integer"
+              },
+              "sender_id": {
+                  "type": "integer"
+              },
+              "sender_pk": {
+                  "description": "ETH or BTC address",
+                  "type": "integer"
+              },
+              "status": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "pkg_address.Address": {
+          "type": "object",
+          "properties": {
+              "createdAt": {
+                  "type": "string"
+              },
+              "currency": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "is_primary": {
+                  "type": "boolean"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "owner": {
+                  "type": "string"
+              },
+              "pubkey": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "pkg_friend.FriendRequest": {
+          "type": "object",
+          "properties": {
+              "createdAt": {
+                  "type": "string"
+              },
+              "creator_user": {
+                  "$ref": "#/definitions/entity.User"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "receiver_user": {
+                  "$ref": "#/definitions/entity.User"
+              },
+              "status": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "pkg_friend.User": {
+          "type": "object",
+          "required": [
+              "phone"
+          ],
+          "properties": {
+              "avatar": {
+                  "type": "string"
+              },
+              "createdAt": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "is_disabled": {
+                  "type": "boolean"
+              },
+              "last_login": {
+                  "type": "string"
+              },
+              "password": {
+                  "type": "string"
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              },
+              "username": {
+                  "type": "string"
+              }
+          }
+      },
+      "pkg_whitelist.WhitelistUserInfo": {
+          "type": "object",
+          "properties": {
+              "createdAt": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "discord": {
+                  "type": "string"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "location": {
+                  "type": "string"
+              },
+              "name": {
+                  "type": "string"
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "twitter": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              }
+          }
+      },
+      "user.User": {
+          "type": "object",
+          "required": [
+              "phone"
+          ],
+          "properties": {
+              "avatar": {
+                  "type": "string"
+              },
+              "createdAt": {
+                  "type": "string"
+              },
+              "deletedAt": {
+                  "$ref": "#/definitions/gorm.DeletedAt"
+              },
+              "email": {
+                  "type": "string"
+              },
+              "id": {
+                  "type": "integer"
+              },
+              "is_disabled": {
+                  "type": "boolean"
+              },
+              "last_login": {
+                  "type": "string"
+              },
+              "password": {
+                  "type": "string"
+              },
+              "phone": {
+                  "type": "string"
+              },
+              "updatedAt": {
+                  "type": "string"
+              },
+              "username": {
+                  "type": "string"
+              }
+          }
+      },        "api.AddTransactionRequest": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name",
+            "receiver_pk",
+            "sender_pk"
+        ],
+        "properties": {
+            "amount": {
+                "type": "integer"
+            },
+            "currency": {
+                "description": "currency code",
+                "type": "string"
+            },
+            "message": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "description": "ETH or BTC address",
+                "type": "integer"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "description": "ETH or BTC address",
+                "type": "integer"
+            },
+            "status": {
+                "type": "string"
             }
-        },
-        "github.com_Melon-Network-Inc_payment-service_pkg_transaction.UpdateTransactionRequest": {
-            "type": "object",
-            "required": [
-                "name"
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "message": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                }
+        }
+    },
+    "api.UpdateTransactionRequest": {
+        "type": "object",
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "message": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
             }
-        },
-        "pkg_transaction.AddTransactionRequest": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "integer"
-                },
-                "currency": {
-                    "description": "currency code",
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
-                },
-                "status": {
-                    "type": "string"
-                }
+        }
+    },
+    "github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name",
+            "receiver_pk",
+            "sender_pk"
+        ],
+        "properties": {
+            "amount": {
+                "type": "integer"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "description": "currency code",
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "message": {
+                "description": "message should be less than 200 characters",
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "description": "ETH or BTC address",
+                "type": "integer"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "description": "ETH or BTC address",
+                "type": "integer"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
             }
-        },
-        "pkg_transaction.Transaction": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "description": "currency code",
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "message": {
-                    "description": "message should be less than 200 characters",
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "pkg_transaction.UpdateTransactionRequest": {
-            "type": "object",
-            "required": [
-                "name"
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "message": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                }
+        }
+    },
+    "pkg_transaction.Transaction": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name",
+            "receiver_pk",
+            "sender_pk"
+        ],
+        "properties": {
+            "amount": {
+                "type": "integer"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "description": "currency code",
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "message": {
+                "description": "message should be less than 200 characters",
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "description": "ETH or BTC address",
+                "type": "integer"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "description": "ETH or BTC address",
+                "type": "integer"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
             }
         }
     }
+  }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
