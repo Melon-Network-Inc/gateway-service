@@ -39,7 +39,7 @@ func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
 
 func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
@@ -59,7 +59,7 @@ func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
 
 func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
@@ -79,7 +79,7 @@ func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
 
 func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
@@ -99,5 +99,5 @@ func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
         log.Println("Payment Service: unable to connect PaymentService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }

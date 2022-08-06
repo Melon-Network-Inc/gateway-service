@@ -39,7 +39,7 @@ func (s *accountService) HandleGetRequest(ctx *gin.Context) {
     	log.Println("Account Service: unable to connect AccountService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
 
 func (s *accountService) HandlePostRequest(ctx *gin.Context) {
@@ -60,7 +60,7 @@ func (s *accountService) HandlePostRequest(ctx *gin.Context) {
     	log.Println("Account Service: unable to connect AccountService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
 
 func (s *accountService) HandleUpdateRequest(ctx *gin.Context) {
@@ -79,7 +79,7 @@ func (s *accountService) HandleUpdateRequest(ctx *gin.Context) {
     	log.Println("Account Service: unable to connect AccountService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
 
 func (s *accountService) HandleDeleteRequest(ctx *gin.Context) {
@@ -97,5 +97,5 @@ func (s *accountService) HandleDeleteRequest(ctx *gin.Context) {
     	log.Println("Account Service: unable to connect AccountService due to", err)
         return
     }
-	ctx.JSON(resp.StatusCode(), resp.Body())
+	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
