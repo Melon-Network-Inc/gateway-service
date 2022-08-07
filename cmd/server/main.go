@@ -86,10 +86,10 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 
 	whitelist := v1.Group("/whitelist")
 	whitelist.POST("/", accountService.HandlePostRequest)
-	whitelist.GET("/", accountService.HandleGetRequest)
 	whitelist.GET("/name/:name", accountService.HandleGetRequest)
 	whitelist.GET("/email/:email", accountService.HandleGetRequest)
 	whitelist.GET("/phone/:phone", accountService.HandleGetRequest)
+	whitelist.GET("/", accountService.HandleGetRequest)
 	whitelist.DELETE("/:id", accountService.HandleDeleteRequest)
 
 	// Handle by Payment Service
