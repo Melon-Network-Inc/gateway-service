@@ -9,6 +9,8 @@ github.com/Melon-Network-Inc/entity-repo v1.0.8 h1:4zBP7k38jp2CSI/plC6bvXyDlxGor
 github.com/Melon-Network-Inc/entity-repo v1.0.8/go.mod h1:jYQOH4F/v2+S4twYcp8Za0q2pxHUBCBpf34WtgryqPE=
 github.com/Melon-Network-Inc/entity-repo v1.0.9 h1:gqfzDfxRyu1JOvestmCzny23Yn1udyb6j7mfQ/i8BTU=
 github.com/Melon-Network-Inc/entity-repo v1.0.9/go.mod h1:jYQOH4F/v2+S4twYcp8Za0q2pxHUBCBpf34WtgryqPE=
+github.com/Melon-Network-Inc/entity-repo v1.0.12 h1:4CFjTuExDjQGw84uCHWf1Ca7RJaPYj2lKDAO4CO8Cl0=
+github.com/Melon-Network-Inc/entity-repo v1.0.12/go.mod h1:jYQOH4F/v2+S4twYcp8Za0q2pxHUBCBpf34WtgryqPE=
 github.com/PuerkitoBio/purell v1.1.1 h1:WEQqlqaGbrPkxLJWfBwQmfEAE1Z7ONdDLqrN38tNFfI=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 h1:d+Bc7a5rLufV/sSk/8dngufqelfh6jnri85riMAaF/M=
