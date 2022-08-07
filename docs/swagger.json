@@ -1459,6 +1459,9 @@
               "id": {
                   "type": "integer"
               },
+              "is_public": {
+                  "type": "boolean"
+              },
               "message": {
                   "description": "message should be less than 200 characters",
                   "type": "string"
@@ -1659,6 +1662,9 @@
               },
               "id": {
                   "type": "integer"
+              },
+              "is_public": {
+                  "type": "boolean"
               },
               "message": {
                   "description": "message should be less than 200 characters",
@@ -1881,6 +1887,9 @@
                   "description": "currency code",
                   "type": "string"
               },
+              "is_public": {
+                  "type": "boolean"
+              },
               "message": {
                   "type": "string"
               },
@@ -1949,6 +1958,9 @@
               "id": {
                   "type": "integer"
               },
+              "is_public": {
+                  "type": "boolean"
+              },
               "message": {
                   "description": "message should be less than 200 characters",
                   "type": "string"
@@ -2003,6 +2015,9 @@
               },
               "id": {
                   "type": "integer"
+              },
+              "is_public": {
+                  "type": "boolean"
               },
               "message": {
                   "description": "message should be less than 200 characters",

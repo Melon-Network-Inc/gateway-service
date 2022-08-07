@@ -1467,6 +1467,9 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
+                "is_public": {
+                    "type": "boolean"
+                },
                 "message": {
                     "description": "message should be less than 200 characters",
                     "type": "string"
@@ -1667,6 +1670,9 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "integer"
+                },
+                "is_public": {
+                    "type": "boolean"
                 },
                 "message": {
                     "description": "message should be less than 200 characters",
@@ -1889,6 +1895,9 @@ const docTemplate = `{
                     "description": "currency code",
                     "type": "string"
                 },
+                "is_public": {
+                    "type": "boolean"
+                },
                 "message": {
                     "type": "string"
                 },
@@ -1920,6 +1929,9 @@ const docTemplate = `{
                 "name"
             ],
             "properties": {
+                "is_public": {
+                    "type": "boolean"
+                },
                 "message": {
                     "type": "string"
                 },
@@ -1956,6 +1968,9 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "integer"
+                },
+                "is_public": {
+                    "type": "boolean"
                 },
                 "message": {
                     "description": "message should be less than 200 characters",
@@ -2011,6 +2026,9 @@ const docTemplate = `{
                 },
                 "id": {
                     "type": "integer"
+                },
+                "is_public": {
+                    "type": "boolean"
                 },
                 "message": {
                     "description": "message should be less than 200 characters",
