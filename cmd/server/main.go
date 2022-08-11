@@ -95,8 +95,9 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	// Handle by Payment Service
 	transaction := v1.Group("/transactions")
 	transaction.POST("/", authenticator, paymentService.HandlePostRequest)
-	transaction.GET("/", authenticator, paymentService.HandleGetRequest)
+	transaction.GET("/user/:id", authenticator, paymentService.HandleGetRequest)
 	transaction.GET("/:id", authenticator, paymentService.HandleGetRequest)
+	transaction.GET("/", authenticator, paymentService.HandleGetRequest)
 	transaction.PUT("/:id", authenticator, paymentService.HandleUpdateRequest)
 	transaction.DELETE("/:id", authenticator, paymentService.HandleDeleteRequest)
 
