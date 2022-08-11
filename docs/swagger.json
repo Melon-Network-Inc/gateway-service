@@ -304,7 +304,7 @@
                     "schema": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_activity.Activity"
+                            "$ref": "#/definitions/pkg_activity.Activity"
                         }
                     }
                 },
@@ -334,7 +334,7 @@
                     "schema": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/definitions/pkg_address.Address"
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                         }
                     }
                 },
@@ -371,7 +371,7 @@
                 "200": {
                     "description": "OK",
                     "schema": {
-                        "$ref": "#/definitions/pkg_address.Address"
+                        "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                     }
                 },
                 "400": {
@@ -410,7 +410,7 @@
                 "201": {
                     "description": "Created",
                     "schema": {
-                        "$ref": "#/definitions/pkg_address.Address"
+                        "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                     }
                 },
                 "400": {
@@ -449,7 +449,7 @@
                 "200": {
                     "description": "OK",
                     "schema": {
-                        "$ref": "#/definitions/pkg_address.Address"
+                        "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                     }
                 },
                 "404": {
@@ -483,7 +483,7 @@
                 "200": {
                     "description": "OK",
                     "schema": {
-                        "$ref": "#/definitions/pkg_address.Address"
+                        "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                     }
                 },
                 "404": {
@@ -1157,7 +1157,7 @@
     },
     "/transaction/{id}": {
         "get": {
-            "description": "Get an transaction",
+            "description": "Get a transaction",
             "consumes": [
                 "application/json"
             ],
@@ -1167,7 +1167,7 @@
             "tags": [
                 "transactions"
             ],
-            "summary": "Get an transaction",
+            "summary": "Get a transaction",
             "operationId": "get-transaction",
             "parameters": [
                 {
@@ -1193,860 +1193,795 @@
     }
   },
   "definitions": {
-      "api.AddAddressRequest": {
-          "type": "object",
-          "required": [
-              "currency",
-              "is_primary",
-              "name",
-              "pubkey"
-          ],
-          "properties": {
-              "currency": {
-                  "type": "string",
-                  "enum": [
-                      "SOL",
-                      "BTC",
-                      "ETH",
-                      "BSC"
-                  ]
-              },
-              "is_primary": {
-                  "type": "boolean"
-              },
-              "name": {
-                  "type": "string",
-                  "maxLength": 30,
-                  "minLength": 2
-              },
-              "pubkey": {
-                  "type": "string"
-              }
-          }
-      },
-      "api.AddFriendRequest": {
-          "type": "object",
-          "required": [
-              "username"
-          ],
-          "properties": {
-              "status": {
-                  "type": "string",
-                  "enum": [
-                      "PENDING",
-                      "COMPLETED",
-                      "CANCELLED",
-                      "REJECTED"
-                  ]
-              },
-              "user_id": {
-                  "type": "string"
-              },
-              "username": {
-                  "type": "string",
-                  "maxLength": 30,
-                  "minLength": 2
-              }
-          }
-      },
-      "api.CreateUserRequest": {
-          "type": "object",
-          "required": [
-              "email",
-              "password",
-              "username"
-          ],
-          "properties": {
-              "avatar": {
-                  "type": "string"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "password": {
-                  "type": "string",
-                  "minLength": 8
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "username": {
-                  "type": "string",
-                  "maxLength": 30,
-                  "minLength": 2
-              }
-          }
-      },
-      "api.CreateWhiteListUserInfoRequest": {
-          "type": "object",
-          "required": [
-              "email",
-              "name"
-          ],
-          "properties": {
-              "discord": {
-                  "type": "string"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "location": {
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string",
-                  "maxLength": 30,
-                  "minLength": 2
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "twitter": {
-                  "type": "string"
-              }
-          }
-      },
-      "api.LoginUserRequest": {
-          "type": "object",
-          "required": [
-              "password",
-              "username"
-          ],
-          "properties": {
-              "password": {
-                  "type": "string",
-                  "minLength": 8
-              },
-              "username": {
-                  "type": "string",
-                  "maxLength": 30,
-                  "minLength": 2
-              }
-          }
-      },
-      "api.UpdateAddressRequest": {
-          "type": "object",
-          "required": [
-              "is_primary",
-              "name"
-          ],
-          "properties": {
-              "id": {
-                  "type": "string"
-              },
-              "is_primary": {
-                  "type": "boolean"
-              },
-              "name": {
-                  "type": "string",
-                  "maxLength": 30,
-                  "minLength": 2
-              }
-          }
-      },
-      "api.UpdateUserRequest": {
-          "type": "object",
-          "properties": {
-              "avatar": {
-                  "type": "string"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "phone": {
-                  "type": "string"
-              }
-          }
-      },
-      "api.UpdateUserStatusRequest": {
-          "type": "object",
-          "properties": {
-              "id": {
-                  "type": "string"
-              }
-          }
-      },
-      "entity.FriendRequest": {
-          "type": "object",
-          "properties": {
-              "createdAt": {
-                  "type": "string"
-              },
-              "creator_user": {
-                  "$ref": "#/definitions/entity.User"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "receiver_user": {
-                  "$ref": "#/definitions/entity.User"
-              },
-              "status": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "entity.User": {
-          "type": "object",
-          "required": [
-              "phone"
-          ],
-          "properties": {
-              "avatar": {
-                  "type": "string"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_disabled": {
-                  "type": "boolean"
-              },
-              "last_login": {
-                  "type": "string"
-              },
-              "password": {
-                  "type": "string"
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              },
-              "username": {
-                  "type": "string"
-              }
-          }
-      },
-      "github.com_Melon-Network-Inc_account-service_pkg_activity.Activity": {
-          "type": "object",
-          "required": [
-              "amount",
-              "currency",
-              "name",
-              "receiver_pk",
-              "sender_pk"
-          ],
-          "properties": {
-              "amount": {
-                  "type": "integer"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "currency": {
-                  "description": "currency code",
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_public": {
-                  "type": "boolean"
-              },
-              "message": {
-                  "description": "message should be less than 200 characters",
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "receiver_id": {
-                  "type": "integer"
-              },
-              "receiver_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "sender_id": {
-                  "type": "integer"
-              },
-              "sender_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "status": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "github.com_Melon-Network-Inc_account-service_pkg_address.Address": {
-          "type": "object",
-          "properties": {
-              "createdAt": {
-                  "type": "string"
-              },
-              "currency": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_primary": {
-                  "type": "boolean"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "owner": {
-                  "type": "string"
-              },
-              "pubkey": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest": {
-          "type": "object",
-          "properties": {
-              "createdAt": {
-                  "type": "string"
-              },
-              "creator_user": {
-                  "$ref": "#/definitions/entity.User"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "receiver_user": {
-                  "$ref": "#/definitions/entity.User"
-              },
-              "status": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "github.com_Melon-Network-Inc_account-service_pkg_friend.User": {
-          "type": "object",
-          "required": [
-              "phone"
-          ],
-          "properties": {
-              "avatar": {
-                  "type": "string"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_disabled": {
-                  "type": "boolean"
-              },
-              "last_login": {
-                  "type": "string"
-              },
-              "password": {
-                  "type": "string"
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              },
-              "username": {
-                  "type": "string"
-              }
-          }
-      },
-      "github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo": {
-          "type": "object",
-          "properties": {
-              "createdAt": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "discord": {
-                  "type": "string"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "location": {
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "twitter": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "gorm.DeletedAt": {
-          "type": "object",
-          "properties": {
-              "time": {
-                  "type": "string"
-              },
-              "valid": {
-                  "description": "Valid is true if Time is not NULL",
-                  "type": "boolean"
-              }
-          }
-      },
-      "pkg_activity.Activity": {
-          "type": "object",
-          "required": [
-              "amount",
-              "currency",
-              "name",
-              "receiver_pk",
-              "sender_pk"
-          ],
-          "properties": {
-              "amount": {
-                  "type": "integer"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "currency": {
-                  "description": "currency code",
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_public": {
-                  "type": "boolean"
-              },
-              "message": {
-                  "description": "message should be less than 200 characters",
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "receiver_id": {
-                  "type": "integer"
-              },
-              "receiver_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "sender_id": {
-                  "type": "integer"
-              },
-              "sender_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "status": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "pkg_address.Address": {
-          "type": "object",
-          "properties": {
-              "createdAt": {
-                  "type": "string"
-              },
-              "currency": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_primary": {
-                  "type": "boolean"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "owner": {
-                  "type": "string"
-              },
-              "pubkey": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "pkg_friend.FriendRequest": {
-          "type": "object",
-          "properties": {
-              "createdAt": {
-                  "type": "string"
-              },
-              "creator_user": {
-                  "$ref": "#/definitions/entity.User"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "receiver_user": {
-                  "$ref": "#/definitions/entity.User"
-              },
-              "status": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "pkg_friend.User": {
-          "type": "object",
-          "required": [
-              "phone"
-          ],
-          "properties": {
-              "avatar": {
-                  "type": "string"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_disabled": {
-                  "type": "boolean"
-              },
-              "last_login": {
-                  "type": "string"
-              },
-              "password": {
-                  "type": "string"
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              },
-              "username": {
-                  "type": "string"
-              }
-          }
-      },
-      "pkg_whitelist.WhitelistUserInfo": {
-          "type": "object",
-          "properties": {
-              "createdAt": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "discord": {
-                  "type": "string"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "location": {
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "twitter": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "user.User": {
-          "type": "object",
-          "required": [
-              "phone"
-          ],
-          "properties": {
-              "avatar": {
-                  "type": "string"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "email": {
-                  "type": "string"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_disabled": {
-                  "type": "boolean"
-              },
-              "last_login": {
-                  "type": "string"
-              },
-              "password": {
-                  "type": "string"
-              },
-              "phone": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              },
-              "username": {
-                  "type": "string"
-              }
-          }
-      },
-      "api.AddTransactionRequest": {
-          "type": "object",
-          "required": [
-              "amount",
-              "currency",
-              "name",
-              "receiver_pk",
-              "sender_pk"
-          ],
-          "properties": {
-              "amount": {
-                  "type": "integer"
-              },
-              "currency": {
-                  "description": "currency code",
-                  "type": "string"
-              },
-              "is_public": {
-                  "type": "boolean"
-              },
-              "message": {
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "receiver_id": {
-                  "type": "integer"
-              },
-              "receiver_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "sender_id": {
-                  "type": "integer"
-              },
-              "sender_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "status": {
-                  "type": "string"
-              }
-          }
-      },
-      "api.UpdateTransactionRequest": {
-          "type": "object",
-          "required": [
-              "name"
-          ],
-          "properties": {
-              "message": {
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "status": {
-                  "type": "string"
-              }
-          }
-      },
-      "github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction": {
-          "type": "object",
-          "required": [
-              "amount",
-              "currency",
-              "name",
-              "receiver_pk",
-              "sender_pk"
-          ],
-          "properties": {
-              "amount": {
-                  "type": "integer"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "currency": {
-                  "description": "currency code",
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_public": {
-                  "type": "boolean"
-              },
-              "message": {
-                  "description": "message should be less than 200 characters",
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "receiver_id": {
-                  "type": "integer"
-              },
-              "receiver_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "sender_id": {
-                  "type": "integer"
-              },
-              "sender_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "status": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      },
-      "pkg_transaction.Transaction": {
-          "type": "object",
-          "required": [
-              "amount",
-              "currency",
-              "name",
-              "receiver_pk",
-              "sender_pk"
-          ],
-          "properties": {
-              "amount": {
-                  "type": "integer"
-              },
-              "createdAt": {
-                  "type": "string"
-              },
-              "currency": {
-                  "description": "currency code",
-                  "type": "string"
-              },
-              "deletedAt": {
-                  "$ref": "#/definitions/gorm.DeletedAt"
-              },
-              "id": {
-                  "type": "integer"
-              },
-              "is_public": {
-                  "type": "boolean"
-              },
-              "message": {
-                  "description": "message should be less than 200 characters",
-                  "type": "string"
-              },
-              "name": {
-                  "type": "string"
-              },
-              "receiver_id": {
-                  "type": "integer"
-              },
-              "receiver_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "sender_id": {
-                  "type": "integer"
-              },
-              "sender_pk": {
-                  "description": "ETH or BTC address",
-                  "type": "integer"
-              },
-              "status": {
-                  "type": "string"
-              },
-              "updatedAt": {
-                  "type": "string"
-              }
-          }
-      }
+    "api.AddAddressRequest": {
+        "type": "object",
+        "required": [
+            "currency",
+            "is_primary",
+            "name",
+            "pubkey"
+        ],
+        "properties": {
+            "currency": {
+                "type": "string",
+                "enum": [
+                    "SOL",
+                    "BTC",
+                    "ETH",
+                    "BSC"
+                ]
+            },
+            "is_primary": {
+                "type": "boolean"
+            },
+            "name": {
+                "type": "string",
+                "maxLength": 30,
+                "minLength": 2
+            },
+            "pubkey": {
+                "type": "string"
+            }
+        }
+    },
+    "api.AddFriendRequest": {
+        "type": "object",
+        "required": [
+            "username"
+        ],
+        "properties": {
+            "user_id": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string",
+                "maxLength": 30,
+                "minLength": 2
+            }
+        }
+    },
+    "api.CreateUserRequest": {
+        "type": "object",
+        "required": [
+            "email",
+            "password",
+            "username"
+        ],
+        "properties": {
+            "avatar": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string",
+                "minLength": 8
+            },
+            "phone": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string",
+                "maxLength": 30,
+                "minLength": 2
+            }
+        }
+    },
+    "api.CreateWhiteListUserInfoRequest": {
+        "type": "object",
+        "required": [
+            "email",
+            "name"
+        ],
+        "properties": {
+            "discord": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "location": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string",
+                "maxLength": 30,
+                "minLength": 2
+            },
+            "phone": {
+                "type": "string"
+            },
+            "twitter": {
+                "type": "string"
+            }
+        }
+    },
+    "api.LoginUserRequest": {
+        "type": "object",
+        "required": [
+            "password",
+            "username"
+        ],
+        "properties": {
+            "password": {
+                "type": "string",
+                "minLength": 8
+            },
+            "username": {
+                "type": "string",
+                "maxLength": 30,
+                "minLength": 2
+            }
+        }
+    },
+    "api.UpdateAddressRequest": {
+        "type": "object",
+        "required": [
+            "is_primary",
+            "name"
+        ],
+        "properties": {
+            "is_primary": {
+                "type": "boolean"
+            },
+            "name": {
+                "type": "string",
+                "maxLength": 30,
+                "minLength": 2
+            }
+        }
+    },
+    "api.UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+            "avatar": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "phone": {
+                "type": "string"
+            }
+        }
+    },
+    "api.UpdateUserStatusRequest": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string"
+            }
+        }
+    },
+    "entity.FriendRequest": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "type": "string"
+            },
+            "creator_ref": {
+                "type": "integer"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "receiver_ref": {
+                "type": "integer"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "github.com_Melon-Network-Inc_account-service_pkg_activity.Activity": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name",
+            "receiver_pk",
+            "sender_pk"
+        ],
+        "properties": {
+            "amount": {
+                "type": "number"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_public": {
+                "type": "boolean"
+            },
+            "message": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "type": "string"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "github.com_Melon-Network-Inc_account-service_pkg_address.Address": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_primary": {
+                "type": "boolean"
+            },
+            "name": {
+                "type": "string"
+            },
+            "owner": {
+                "type": "string"
+            },
+            "pubkey": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "type": "string"
+            },
+            "creator_ref": {
+                "type": "integer"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "receiver_ref": {
+                "type": "integer"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "github.com_Melon-Network-Inc_account-service_pkg_friend.User": {
+        "type": "object",
+        "required": [
+            "phone"
+        ],
+        "properties": {
+            "avatar": {
+                "type": "string"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "email": {
+                "type": "string"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_disabled": {
+                "type": "boolean"
+            },
+            "last_login": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "phone": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string"
+            }
+        }
+    },
+    "github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "discord": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "location": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "phone": {
+                "type": "string"
+            },
+            "twitter": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "gorm.DeletedAt": {
+        "type": "object",
+        "properties": {
+            "time": {
+                "type": "string"
+            },
+            "valid": {
+                "description": "Valid is true if Time is not NULL",
+                "type": "boolean"
+            }
+        }
+    },
+    "pkg_activity.Activity": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name",
+            "receiver_pk",
+            "sender_pk"
+        ],
+        "properties": {
+            "amount": {
+                "type": "number"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_public": {
+                "type": "boolean"
+            },
+            "message": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "type": "string"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "pkg_address.Address": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_primary": {
+                "type": "boolean"
+            },
+            "name": {
+                "type": "string"
+            },
+            "owner": {
+                "type": "string"
+            },
+            "pubkey": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "pkg_friend.FriendRequest": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "type": "string"
+            },
+            "creator_ref": {
+                "type": "integer"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "receiver_ref": {
+                "type": "integer"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "pkg_friend.User": {
+        "type": "object",
+        "required": [
+            "phone"
+        ],
+        "properties": {
+            "avatar": {
+                "type": "string"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "email": {
+                "type": "string"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_disabled": {
+                "type": "boolean"
+            },
+            "last_login": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "phone": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string"
+            }
+        }
+    },
+    "pkg_whitelist.WhitelistUserInfo": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "discord": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "location": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "phone": {
+                "type": "string"
+            },
+            "twitter": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "user.User": {
+        "type": "object",
+        "required": [
+            "phone"
+        ],
+        "properties": {
+            "avatar": {
+                "type": "string"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "email": {
+                "type": "string"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_disabled": {
+                "type": "boolean"
+            },
+            "last_login": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "phone": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string"
+            }
+        }
+    },
+    "api.AddTransactionRequest": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name"
+        ],
+        "properties": {
+            "amount": {
+                "type": "number"
+            },
+            "currency": {
+                "type": "string"
+            },
+            "is_public": {
+                "type": "boolean"
+            },
+            "message": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "type": "string"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
+            }
+        }
+    },
+    "api.UpdateTransactionRequest": {
+        "type": "object",
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "is_public": {
+                "type": "boolean"
+            },
+            "message": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "name": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
+            }
+        }
+    },
+    "github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name",
+            "receiver_pk",
+            "sender_pk"
+        ],
+        "properties": {
+            "amount": {
+                "type": "number"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_public": {
+                "type": "boolean"
+            },
+            "message": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "type": "string"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    },
+    "pkg_transaction.Transaction": {
+        "type": "object",
+        "required": [
+            "amount",
+            "currency",
+            "name",
+            "receiver_pk",
+            "sender_pk"
+        ],
+        "properties": {
+            "amount": {
+                "type": "number"
+            },
+            "createdAt": {
+                "type": "string"
+            },
+            "currency": {
+                "type": "string"
+            },
+            "deletedAt": {
+                "$ref": "#/definitions/gorm.DeletedAt"
+            },
+            "id": {
+                "type": "integer"
+            },
+            "is_public": {
+                "type": "boolean"
+            },
+            "message": {
+                "type": "string",
+                "maxLength": 200
+            },
+            "name": {
+                "type": "string"
+            },
+            "receiver_id": {
+                "type": "integer"
+            },
+            "receiver_pk": {
+                "type": "string"
+            },
+            "sender_id": {
+                "type": "integer"
+            },
+            "sender_pk": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
+            },
+            "updatedAt": {
+                "type": "string"
+            }
+        }
+    }
   }
 }

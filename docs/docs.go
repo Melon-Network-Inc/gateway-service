@@ -311,7 +311,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_activity.Activity"
+                                "$ref": "#/definitions/pkg_activity.Activity"
                             }
                         }
                     },
@@ -341,7 +341,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pkg_address.Address"
+                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                             }
                         }
                     },
@@ -378,7 +378,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                         }
                     },
                     "400": {
@@ -417,7 +417,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                         }
                     },
                     "400": {
@@ -456,7 +456,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                         }
                     },
                     "404": {
@@ -490,7 +490,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
+                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
                         }
                     },
                     "404": {
@@ -1164,7 +1164,7 @@ const docTemplate = `{
         },
         "/transaction/{id}": {
             "get": {
-                "description": "Get an transaction",
+                "description": "Get a transaction",
                 "consumes": [
                     "application/json"
                 ],
@@ -1174,7 +1174,7 @@ const docTemplate = `{
                 "tags": [
                     "transactions"
                 ],
-                "summary": "Get an transaction",
+                "summary": "Get a transaction",
                 "operationId": "get-transaction",
                 "parameters": [
                     {
@@ -1198,9 +1198,8 @@ const docTemplate = `{
                 }
             }
         }
-    },
-
-    "definitions": {
+      },
+      "definitions": {
         "api.AddAddressRequest": {
             "type": "object",
             "required": [
@@ -1238,15 +1237,6 @@ const docTemplate = `{
                 "username"
             ],
             "properties": {
-                "status": {
-                    "type": "string",
-                    "enum": [
-                        "PENDING",
-                        "COMPLETED",
-                        "CANCELLED",
-                        "REJECTED"
-                    ]
-                },
                 "user_id": {
                     "type": "string"
                 },
@@ -1339,9 +1329,6 @@ const docTemplate = `{
                 "name"
             ],
             "properties": {
-                "id": {
-                    "type": "string"
-                },
                 "is_primary": {
                     "type": "boolean"
                 },
@@ -1380,8 +1367,8 @@ const docTemplate = `{
                 "createdAt": {
                     "type": "string"
                 },
-                "creator_user": {
-                    "$ref": "#/definitions/entity.User"
+                "creator_ref": {
+                    "type": "integer"
                 },
                 "deletedAt": {
                     "$ref": "#/definitions/gorm.DeletedAt"
@@ -1389,54 +1376,13 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "receiver_user": {
-                    "$ref": "#/definitions/entity.User"
+                "receiver_ref": {
+                    "type": "integer"
                 },
                 "status": {
                     "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "entity.User": {
-            "type": "object",
-            "required": [
-                "phone"
-            ],
-            "properties": {
-                "avatar": {
-                    "type": "string"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_disabled": {
-                    "type": "boolean"
-                },
-                "last_login": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "username": {
                     "type": "string"
                 }
             }
@@ -1452,13 +1398,12 @@ const docTemplate = `{
             ],
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "createdAt": {
                     "type": "string"
                 },
                 "currency": {
-                    "description": "currency code",
                     "type": "string"
                 },
                 "deletedAt": {
@@ -1471,8 +1416,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "message": {
-                    "description": "message should be less than 200 characters",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
                     "type": "string"
@@ -1481,15 +1426,13 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "sender_id": {
                     "type": "integer"
                 },
                 "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "status": {
                     "type": "string"
@@ -1537,8 +1480,8 @@ const docTemplate = `{
                 "createdAt": {
                     "type": "string"
                 },
-                "creator_user": {
-                    "$ref": "#/definitions/entity.User"
+                "creator_ref": {
+                    "type": "integer"
                 },
                 "deletedAt": {
                     "$ref": "#/definitions/gorm.DeletedAt"
@@ -1546,8 +1489,8 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "receiver_user": {
-                    "$ref": "#/definitions/entity.User"
+                "receiver_ref": {
+                    "type": "integer"
                 },
                 "status": {
                     "type": "string"
@@ -1656,13 +1599,12 @@ const docTemplate = `{
             ],
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "createdAt": {
                     "type": "string"
                 },
                 "currency": {
-                    "description": "currency code",
                     "type": "string"
                 },
                 "deletedAt": {
@@ -1675,8 +1617,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "message": {
-                    "description": "message should be less than 200 characters",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
                     "type": "string"
@@ -1685,15 +1627,13 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "sender_id": {
                     "type": "integer"
                 },
                 "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "status": {
                     "type": "string"
@@ -1741,8 +1681,8 @@ const docTemplate = `{
                 "createdAt": {
                     "type": "string"
                 },
-                "creator_user": {
-                    "$ref": "#/definitions/entity.User"
+                "creator_ref": {
+                    "type": "integer"
                 },
                 "deletedAt": {
                     "$ref": "#/definitions/gorm.DeletedAt"
@@ -1750,8 +1690,8 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "receiver_user": {
-                    "$ref": "#/definitions/entity.User"
+                "receiver_ref": {
+                    "type": "integer"
                 },
                 "status": {
                     "type": "string"
@@ -1883,23 +1823,21 @@ const docTemplate = `{
             "required": [
                 "amount",
                 "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
+                "name"
             ],
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "currency": {
-                    "description": "currency code",
                     "type": "string"
                 },
                 "is_public": {
                     "type": "boolean"
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
                     "type": "string"
@@ -1908,15 +1846,13 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "sender_id": {
                     "type": "integer"
                 },
                 "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "status": {
                     "type": "string"
@@ -1933,7 +1869,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
                     "type": "string"
@@ -1954,13 +1891,12 @@ const docTemplate = `{
             ],
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "createdAt": {
                     "type": "string"
                 },
                 "currency": {
-                    "description": "currency code",
                     "type": "string"
                 },
                 "deletedAt": {
@@ -1973,8 +1909,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "message": {
-                    "description": "message should be less than 200 characters",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
                     "type": "string"
@@ -1983,15 +1919,13 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "sender_id": {
                     "type": "integer"
                 },
                 "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "status": {
                     "type": "string"
@@ -2012,13 +1946,12 @@ const docTemplate = `{
             ],
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "number"
                 },
                 "createdAt": {
                     "type": "string"
                 },
                 "currency": {
-                    "description": "currency code",
                     "type": "string"
                 },
                 "deletedAt": {
@@ -2031,8 +1964,8 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "message": {
-                    "description": "message should be less than 200 characters",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
                     "type": "string"
@@ -2041,15 +1974,13 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "receiver_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "sender_id": {
                     "type": "integer"
                 },
                 "sender_pk": {
-                    "description": "ETH or BTC address",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "status": {
                     "type": "string"
