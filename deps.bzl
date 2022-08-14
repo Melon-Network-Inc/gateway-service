@@ -211,6 +211,55 @@ def go_dependencies():
         version = "v1.0.0",
     )
     go_repository(
+        name = "com_github_jackc_chunkreader_v2",
+        importpath = "github.com/jackc/chunkreader/v2",
+        sum = "h1:i+RDz65UE+mmpjTfyz0MoVTnzeYxroil2G82ki7MGG8=",
+        version = "v2.0.1",
+    )
+    go_repository(
+        name = "com_github_jackc_pgconn",
+        importpath = "github.com/jackc/pgconn",
+        sum = "h1:rsDFzIpRk7xT4B8FufgpCCeyjdNpKyghZeSefViE5W8=",
+        version = "v1.12.1",
+    )
+    go_repository(
+        name = "com_github_jackc_pgio",
+        importpath = "github.com/jackc/pgio",
+        sum = "h1:g12B9UwVnzGhueNavwioyEEpAmqMe1E/BN9ES+8ovkE=",
+        version = "v1.0.0",
+    )
+    go_repository(
+        name = "com_github_jackc_pgpassfile",
+        importpath = "github.com/jackc/pgpassfile",
+        sum = "h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=",
+        version = "v1.0.0",
+    )
+    go_repository(
+        name = "com_github_jackc_pgproto3_v2",
+        importpath = "github.com/jackc/pgproto3/v2",
+        sum = "h1:brH0pCGBDkBW07HWlN/oSBXrmo3WB0UvZd1pIuDcL8Y=",
+        version = "v2.3.0",
+    )
+    go_repository(
+        name = "com_github_jackc_pgservicefile",
+        importpath = "github.com/jackc/pgservicefile",
+        sum = "h1:C8S2+VttkHFdOOCXJe+YGfa4vHYwlt4Zx+IVXQ97jYg=",
+        version = "v0.0.0-20200714003250-2b9c44734f2b",
+    )
+    go_repository(
+        name = "com_github_jackc_pgtype",
+        importpath = "github.com/jackc/pgtype",
+        sum = "h1:u4uiGPz/1hryuXzyaBhSk6dnIyyG2683olG2OV+UUgs=",
+        version = "v1.11.0",
+    )
+    go_repository(
+        name = "com_github_jackc_pgx_v4",
+        importpath = "github.com/jackc/pgx/v4",
+        sum = "h1:JzTglcal01DrghUqt+PmzWsZx/Yh7SC/CTQmSBMTd0Y=",
+        version = "v4.16.1",
+    )
+
+    go_repository(
         name = "com_github_jinzhu_inflection",
         importpath = "github.com/jinzhu/inflection",
         sum = "h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=",
@@ -297,8 +346,8 @@ def go_dependencies():
     go_repository(
         name = "com_github_melon_network_inc_entity_repo",
         importpath = "github.com/Melon-Network-Inc/entity-repo",
-        sum = "h1:4CFjTuExDjQGw84uCHWf1Ca7RJaPYj2lKDAO4CO8Cl0=",
-        version = "v1.0.12",
+        sum = "h1:r4A1kU3EwIiRwvuN597gqzqKxJm5xySIND7EvLTWBfw=",
+        version = "v1.0.30",
     )
     go_repository(
         name = "com_github_mitchellh_mapstructure",
@@ -582,6 +631,13 @@ def go_dependencies():
         sum = "h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=",
         version = "v3.0.1",
     )
+    go_repository(
+        name = "io_gorm_driver_postgres",
+        importpath = "gorm.io/driver/postgres",
+        sum = "h1:8bEphSAB69t3odsCR4NDzt581iZEWQuRM27Cg6KgfPY=",
+        version = "v1.3.8",
+    )
+
     go_repository(
         name = "io_gorm_gorm",
         importpath = "gorm.io/gorm",
