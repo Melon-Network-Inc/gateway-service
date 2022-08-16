@@ -10,6 +10,8 @@ const UserIDKey = "user_id"
 const ContextUserKey = "Username"
 const ContextUserIDKey = "User-Id"
 const AuthorizationKey = "Authorization"
+const RegistrationKey = "RegistrationSession"
+const ContextRegistrationTokenKey = "RegistrationSessionToken"
 
 func PrepareRequest(ctx *gin.Context, client *resty.Client) *resty.Request {
 	var req *resty.Request
@@ -36,5 +38,10 @@ func GetUserData(ctx *gin.Context) (map[string]string, bool) {
 		userData[ContextUserIDKey] = userID.(string)
 		userData[AuthorizationKey] = token.(string)
 	}
-	return userData, (existsName && existsID && existsToken)
+
+	registrationToken, existsRegistrationToken := ctx.Get(RegistrationKey)
+	if existsRegistrationToken {
+		userData[ContextRegistrationTokenKey] = registrationToken.(string)
+	}
+	return userData, (existsName && existsID && existsToken) || existsRegistrationToken
 }

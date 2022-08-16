@@ -38,10 +38,11 @@ func main() {
 }
 
 func setupRouter(s storage.Accessor) *gin.Engine {
-	authenticator := middleware.TokenAuthenticator(s)
-	accountService := service.NewAccountService("http://localhost:6000")
-	paymentService := service.NewPaymentService("http://localhost:7000")
-	corsHandler := newCorsHandler()
+	forwarder 		:= middleware.TokenForwarder()
+	authenticator 	:= middleware.TokenAuthenticator(s)
+	accountService 	:= service.NewAccountService("http://localhost:6000")
+	paymentService 	:= service.NewPaymentService("http://localhost:7000")
+	corsHandler 	:= newCorsHandler()
 
 	router := gin.Default()
 	router.Use(corsHandler)
@@ -56,7 +57,7 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	auth.GET("/logout", authenticator, accountService.HandleGetRequest)
 
 	address := v1.Group("/address")
-	address.POST("/", authenticator, accountService.HandlePostRequest)
+	address.POST("/", forwarder, accountService.HandlePostRequest)
 	address.GET("/", authenticator, accountService.HandleGetRequest)
 	address.GET("/:id", authenticator, accountService.HandleGetRequest)
 	address.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
@@ -75,7 +76,7 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	request.GET("/", authenticator, accountService.HandleGetRequest)
 
 	account := v1.Group("/account")
-	account.POST("/", accountService.HandlePostRequest)
+	account.POST("/", authenticator, accountService.HandlePostRequest)
 	account.GET("/:id", authenticator, accountService.HandleGetRequest)
 	account.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
 	account.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
