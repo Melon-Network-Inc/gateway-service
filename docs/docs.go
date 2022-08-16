@@ -311,7 +311,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pkg_activity.Activity"
+                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_activity.Activity"
                             }
                         }
                     },
@@ -341,7 +341,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                                "$ref": "#/definitions/pkg_address.Address"
                             }
                         }
                     },
@@ -378,7 +378,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                            "$ref": "#/definitions/pkg_address.Address"
                         }
                     },
                     "400": {
@@ -417,7 +417,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                            "$ref": "#/definitions/pkg_address.Address"
                         }
                     },
                     "400": {
@@ -456,7 +456,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                            "$ref": "#/definitions/pkg_address.Address"
                         }
                     },
                     "404": {
@@ -490,10 +490,83 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_address.Address"
+                            "$ref": "#/definitions/pkg_address.Address"
                         }
                     },
                     "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/auth/email/generate": {
+            "post": {
+                "description": "Generate email verification passcode and send passcode to user email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Generate email verification passcode",
+                "operationId": "email-generate",
+                "parameters": [
+                    {
+                        "description": "Email",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.GenerateEmailPasscodeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/auth/email/verify": {
+            "post": {
+                "description": "Verify email passcode",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Verify email passcode",
+                "operationId": "email-verify",
+                "parameters": [
+                    {
+                        "description": "Passcode",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.VerifyEmailPasscodeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     }
                 }
@@ -857,7 +930,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
                             }
                         }
                     },
@@ -899,7 +972,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
                             }
                         }
                     },
@@ -938,7 +1011,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
                             }
                         }
                     },
@@ -968,7 +1041,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/pkg_whitelist.WhitelistUserInfo"
+                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
                             }
                         }
                     },
@@ -1304,6 +1377,17 @@ const docTemplate = `{
                 }
             }
         },
+        "api.GenerateEmailPasscodeRequest": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
         "api.LoginUserRequest": {
             "type": "object",
             "required": [
@@ -1357,6 +1441,21 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.VerifyEmailPasscodeRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "passcode"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "passcode": {
                     "type": "string"
                 }
             }
@@ -1808,6 +1907,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "phone": {
+                    "type": "string"
+                },
+                "token": {
                     "type": "string"
                 },
                 "updatedAt": {
