@@ -57,7 +57,7 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	auth.GET("/logout", authenticator, accountService.HandleGetRequest)
 
 	address := v1.Group("/address")
-	address.POST("/", forwarder, accountService.HandlePostRequest)
+	address.POST("/", authenticator, accountService.HandlePostRequest)
 	address.GET("/", authenticator, accountService.HandleGetRequest)
 	address.GET("/:id", authenticator, accountService.HandleGetRequest)
 	address.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
@@ -76,7 +76,7 @@ func setupRouter(s storage.Accessor) *gin.Engine {
 	request.GET("/", authenticator, accountService.HandleGetRequest)
 
 	account := v1.Group("/account")
-	account.POST("/", authenticator, accountService.HandlePostRequest)
+	account.POST("/", forwarder, accountService.HandlePostRequest)
 	account.GET("/:id", authenticator, accountService.HandleGetRequest)
 	account.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
 	account.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
