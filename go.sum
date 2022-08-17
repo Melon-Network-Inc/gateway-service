@@ -1,12 +1,10 @@
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
 github.com/KyleBanks/depth v1.2.1/go.mod h1:jzSb9d0L43HxTQfT+oSA1EEp2q+ne2uh6XgeJcm8brE=
-github.com/Melon-Network-Inc/entity-repo v1.1.0 h1:Ta8f6tkRU69tOxtjcCw90xHVTCXTBFgR26lytEhWWy0=
-github.com/Melon-Network-Inc/entity-repo v1.1.0/go.mod h1:h32lJaHG6ZQ//BoZqR1ztQGerjGYK8byFRlOB/+tov8=
-github.com/Melon-Network-Inc/entity-repo v1.1.1 h1:rj6fOhIwKR5tgsPw8JzV6uSBHAUuKMouQXY7aAoyOjs=
-github.com/Melon-Network-Inc/entity-repo v1.1.1/go.mod h1:h32lJaHG6ZQ//BoZqR1ztQGerjGYK8byFRlOB/+tov8=
-github.com/Melon-Network-Inc/entity-repo v1.1.2 h1:ncOrTrOTbDVlycZpo3aw2T6rIrgJnkZ2ls7helSBEVA=
-github.com/Melon-Network-Inc/entity-repo v1.1.2/go.mod h1:h32lJaHG6ZQ//BoZqR1ztQGerjGYK8byFRlOB/+tov8=
+github.com/Melon-Network-Inc/entity-repo v1.1.3 h1:N6FDC6ztqvx7kzG7u2pS4PnQ1gRdlTz+RSPOl8PXU7E=
+github.com/Melon-Network-Inc/entity-repo v1.1.3/go.mod h1:h32lJaHG6ZQ//BoZqR1ztQGerjGYK8byFRlOB/+tov8=
+github.com/Melon-Network-Inc/entity-repo v1.1.5 h1:zBEM2ev50pStGh5WtbNFyUQx2umV3hJlrIQqlnaoeo8=
+github.com/Melon-Network-Inc/entity-repo v1.1.5/go.mod h1:U5Bv/KfO4+rq1f8vsARRkm3iZrS7BnM0LrYGKQiC0Xw=
 github.com/PuerkitoBio/purell v1.1.1 h1:WEQqlqaGbrPkxLJWfBwQmfEAE1Z7ONdDLqrN38tNFfI=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 h1:d+Bc7a5rLufV/sSk/8dngufqelfh6jnri85riMAaF/M=
@@ -63,6 +61,8 @@ github.com/go-playground/validator/v10 v10.11.0 h1:0W+xRM511GY47Yy3bZUbJVitCNg2B
 github.com/go-playground/validator/v10 v10.11.0/go.mod h1:i+3WkQ1FvaUjjxh1kSvIA4dMGDBiPU55YFDl0WbKdWU=
 github.com/go-redis/redis/v9 v9.0.0-beta.1 h1:oW3jlPic5HhGUbYMH0lidnP+72BgsT+lCwlVud6o2Mc=
 github.com/go-redis/redis/v9 v9.0.0-beta.1/go.mod h1:6gNX1bXdwkpEG0M/hEBNK/Fp8zdyCkjwwKc6vBbfCDI=
+github.com/go-redis/redis/v9 v9.0.0-beta.2 h1:ZSr84TsnQyKMAg8gnV+oawuQezeJR11/09THcWCQzr4=
+github.com/go-redis/redis/v9 v9.0.0-beta.2/go.mod h1:Bldcd/M/bm9HbnNPi/LUtYBSD8ttcZYBMupwMXhdU0o=
 github.com/go-resty/resty/v2 v2.7.0 h1:me+K9p3uhSmXtrBZ4k9jcEAfJmuC8IivWHwaLZwPrFY=
 github.com/go-resty/resty/v2 v2.7.0/go.mod h1:9PWDzw47qPphMRFfhsyk0NnSgvluHcljSMVIq3w7q0I=
 github.com/goccy/go-json v0.9.7 h1:IcB+Aqpx/iMHu5Yooh7jEzJk1JZ7Pjtmys2ukPr7EeM=
