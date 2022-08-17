@@ -10,11 +10,7 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {
-            "name": "API Support",
-            "url": "https://melonnetwork.io",
-            "email": "support@melonnetwork.io"
-        },
+        "contact": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -291,358 +287,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/activity": {
-            "get": {
-                "description": "List activities of an account",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "activities"
-                ],
-                "summary": "List activities of an account",
-                "operationId": "list-activities",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_activity.Activity"
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/address": {
-            "get": {
-                "description": "Query addresses of an account by pages",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "addresses"
-                ],
-                "summary": "Query addresses of an account by pages",
-                "operationId": "query-addresses-by-page",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/pkg_address.Address"
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            },
-            "put": {
-                "description": "Update an addresses",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "addresses"
-                ],
-                "summary": "Update an address",
-                "operationId": "update-address",
-                "parameters": [
-                    {
-                        "description": "Address Data",
-                        "name": "address",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateAddressRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            },
-            "post": {
-                "description": "Add an address to account",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "addresses"
-                ],
-                "summary": "Add an address to account",
-                "operationId": "add-address",
-                "parameters": [
-                    {
-                        "description": "Address Data",
-                        "name": "address",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.AddAddressRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/address/{id}": {
-            "get": {
-                "description": "Get an address",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "addresses"
-                ],
-                "summary": "Get an address",
-                "operationId": "get-address",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Address ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
-                        }
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            },
-            "delete": {
-                "description": "Delete an addresses by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "addresses"
-                ],
-                "summary": "Delete an address by ID",
-                "operationId": "delete-address",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Address ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/pkg_address.Address"
-                        }
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/auth/email/generate": {
-            "post": {
-                "description": "Generate email verification passcode and send passcode to user email",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "auth"
-                ],
-                "summary": "Generate email verification passcode",
-                "operationId": "email-generate",
-                "parameters": [
-                    {
-                        "description": "Email",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.GenerateEmailPasscodeRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": ""
-                    },
-                    "500": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/auth/email/verify": {
-            "post": {
-                "description": "Verify email passcode",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "auth"
-                ],
-                "summary": "Verify email passcode",
-                "operationId": "email-verify",
-                "parameters": [
-                    {
-                        "description": "Passcode",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.VerifyEmailPasscodeRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "401": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/auth/login": {
-            "post": {
-                "description": "Login an account",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "auth"
-                ],
-                "summary": "Login an account",
-                "operationId": "login",
-                "parameters": [
-                    {
-                        "description": "Login Data",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.LoginUserRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": "token",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/auth/logout": {
-            "get": {
-                "description": "Log out an account",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "auth"
-                ],
-                "summary": "Log out an account",
-                "operationId": "logout",
-                "responses": {
-                    "202": {
-                        "description": "Logged out",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
         "/friend/list": {
             "get": {
                 "description": "List friends of requester",
@@ -663,7 +307,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                                "$ref": "#/definitions/friend.FriendRequest"
                             }
                         }
                     },
@@ -693,7 +337,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.User"
+                                "$ref": "#/definitions/friend.User"
                             }
                         }
                     },
@@ -793,7 +437,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                            "$ref": "#/definitions/friend.FriendRequest"
                         }
                     },
                     "400": {
@@ -832,7 +476,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                            "$ref": "#/definitions/friend.FriendRequest"
                         }
                     },
                     "404": {
@@ -868,7 +512,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest"
+                            "$ref": "#/definitions/friend.FriendRequest"
                         }
                     },
                     "404": {
@@ -910,177 +554,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/whitelist": {
-            "post": {
-                "description": "List all whitelist user records",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "whitelist"
-                ],
-                "summary": "List all whitelist user records",
-                "operationId": "list-records",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/whitelist/email/{email}": {
-            "get": {
-                "description": "Get whitelist user records by email",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "whitelist"
-                ],
-                "summary": "Get whitelist user records by email",
-                "operationId": "get-record-by-email",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Whitelist User Record ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/whitelist/name/{name}": {
-            "get": {
-                "description": "Get whitelist user records by name",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "whitelist"
-                ],
-                "summary": "Get whitelist user records by name",
-                "operationId": "get-record-by-name",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Whitelist User Record ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/whitelist/phone/{phone}": {
-            "get": {
-                "description": "Get whitelist user records by phone",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "whitelist"
-                ],
-                "summary": "Get whitelist user records by phone",
-                "operationId": "get-record-by-phone",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo"
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/whitelist/{id}": {
-            "delete": {
-                "description": "Delete a whitelist user record",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "whitelist"
-                ],
-                "summary": "Delete a whitelist user record",
-                "operationId": "delete-whitelist-user",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "Object"
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
         "/transaction": {
             "get": {
                 "description": "List all transactiones by an account",
@@ -1110,7 +583,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                                "$ref": "#/definitions/pkg_transaction.Transaction"
                             }
                         }
                     },
@@ -1147,7 +620,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                            "$ref": "#/definitions/pkg_transaction.Transaction"
                         }
                     },
                     "400": {
@@ -1186,7 +659,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                            "$ref": "#/definitions/pkg_transaction.Transaction"
                         }
                     },
                     "400": {
@@ -1223,7 +696,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                            "$ref": "#/definitions/pkg_transaction.Transaction"
                         }
                     },
                     "400": {
@@ -1262,7 +735,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction"
+                            "$ref": "#/definitions/pkg_transaction.Transaction"
                         }
                     },
                     "404": {
@@ -1271,39 +744,8 @@ const docTemplate = `{
                 }
             }
         }
-      },
-      "definitions": {
-        "api.AddAddressRequest": {
-            "type": "object",
-            "required": [
-                "currency",
-                "is_primary",
-                "name",
-                "pubkey"
-            ],
-            "properties": {
-                "currency": {
-                    "type": "string",
-                    "enum": [
-                        "SOL",
-                        "BTC",
-                        "ETH",
-                        "BSC"
-                    ]
-                },
-                "is_primary": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 2
-                },
-                "pubkey": {
-                    "type": "string"
-                }
-            }
-        },
+    },
+    "definitions": {
         "api.AddFriendRequest": {
             "type": "object",
             "required": [
@@ -1317,6 +759,53 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 30,
                     "minLength": 2
+                }
+            }
+        },
+        "api.AddTransactionRequest": {
+            "type": "object",
+            "required": [
+                "amount",
+                "currency",
+                "name",
+                "show_type"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "receiver_pk": {
+                    "type": "string"
+                },
+                "sender_id": {
+                    "type": "integer"
+                },
+                "sender_pk": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string",
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
+                },
+                "status": {
+                    "type": "string"
                 }
             }
         },
@@ -1348,78 +837,30 @@ const docTemplate = `{
                 }
             }
         },
-        "api.CreateWhiteListUserInfoRequest": {
+        "api.UpdateTransactionRequest": {
             "type": "object",
             "required": [
-                "email",
-                "name"
+                "name",
+                "show_type"
             ],
             "properties": {
-                "discord": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 2
-                },
-                "phone": {
                     "type": "string"
                 },
-                "twitter": {
-                    "type": "string"
-                }
-            }
-        },
-        "api.GenerateEmailPasscodeRequest": {
-            "type": "object",
-            "required": [
-                "email"
-            ],
-            "properties": {
-                "email": {
-                    "type": "string"
-                }
-            }
-        },
-        "api.LoginUserRequest": {
-            "type": "object",
-            "required": [
-                "password",
-                "username"
-            ],
-            "properties": {
-                "password": {
+                "show_type": {
                     "type": "string",
-                    "minLength": 8
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
                 },
-                "username": {
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 2
-                }
-            }
-        },
-        "api.UpdateAddressRequest": {
-            "type": "object",
-            "required": [
-                "is_primary",
-                "name"
-            ],
-            "properties": {
-                "is_primary": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 2
+                "status": {
+                    "type": "string"
                 }
             }
         },
@@ -1441,21 +882,6 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
-                }
-            }
-        },
-        "api.VerifyEmailPasscodeRequest": {
-            "type": "object",
-            "required": [
-                "email",
-                "passcode"
-            ],
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "passcode": {
                     "type": "string"
                 }
             }
@@ -1486,94 +912,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github.com_Melon-Network-Inc_account-service_pkg_activity.Activity": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "number"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_public": {
-                    "type": "boolean"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "type": "string"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_address.Address": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_primary": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "owner": {
-                    "type": "string"
-                },
-                "pubkey": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "github.com_Melon-Network-Inc_account-service_pkg_friend.FriendRequest": {
+        "friend.FriendRequest": {
             "type": "object",
             "properties": {
                 "createdAt": {
@@ -1599,7 +938,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github.com_Melon-Network-Inc_account-service_pkg_friend.User": {
+        "friend.User": {
             "type": "object",
             "required": [
                 "phone"
@@ -1640,34 +979,54 @@ const docTemplate = `{
                 }
             }
         },
-        "github.com_Melon-Network-Inc_account-service_pkg_whitelist.WhitelistUserInfo": {
+        "github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction": {
             "type": "object",
+            "required": [
+                "amount",
+                "currency",
+                "name",
+                "receiver_pk",
+                "sender_pk"
+            ],
             "properties": {
+                "amount": {
+                    "type": "number"
+                },
                 "createdAt": {
+                    "type": "string"
+                },
+                "currency": {
                     "type": "string"
                 },
                 "deletedAt": {
                     "$ref": "#/definitions/gorm.DeletedAt"
                 },
-                "discord": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
                 "id": {
                     "type": "integer"
                 },
-                "location": {
-                    "type": "string"
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
                 },
                 "name": {
                     "type": "string"
                 },
-                "phone": {
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "receiver_pk": {
                     "type": "string"
                 },
-                "twitter": {
+                "sender_id": {
+                    "type": "integer"
+                },
+                "sender_pk": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string"
+                },
+                "status": {
                     "type": "string"
                 },
                 "updatedAt": {
@@ -1687,7 +1046,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pkg_activity.Activity": {
+        "pkg_transaction.Transaction": {
             "type": "object",
             "required": [
                 "amount",
@@ -1712,9 +1071,6 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "is_public": {
-                    "type": "boolean"
-                },
                 "message": {
                     "type": "string",
                     "maxLength": 200
@@ -1734,141 +1090,10 @@ const docTemplate = `{
                 "sender_pk": {
                     "type": "string"
                 },
-                "status": {
+                "show_type": {
                     "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "pkg_address.Address": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_primary": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "owner": {
-                    "type": "string"
-                },
-                "pubkey": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "pkg_friend.FriendRequest": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "creator_ref": {
-                    "type": "integer"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "receiver_ref": {
-                    "type": "integer"
                 },
                 "status": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "pkg_friend.User": {
-            "type": "object",
-            "required": [
-                "phone"
-            ],
-            "properties": {
-                "avatar": {
-                    "type": "string"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_disabled": {
-                    "type": "boolean"
-                },
-                "last_login": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "pkg_whitelist.WhitelistUserInfo": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "discord": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "twitter": {
                     "type": "string"
                 },
                 "updatedAt": {
@@ -1919,190 +1144,18 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
-        },
-        "api.AddTransactionRequest": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "number"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "is_public": {
-                    "type": "boolean"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "type": "string"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                }
-            }
-        },
-        "api.UpdateTransactionRequest": {
-            "type": "object",
-            "required": [
-                "name"
-            ],
-            "properties": {
-                "is_public": {
-                    "type": "boolean"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                }
-            }
-        },
-        "github.com_Melon-Network-Inc_payment-service_pkg_transaction.Transaction": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "number"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_public": {
-                    "type": "boolean"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "type": "string"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "pkg_transaction.Transaction": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "number"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_public": {
-                    "type": "boolean"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "type": "string"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
         }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "2.0",
-	Host:             "localhost:8080",
-	BasePath:         "/api/v1",
+	Version:          "1.0",
+	Host:             "",
+	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "Melon Wallet Service API",
-	Description:      "This is the melon wallet service.",
+	Title:            "",
+	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
