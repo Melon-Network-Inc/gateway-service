@@ -1,8 +1,8 @@
 package service
 
 import (
+	"github.com/Melon-Network-Inc/common/pkg/log"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/processor"
-	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"
@@ -17,12 +17,13 @@ type AccountService interface {
 
 type accountService struct {
 	serviceUrlPrefix string
+	logger log.Logger
 }
 
-func NewAccountService(
-	serviceUrlPrefix string) AccountService {
+func NewAccountService(serviceUrlPrefix string, logger log.Logger) AccountService {
 	return &accountService{
 		serviceUrlPrefix: serviceUrlPrefix,
+		logger: logger,
 	}
 }
 
@@ -32,7 +33,7 @@ func (s *accountService) HandleGetRequest(ctx *gin.Context) {
 		Get(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-    	log.Println("Account Service: unable to connect AccountService due to", err)
+    	s.logger.Errorf("Account Service: unable to connect AccountService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
@@ -44,7 +45,7 @@ func (s *accountService) HandlePostRequest(ctx *gin.Context) {
 		Post(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-    	log.Println("Account Service: unable to connect AccountService due to", err)
+    	s.logger.Errorf("Account Service: unable to connect AccountService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
@@ -56,7 +57,7 @@ func (s *accountService) HandleUpdateRequest(ctx *gin.Context) {
 		Put(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-    	log.Println("Account Service: unable to connect AccountService due to", err)
+    	s.logger.Errorf("Account Service: unable to connect AccountService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
@@ -68,7 +69,7 @@ func (s *accountService) HandleDeleteRequest(ctx *gin.Context) {
 		Delete(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-    	log.Println("Account Service: unable to connect AccountService due to", err)
+    	s.logger.Errorf("Account Service: unable to connect AccountService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())

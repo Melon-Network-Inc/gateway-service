@@ -12,6 +12,6 @@ go_library(
         "//pkg/processor",
         "@com_github_gin_gonic_gin//:gin",
         "@com_github_go_resty_resty_v2//:resty",
-        "@com_github_sirupsen_logrus//:logrus",
+        "@com_github_melon_network_inc_common//pkg/log",
     ],
 )

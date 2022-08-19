@@ -1,8 +1,8 @@
 package service
 
 import (
+	"github.com/Melon-Network-Inc/common/pkg/log"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/processor"
-	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"
@@ -17,11 +17,14 @@ type PaymentService interface {
 
 type paymentService struct {
 	serviceUrlPrefix string
+	logger log.Logger
 }
 
-func NewPaymentService(serviceUrlPrefix string) PaymentService {
+func NewPaymentService(serviceUrlPrefix string, logger log.Logger) PaymentService {
 	return &paymentService{
-		serviceUrlPrefix: serviceUrlPrefix}
+		serviceUrlPrefix: serviceUrlPrefix,
+		logger: logger,
+	}
 }
 
 func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
@@ -30,7 +33,7 @@ func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
 		Post(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService due to", err)
+        s.logger.Errorf("Payment Service: unable to connect PaymentService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
@@ -42,7 +45,7 @@ func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
 		Put(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService due to", err)
+        s.logger.Errorf("Payment Service: unable to connect PaymentService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
@@ -54,7 +57,7 @@ func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
 		Get(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService due to", err)
+        s.logger.Errorf("Payment Service: unable to connect PaymentService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
@@ -66,7 +69,7 @@ func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
 		Delete(s.serviceUrlPrefix + ctx.Request.URL.String())
 
     if err != nil {
-        log.Println("Payment Service: unable to connect PaymentService due to", err)
+        s.logger.Errorf("Payment Service: unable to connect PaymentService due to", err)
         return
     }
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
