@@ -13,7 +13,7 @@ go_library(
     deps = [
         "//pkg/config",
         "//pkg/storage/cache",
-        "@com_github_melon_network_inc_entity_repo//pkg/entity",
+        "@com_github_melon_network_inc_common//pkg/entity",
         "@com_github_sirupsen_logrus//:logrus",
     ],
 )
