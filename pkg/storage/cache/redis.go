@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/Melon-Network-Inc/entity-repo/pkg/entity"
+	"github.com/Melon-Network-Inc/common/pkg/entity"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 
 	"gopkg.in/vmihailenco/msgpack.v2"

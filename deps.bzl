@@ -351,10 +351,10 @@ def go_dependencies():
         version = "v0.0.14",
     )
     go_repository(
-        name = "com_github_melon_network_inc_entity_repo",
-        importpath = "github.com/Melon-Network-Inc/entity-repo",
-        sum = "h1:SZEE3nQGbbvOpL9W3TEf9V5gQA57IDL74dYTCh4LsfY=",
-        version = "v1.1.8",
+        name = "com_github_melon_network_inc_common",
+        importpath = "github.com/Melon-Network-Inc/common",
+        sum = "h1:YOGVpBDHjDg/mnK0069CUtrEo9It1povZzjPAm+w9uY=",
+        version = "v1.0.0",
     )
     go_repository(
         name = "com_github_mitchellh_mapstructure",
