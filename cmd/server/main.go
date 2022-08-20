@@ -89,6 +89,9 @@ func (s Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.En
 	account.PUT("/activate", authenticator, accountService.HandleUpdateRequest)
 	account.PUT("/deactivate", authenticator, accountService.HandleUpdateRequest)
 
+	routes := v1.Group("/search")
+	routes.GET("/user/:keyword", accountService.HandleGetRequest)
+
 	activity := v1.Group("/activity")
 	activity.GET("/", authenticator, accountService.HandleGetRequest)
 
