@@ -2,6 +2,12 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/Melon-Network-Inc/common/pkg/log"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
@@ -12,21 +18,23 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/Melon-Network-Inc/gateway-service/docs"
-	swaggerfiles "github.com/swaggo/files"
+	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// ServiceName indicates the name of current service.
 // Version indicates the current version of the application.
-var ServiceName = "gateway-service"
-var Version = "1.0.0"
+const ServiceName = "gateway-service"
+const Version = "1.0.0"
+
 var swagHandler gin.HandlerFunc
 
 type Server struct {
-	router *gin.Engine
+	App *gin.Engine
 }
 
 func init() {
-	swagHandler = ginSwagger.WrapHandler(swaggerfiles.Handler)
+	swagHandler = ginSwagger.WrapHandler(swaggerFiles.Handler)
 }
 
 func main() {
@@ -38,21 +46,55 @@ func main() {
 		panic("Failed to get config.")
 	}
 
-	s := Server{gin.Default()}
+	s := Server{App: gin.Default()}
 
-	s.setupRouter(storage.New(context.Background(), conf.Redis), logger).Run(":8080")
+	s.setupRouter(storage.New(context.Background(), conf.Redis), logger)
+
+	srv := &http.Server{
+		Addr:    fmt.Sprintf(":%d", conf.ServerPort),
+		Handler: s.App,
+	}
+
+	go func() {
+		// service connections
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			logger.Errorf("listen: %s\n", err)
+		}
+	}()
+
+	// Wait for interrupt signal to gracefully shut down the server with
+	// a timeout of 5 seconds.
+	quit := make(chan os.Signal)
+	// kill (no param) default send syscall.SIGTERM
+	// kill -2 is syscall.SIGINT
+	// kill -9 is syscall. SIGKILL but can"t be caught, so don't need to add it
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	logger.Info("Shutdown Server ...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		logger.Errorf("Server Shutdown:", err)
+	}
+	// catching ctx.Done(). timeout of 5 seconds.
+	select {
+	case <-ctx.Done():
+		logger.Info("timeout of 5 seconds.")
+	}
+	logger.Info("Server exiting")
 }
 
-func (s Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.Engine {
-	forwarder 		:= middleware.TokenForwarder()
-	authenticator 	:= middleware.TokenAuthenticator(storage)
-	accountService 	:= service.NewAccountService("http://localhost:6000", logger)
-	paymentService 	:= service.NewPaymentService("http://localhost:7000", logger)
-	corsHandler 	:= newCorsHandler()
+func (s *Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.Engine {
+	forwarder := middleware.TokenForwarder()
+	authenticator := middleware.TokenAuthenticator(storage)
+	accountService := service.NewAccountService("http://localhost:6000", logger)
+	paymentService := service.NewPaymentService("http://localhost:7000", logger)
+	corsHandler := newCorsHandler()
 
-	s.router.Use(corsHandler)
+	s.App.Use(corsHandler)
 
-	v1 := s.router.Group("api/v1")
+	v1 := s.App.Group("api/v1")
 
 	// Handle by Account Service
 	auth := v1.Group("/auth")
@@ -114,13 +156,13 @@ func (s Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.En
 
 	if swagHandler != nil {
 		s.buildSwagger()
-		s.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+		s.App.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 
-	return s.router
+	return s.App
 }
 
-func (s Server) buildSwagger() {
+func (s *Server) buildSwagger() {
 	docs.SwaggerInfo.Title = "Melon Wallet Service API"
 	docs.SwaggerInfo.Description = "This is backend server for Melon Wallet."
 	docs.SwaggerInfo.Version = "1.0"
@@ -130,9 +172,9 @@ func (s Server) buildSwagger() {
 }
 
 func newCorsHandler() gin.HandlerFunc {
-	config := cors.DefaultConfig()
-	config.AllowAllOrigins = true
-	config.AddAllowHeaders("Authorization")
+	defaultConfig := cors.DefaultConfig()
+	defaultConfig.AllowAllOrigins = true
+	defaultConfig.AddAllowHeaders("Authorization")
 
-	return cors.New(config)
+	return cors.New(defaultConfig)
 }

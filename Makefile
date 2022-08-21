@@ -13,6 +13,7 @@ prod: ## run the production server with bazel
 .PHONY: build
 build: ## update dependency and build using bazel
 	bazel run //:gazelle -- update-repos -from_file=go.mod -to_macro=deps.bzl%go_dependencies
+	bazel run //:gazelle
 	bazel build //...
 
 .PHONY: test
@@ -28,7 +29,7 @@ gazelle: ## run gazelle to add bazel to each directory
 	bazel run //:gazelle
 
 .PHONY: dependency
-dependency: ## update all bazel file wtih necessary depedency
+dependency: ## update all bazel file with necessary dependency
 	bazel run //:gazelle -- update-repos -from_file=go.mod -to_macro=deps.bzl%go_dependencies
 
 .PHONE: doc
