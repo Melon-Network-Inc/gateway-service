@@ -89,7 +89,7 @@ func (s *Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.E
 	forwarder := middleware.TokenForwarder()
 	authenticator := middleware.TokenAuthenticator(storage)
 	accountService := service.NewAccountService("http://localhost:6000", logger)
-	paymentService := service.NewPaymentService("http://localhost:7000", logger)
+	paymentService := service.NewPaymentService("http://localhost:7001", logger)
 	corsHandler := newCorsHandler()
 
 	s.App.Use(corsHandler)
