@@ -912,6 +912,45 @@ const docTemplate = `{
                 }
             }
         },
+        "/search/user/{keyword}": {
+            "get": {
+                "description": "Search users by keyword",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "search"
+                ],
+                "summary": "Search users by keyword",
+                "operationId": "search-users",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Keyword Data",
+                        "name": "keyword",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.UserResponse"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/whitelist": {
             "post": {
                 "description": "List all whitelist user records",
@@ -1275,135 +1314,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "api.AddTransactionRequest": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "show_type"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "number"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "type": "string"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "type": "string"
-                },
-                "show_type": {
-                    "type": "string",
-                    "enum": [
-                        "Public",
-                        "Private",
-                        "Friend"
-                    ]
-                },
-                "status": {
-                    "type": "string"
-                }
-            }
-        },
-        "api.TransactionResponse": {
-            "type": "object",
-            "required": [
-                "amount",
-                "currency",
-                "name",
-                "receiver_pk",
-                "sender_pk"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "number"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "type": "string"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "type": "string"
-                },
-                "show_type": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "api.UpdateTransactionRequest": {
-            "type": "object",
-            "required": [
-                "name",
-                "show_type"
-            ],
-            "properties": {
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "show_type": {
-                    "type": "string",
-                    "enum": [
-                        "Public",
-                        "Private",
-                        "Friend"
-                    ]
-                },
-                "status": {
-                    "type": "string"
-                }
-            }
-        },
         "api.ActivityResponse": {
             "type": "object",
             "required": [
@@ -1803,6 +1713,143 @@ const docTemplate = `{
                 "valid": {
                     "description": "Valid is true if Time is not NULL",
                     "type": "boolean"
+                }
+            }
+        },
+        "api.AddTransactionRequest": {
+            "type": "object",
+            "required": [
+                "amount",
+                "currency",
+                "name",
+                "show_type"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "receiver_pk": {
+                    "type": "string"
+                },
+                "sender_id": {
+                    "type": "integer"
+                },
+                "sender_pk": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string",
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.TransactionResponse": {
+            "type": "object",
+            "properties": {
+                "transaction": {
+                    "$ref": "#/definitions/entity.Transaction"
+                }
+            }
+        },
+        "api.UpdateTransactionRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "show_type"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string",
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Transaction": {
+            "type": "object",
+            "required": [
+                "amount",
+                "currency",
+                "name",
+                "receiver_pk",
+                "sender_pk"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "receiver_pk": {
+                    "type": "string"
+                },
+                "sender_id": {
+                    "type": "integer"
+                },
+                "sender_pk": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
                 }
             }
         }
