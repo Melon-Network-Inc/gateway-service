@@ -6,6 +6,8 @@ github.com/Melon-Network-Inc/common v1.0.3 h1:zBYA/ykgraAtC7owD0TBRIHMGGLqYH+4Vu
 github.com/Melon-Network-Inc/common v1.0.3/go.mod h1:19rdEZ3SF6ZdMzabmpzHobVbjvOGxLTv8d9Ncxg9VAY=
 github.com/Melon-Network-Inc/common v1.0.4 h1:94F9jHQE86shz26tpgiSSq0qWm4uFqoaUz1ukw+FKjA=
 github.com/Melon-Network-Inc/common v1.0.4/go.mod h1:19rdEZ3SF6ZdMzabmpzHobVbjvOGxLTv8d9Ncxg9VAY=
+github.com/Melon-Network-Inc/common v1.0.5 h1:sBOe0xqOQ/9pTvk5vFjO6136XDKDpeGzXxqJngC6u0I=
+github.com/Melon-Network-Inc/common v1.0.5/go.mod h1:y2XB2uTPb7WnI2bFqIIbsp7tq47nln40jQnwc/0IaHU=
 github.com/PuerkitoBio/purell v1.1.1 h1:WEQqlqaGbrPkxLJWfBwQmfEAE1Z7ONdDLqrN38tNFfI=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 h1:d+Bc7a5rLufV/sSk/8dngufqelfh6jnri85riMAaF/M=
