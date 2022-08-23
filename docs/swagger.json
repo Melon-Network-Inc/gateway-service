@@ -1,9 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "",
-        "title": "",
-        "contact": {},
+        "description": "This is backend server for Melon Wallet..",
+        "title": "Melon Wallet Service API",
+        "contact": {
+            "name": "API Support",
+            "url": "https://melonnetwork.io",
+            "email": "support@melonnetwork.io"
+        },
         "version": "1.0"
     },
     "host": "localhost:8080",
@@ -25,7 +29,7 @@
                 "operationId": "update-user",
                 "parameters": [
                     {
-                        "description": "User Data",
+                        "description": "User Update Data",
                         "name": "user",
                         "in": "body",
                         "required": true,
@@ -105,7 +109,7 @@
                 "operationId": "activate-user",
                 "parameters": [
                     {
-                        "description": "User Data",
+                        "description": "User Update Status Data",
                         "name": "user",
                         "in": "body",
                         "required": true,
@@ -146,7 +150,7 @@
                 "operationId": "deactivate-user",
                 "parameters": [
                     {
-                        "description": "User Data",
+                        "description": "User Update Status Data",
                         "name": "user",
                         "in": "body",
                         "required": true,
@@ -192,6 +196,15 @@
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "User Password Data",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateUserPasswordRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1578,6 +1591,18 @@
                     "type": "string",
                     "maxLength": 30,
                     "minLength": 2
+                }
+            }
+        },
+        "api.UpdateUserPasswordRequest": {
+            "type": "object",
+            "required": [
+                "password"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "minLength": 8
                 }
             }
         },

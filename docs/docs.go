@@ -6,15 +6,20 @@ import "github.com/swaggo/swag"
 
 const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
+
     "swagger": "2.0",
     "info": {
-        "description": "{{escape .Description}}",
-        "title": "{{.Title}}",
-        "contact": {},
-        "version": "{{.Version}}"
+        "description": "This is backend server for Melon Wallet..",
+        "title": "Melon Wallet Service API",
+        "contact": {
+            "name": "API Support",
+            "url": "https://melonnetwork.io",
+            "email": "support@melonnetwork.io"
+        },
+        "version": "1.0"
     },
-    "host": "{{.Host}}",
-    "basePath": "{{.BasePath}}",
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
     "paths": {
         "/account": {
             "put": {
@@ -32,7 +37,7 @@ const docTemplate = `{
                 "operationId": "update-user",
                 "parameters": [
                     {
-                        "description": "User Data",
+                        "description": "User Update Data",
                         "name": "user",
                         "in": "body",
                         "required": true,
@@ -112,7 +117,7 @@ const docTemplate = `{
                 "operationId": "activate-user",
                 "parameters": [
                     {
-                        "description": "User Data",
+                        "description": "User Update Status Data",
                         "name": "user",
                         "in": "body",
                         "required": true,
@@ -153,7 +158,7 @@ const docTemplate = `{
                 "operationId": "deactivate-user",
                 "parameters": [
                     {
-                        "description": "User Data",
+                        "description": "User Update Status Data",
                         "name": "user",
                         "in": "body",
                         "required": true,
@@ -199,6 +204,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "User Password Data",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateUserPasswordRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1585,6 +1599,18 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 30,
                     "minLength": 2
+                }
+            }
+        },
+        "api.UpdateUserPasswordRequest": {
+            "type": "object",
+            "required": [
+                "password"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "minLength": 8
                 }
             }
         },
