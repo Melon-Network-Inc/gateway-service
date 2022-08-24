@@ -100,6 +100,7 @@ func (s *Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.E
 	auth := v1.Group("/auth")
 	auth.POST("/email/generate", accountService.HandlePostRequest)
 	auth.POST("/email/verify", accountService.HandlePostRequest)
+	auth.POST("/username/validate", accountService.HandlePostRequest)
 	auth.POST("/login", accountService.HandlePostRequest)
 	auth.GET("/logout", authenticator, accountService.HandleGetRequest)
 
