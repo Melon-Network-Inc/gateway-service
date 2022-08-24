@@ -6,7 +6,6 @@ import "github.com/swaggo/swag"
 
 const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
-
     "swagger": "2.0",
     "info": {
         "description": "This is backend server for Melon Wallet..",
@@ -535,11 +534,14 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "202": {
+                    "200": {
                         "description": "Email verification was sent to user email",
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "500": {
                         "description": ""
@@ -650,10 +652,51 @@ const docTemplate = `{
                             "type": "string"
                         }
                     },
-                    "400": {
+                    "403": {
                         "description": ""
                     },
                     "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/auth/username/validate": {
+            "post": {
+                "description": "Validate whether username is unique",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Validate whether username is unique",
+                "operationId": "username-validate",
+                "parameters": [
+                    {
+                        "description": "Email",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UsernameVerificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1677,6 +1720,19 @@ const docTemplate = `{
                 },
                 "username": {
                     "type": "string"
+                }
+            }
+        },
+        "api.UsernameVerificationRequest": {
+            "type": "object",
+            "required": [
+                "username"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
                 }
             }
         },
