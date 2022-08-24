@@ -8,7 +8,7 @@ require (
 	github.com/swaggo/swag v1.8.1
 )
 
-require github.com/Melon-Network-Inc/common v1.0.5
+require github.com/Melon-Network-Inc/common v1.0.7
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
