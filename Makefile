@@ -34,4 +34,4 @@ dependency: ## update all bazel file with necessary dependency
 
 .PHONE: doc
 doc: ## update swagger document
-	swag init --parseDependency --parseInternal  -g cmd/server/main.go
+	python ../NestedJsonMerger.py
