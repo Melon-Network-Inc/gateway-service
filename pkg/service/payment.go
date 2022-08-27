@@ -5,7 +5,6 @@ import (
 	"github.com/Melon-Network-Inc/gateway-service/pkg/processor"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-resty/resty/v2"
 )
 
 type PaymentService interface {
@@ -28,7 +27,7 @@ func NewPaymentService(serviceUrlPrefix string, logger log.Logger) PaymentServic
 }
 
 func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
-	client := resty.New()
+	client := CreateRetryRestyClient()
 	resp, err := processor.PrepareRequest(ctx, client).
 		Post(s.serviceUrlPrefix + ctx.Request.URL.String())
 
@@ -40,7 +39,7 @@ func (s *paymentService) HandlePostRequest(ctx *gin.Context) {
 }
 
 func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
-	client := resty.New()
+	client := CreateRetryRestyClient()
 	resp, err := processor.PrepareRequest(ctx, client).
 		Put(s.serviceUrlPrefix + ctx.Request.URL.String())
 
@@ -52,7 +51,7 @@ func (s *paymentService) HandleUpdateRequest(ctx *gin.Context) {
 }
 
 func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
-	client := resty.New()
+	client := CreateRetryRestyClient()
 	resp, err := processor.PrepareRequest(ctx, client).
 		Get(s.serviceUrlPrefix + ctx.Request.URL.String())
 
@@ -64,7 +63,7 @@ func (s *paymentService) HandleGetRequest(ctx *gin.Context) {
 }
 
 func (s *paymentService) HandleDeleteRequest(ctx *gin.Context) {
-	client := resty.New()
+	client := CreateRetryRestyClient()
 	resp, err := processor.PrepareRequest(ctx, client).
 		Delete(s.serviceUrlPrefix + ctx.Request.URL.String())
 
