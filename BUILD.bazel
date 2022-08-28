@@ -1,4 +1,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_push", "container_image")
 
 # gazelle:prefix github.com/Melon-Network-Inc/gateway-service
 gazelle(name = "gazelle")
@@ -12,4 +14,17 @@ gazelle(
         "-build_file_proto_mode=disable_global",
     ],
     command = "update-repos",
+)
+
+go_image(
+    name = "gateway-service",
+    binary = "//cmd/server:server",
+)
+
+container_push(
+    name = "gateway-service-push",
+    format = "Docker",
+    image = ":gateway-service",
+    registry = "index.docker.io",
+    repository = "melonnetwork/gateway-service",
 )
