@@ -2,9 +2,6 @@
 .vscode
 .ijwb
 dist
-bazel-bin
-bazel-gateway-service
-bazel-out
-bazel-testlogs
+bazel-**
 coverage**
 *.out
