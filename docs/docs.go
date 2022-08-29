@@ -1438,10 +1438,9 @@ const docTemplate = `{
                 "currency": {
                     "type": "string",
                     "enum": [
-                        "SOL",
-                        "BTC",
-                        "ETH",
-                        "BSC"
+                        "bitcoin",
+                        "ethereum",
+                        "solana"
                     ]
                 },
                 "is_primary": {
