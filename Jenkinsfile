@@ -15,7 +15,7 @@ pipeline {
             when { branch "main" }
             steps {
                 echo 'New release is approved. Clean up previous release.'
-                sh 'screen -XS payment-host quit'
+                sh 'screen -XS gateway-host quit'
             }
         }
         stage('Release') {
