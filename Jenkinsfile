@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             agent any
+            when { branch "main" }
             steps {
                 echo 'Run bazel build on gateway service target'
                 sh 'export GOPRIVATE=github.com/Melon-Network-Inc/common && bazel build //...'
@@ -11,6 +12,7 @@ pipeline {
         }
         stage('Test') {
             agent any
+            when { branch "main" }
             steps {
                 echo 'Run bazel test on gateway service target'
                 sh 'export GOPRIVATE=github.com/Melon-Network-Inc/common && bazel test //...'
