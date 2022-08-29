@@ -18,6 +18,7 @@ pipeline {
         }
         stage('Release') {
             agent any
+            when { branch "main" }
             steps {
                 echo 'Deploying the gateway service application to Production.'
                 sh 'screen -S gateway-host  -d -m -c /dev/null -- sh -c "export JENKINS_NODE_COOKIE=dontKillMe; export GOPRIVATE=github.com/Melon-Network-Inc/common; make run; exec sh"'

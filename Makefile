@@ -35,27 +35,3 @@ dependency: ## update all bazel file with necessary dependency
 .PHONE: doc
 doc: ## update swagger document
 	python ../NestedJsonMerger.py
-
-.PHONY: docker-run
-docker-run:  ## run gateway-service docker
-	bazel run //:gateway-service --@io_bazel_rules_docker//transitions:enable=no --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 -- --name=wallet-gateway
-
-.PHONY: docker-build
-docker-build:  ## build gateway-service docker
-	bazel build //:gateway-service --@io_bazel_rules_docker//transitions:enable=no --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
-
-.PHONY: docker-push
-docker-push:  ## push gateway-service image to dockerhub
-	bazel run //:gateway-service-push --@io_bazel_rules_docker//transitions:enable=no --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
-
-.PHONY: docker-run-x64
-docker-run-x64:  ## run gateway-service docker
-	bazel run //:gateway-service --@io_bazel_rules_docker//transitions:enable=no
-
-.PHONY: docker-build-x64
-docker-build-x64:  ## build gateway-service docker
-	bazel build //:gateway-service --@io_bazel_rules_docker//transitions:enable=no
-
-.PHONY: docker-push-x64
-docker-push-x64:  ## push gateway-service image to dockerhub
-	bazel run //:gateway-service-push --@io_bazel_rules_docker//transitions:enable=no
