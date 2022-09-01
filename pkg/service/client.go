@@ -8,10 +8,10 @@ import (
 )
 
 func CreateRetryRestyClient() *resty.Client {
-	client := resty.New();
+	client := resty.New()
 
 	client.
-		// Set retry count to non zero to enable retries
+		// Set retry count to non-zero to enable retries
 		SetRetryCount(3).
 		// You can override initial retry wait time.
 		// Default is 100 milliseconds.
@@ -23,6 +23,6 @@ func CreateRetryRestyClient() *resty.Client {
 		// Default (nil) implies exponential backoff with jitter
 		SetRetryAfter(func(client *resty.Client, resp *resty.Response) (time.Duration, error) {
 			return 0, errors.New("quota exceeded")
-		});
-	return client;
+		})
+	return client
 }

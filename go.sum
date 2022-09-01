@@ -4,6 +4,8 @@ github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc
 github.com/KyleBanks/depth v1.2.1/go.mod h1:jzSb9d0L43HxTQfT+oSA1EEp2q+ne2uh6XgeJcm8brE=
 github.com/Melon-Network-Inc/common v1.0.13 h1:uhl2VUrAItSro+S2YF+478DVDp4+v3p4b6r4hZHZJoQ=
 github.com/Melon-Network-Inc/common v1.0.13/go.mod h1:yPEqTUSBJhJbbT4kncHF3kz84algx1D6rywL11sTUXE=
+github.com/Melon-Network-Inc/common v1.0.19 h1:R3Od73UCnUd1pvBf8YG2ENOu+Tg2FzOIJflvJWL4mFA=
+github.com/Melon-Network-Inc/common v1.0.19/go.mod h1:yPEqTUSBJhJbbT4kncHF3kz84algx1D6rywL11sTUXE=
 github.com/PuerkitoBio/purell v1.1.1 h1:WEQqlqaGbrPkxLJWfBwQmfEAE1Z7ONdDLqrN38tNFfI=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 h1:d+Bc7a5rLufV/sSk/8dngufqelfh6jnri85riMAaF/M=
