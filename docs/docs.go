@@ -96,6 +96,9 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             }
@@ -795,6 +798,318 @@ const docTemplate = `{
                 }
             }
         },
+        "/referral/:id": {
+            "get": {
+                "description": "Get the referral code status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Get the referral code status",
+                "operationId": "get-referral-status",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Referral Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RevokeInviteCodeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Delete a referral code",
+                "operationId": "delete-referral",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Referral Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.DeleteInvitationResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/referral/accept": {
+            "post": {
+                "description": "Accept a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Accept a referral code",
+                "operationId": "accept-referral",
+                "parameters": [
+                    {
+                        "description": "Referral Code Data",
+                        "name": "accept_invite_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AcceptInviteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.AcceptInviteResponse"
+                        }
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/referral/count/accept": {
+            "get": {
+                "description": "Count the accepted referral codes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Count the accepted referral codes",
+                "operationId": "count-accepted-referral",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetAcceptedReferralResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/referral/count/left": {
+            "get": {
+                "description": "Count rest of the available referral codes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Count rest of the available referral codes",
+                "operationId": "count-left-referral",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetLeftInvitationNumberResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/referral/create": {
+            "get": {
+                "description": "Create a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Create a referral code",
+                "operationId": "create-referral-code",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.CreateInviteCodeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/referral/list": {
+            "get": {
+                "description": "List all invite codes of a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "List all invite codes of a user",
+                "operationId": "list-invitations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ListInvitationResponse"
+                        }
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/referral/revoke": {
+            "get": {
+                "description": "Revoke a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Revoke a referral code",
+                "operationId": "revoke-referral-code",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Referral Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RevokeInviteCodeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/request": {
             "get": {
                 "description": "List friend requests of an account",
@@ -1181,7 +1496,7 @@ const docTemplate = `{
         },
         "/transaction": {
             "get": {
-                "description": "List all transactiones by an account",
+                "description": "List all transactions by an account",
                 "consumes": [
                     "application/json"
                 ],
@@ -1191,7 +1506,7 @@ const docTemplate = `{
                 "tags": [
                     "transactions"
                 ],
-                "summary": "List all transactiones by an account",
+                "summary": "List all transactions by an account",
                 "operationId": "list-transactions-by-user",
                 "parameters": [
                     {
@@ -1371,6 +1686,31 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "api.AcceptInviteRequest": {
+            "type": "object",
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.AcceptInviteResponse": {
+            "type": "object",
+            "properties": {
+                "invitation": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                }
+            }
+        },
         "api.ActivityResponse": {
             "type": "object",
             "required": [
@@ -1504,6 +1844,17 @@ const docTemplate = `{
                 }
             }
         },
+        "api.CreateInviteCodeResponse": {
+            "type": "object",
+            "properties": {
+                "invite_code": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                },
+                "left_invite_number": {
+                    "type": "integer"
+                }
+            }
+        },
         "api.CreateUserRequest": {
             "type": "object",
             "required": [
@@ -1561,6 +1912,14 @@ const docTemplate = `{
                 }
             }
         },
+        "api.DeleteInvitationResponse": {
+            "type": "object",
+            "properties": {
+                "deleted_invitation": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                }
+            }
+        },
         "api.FriendRequestResponse": {
             "type": "object",
             "properties": {
@@ -1598,6 +1957,36 @@ const docTemplate = `{
                 }
             }
         },
+        "api.GetAcceptedReferralResponse": {
+            "type": "object",
+            "properties": {
+                "accepted_invitations": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.GetLeftInvitationNumberResponse": {
+            "type": "object",
+            "properties": {
+                "left_invite_number": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.ListInvitationResponse": {
+            "type": "object",
+            "properties": {
+                "invitations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.InviteCode"
+                    }
+                },
+                "left_invite_number": {
+                    "type": "integer"
+                }
+            }
+        },
         "api.LoginUserRequest": {
             "type": "object",
             "required": [
@@ -1624,6 +2013,17 @@ const docTemplate = `{
                 },
                 "token": {
                     "type": "string"
+                }
+            }
+        },
+        "api.RevokeInviteCodeResponse": {
+            "type": "object",
+            "properties": {
+                "invite_code": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                },
+                "left_invite_number": {
+                    "type": "integer"
                 }
             }
         },
@@ -1779,6 +2179,71 @@ const docTemplate = `{
                 },
                 "twitter": {
                     "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.AcceptorInfo": {
+            "type": "object",
+            "properties": {
+                "accepted_user_id": {
+                    "type": "integer"
+                },
+                "acceptor_email": {
+                    "type": "string"
+                },
+                "acceptor_phone": {
+                    "type": "string"
+                },
+                "acceptor_username": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.InviteCode": {
+            "type": "object",
+            "required": [
+                "code",
+                "expiration_at",
+                "owner",
+                "owner_id",
+                "status"
+            ],
+            "properties": {
+                "acceptor_info": {
+                    "$ref": "#/definitions/entity.AcceptorInfo"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "expiration_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "owner_id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "Initialized",
+                        "Accepted",
+                        "Used",
+                        "Revoked"
+                    ]
                 },
                 "updatedAt": {
                     "type": "string"
