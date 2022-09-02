@@ -926,6 +926,36 @@
                 }
             }
         },
+        "/referral/acceptor": {
+            "get": {
+                "description": "View referral status by acceptor",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "View referral status by acceptor",
+                "operationId": "view-referral-status-by-acceptor",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetInvitationResponse"
+                        }
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/referral/count/accept": {
             "get": {
                 "description": "Count the accepted referral codes",
@@ -1958,6 +1988,14 @@
                 }
             }
         },
+        "api.GetInvitationResponse": {
+            "type": "object",
+            "properties": {
+                "invitation": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                }
+            }
+        },
         "api.GetLeftInvitationNumberResponse": {
             "type": "object",
             "properties": {
@@ -2178,8 +2216,15 @@
                 }
             }
         },
-        "entity.AcceptorInfo": {
+        "entity.InviteCode": {
             "type": "object",
+            "required": [
+                "code",
+                "expired_at",
+                "owner",
+                "owner_ref",
+                "status"
+            ],
             "properties": {
                 "accepted_user_id": {
                     "type": "integer"
@@ -2192,21 +2237,6 @@
                 },
                 "acceptor_username": {
                     "type": "string"
-                }
-            }
-        },
-        "entity.InviteCode": {
-            "type": "object",
-            "required": [
-                "code",
-                "expiration_at",
-                "owner",
-                "owner_id",
-                "status"
-            ],
-            "properties": {
-                "acceptor_info": {
-                    "$ref": "#/definitions/entity.AcceptorInfo"
                 },
                 "code": {
                     "type": "string"
@@ -2217,7 +2247,7 @@
                 "deletedAt": {
                     "$ref": "#/definitions/gorm.DeletedAt"
                 },
-                "expiration_at": {
+                "expired_at": {
                     "type": "string"
                 },
                 "id": {
@@ -2226,7 +2256,7 @@
                 "owner": {
                     "type": "string"
                 },
-                "owner_id": {
+                "owner_ref": {
                     "type": "integer"
                 },
                 "status": {
