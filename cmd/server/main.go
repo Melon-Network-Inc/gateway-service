@@ -147,14 +147,14 @@ func (s *Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.E
 	whitelist.DELETE("/:id", accountService.HandleDeleteRequest)
 
 	referral := v1.Group("/referral")
-	referral.GET("/create", accountService.HandleGetRequest)
+	referral.GET("/create", authenticator, accountService.HandleGetRequest)
 	referral.POST("/accept", accountService.HandlePostRequest)
-	referral.GET("/revoke/:id", accountService.HandleGetRequest)
-	referral.GET("/list", accountService.HandleGetRequest)
-	referral.GET("/count/accepted", accountService.HandleGetRequest)
-	referral.GET("/count/left", accountService.HandleGetRequest)
-	referral.GET("/:id", accountService.HandleGetRequest)
-	referral.DELETE("/:id", accountService.HandleDeleteRequest)
+	referral.GET("/revoke/:id", authenticator, accountService.HandleGetRequest)
+	referral.GET("/list", authenticator, accountService.HandleGetRequest)
+	referral.GET("/count/accepted", authenticator, accountService.HandleGetRequest)
+	referral.GET("/count/left", authenticator, accountService.HandleGetRequest)
+	referral.GET("/:id", authenticator, accountService.HandleGetRequest)
+	referral.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
 	// Handle by Payment Service
 	transaction := v1.Group("/transactions")
