@@ -25,7 +25,7 @@ type Accessor interface {
 
 	// GetSingle retrieves value for key in `entry`.
 	// If key exists `true` is returned, `false` otherwise.
-	GetSingle(ctx context.Context, key string, value Value) (bool, error)
+	GetSingle(ctx context.Context, key Key, value Value) (bool, error)
 
 	// Get retrieves values for each key in `entries`.
 	// Returns array of booleans which tells if key existed or not.

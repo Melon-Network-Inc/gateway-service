@@ -1,5 +1,7 @@
 package config
 
+import "time"
+
 // CacheConfigProvider provides general Cache access configuration.
 type CacheConfigProvider interface {
 	GetPassword() string
@@ -11,4 +13,11 @@ type CacheConfigProvider interface {
 type RedisConfigProvider interface {
 	CacheConfigProvider
 	GetDB() int
+}
+
+// TokenConfigProvider provides Token secret and validity period configuration.
+type TokenConfigProvider interface {
+	GetSecretKey() []byte
+	GetAuthTokenValidityPeriod() time.Duration
+	GetRefreshTokenValidityPeriod() time.Duration
 }

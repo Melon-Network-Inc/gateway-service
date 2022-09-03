@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/Melon-Network-Inc/common/pkg/entity"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
@@ -66,9 +67,9 @@ func (cache *redisCache) Set(ctx context.Context, entries ...Entry) error {
 }
 
 // GetSingle retrieves single `value` stored at `key`.
-// If key does not exist and no error occured returned bool is set to false.
-func (cache *redisCache) GetSingle(ctx context.Context, key string, value Value) (bool, error) {
-	result, err := cache.client.Get(ctx, key).Result()
+// If key does not exist and no error occurred returned bool is set to false.
+func (cache *redisCache) GetSingle(ctx context.Context, key Key, value Value) (bool, error) {
+	result, err := cache.client.Get(ctx, cache.convertKeyToHash(key)).Result()
 	if err == redis.Nil {
 		return false, nil
 	} else if err != nil {
@@ -87,42 +88,42 @@ func (cache *redisCache) GetSingle(ctx context.Context, key string, value Value)
 
 // Get retrieves multiple values.
 // Operations are pipelined so there is only one message sent to Redis instance.
-// Returned array of bools is set appropiretly depending on wheter key existed or not.
-// func (cache *redisCache) Get(ctx context.Context, entries ...Entry) ([]bool, error) {
-// 	results := make([]*redis.StringCmd, len(entries))
-// 	existing := make([]bool, len(entries))
-// 	for i := range existing {
-// 		existing[i] = true
-// 	}
+// Returned array of booleans is set appropriately depending on whether key existed or not.
+func (cache *redisCache) Get(ctx context.Context, entries ...Entry) ([]bool, error) {
+	results := make([]*redis.StringCmd, len(entries))
+	existing := make([]bool, len(entries))
+	for i := range existing {
+		existing[i] = true
+	}
 
-// 	pipe := cache.client.Pipeline()
-// 	for i, entry := range entries {
-// 		results[i] = pipe.Get(ctx, entry.Key)
-// 	}
+	pipe := cache.client.Pipeline()
+	for i, entry := range entries {
+		results[i] = pipe.Get(ctx, entry.Key)
+	}
 
-// 	if _, err := pipe.Exec(ctx); err != nil && err != redis.Nil {
-// 		log.WithField("entries", entries).WithError(err).Error("Get: failed to set values in cache")
-// 		return nil, err
-// 	}
+	if _, err := pipe.Exec(ctx); err != nil && err != redis.Nil {
+		log.WithField("entries", entries).WithError(err).Error("Get: failed to set values in cache")
+		return nil, err
+	}
 
-// 	for i, entry := range entries {
-// 		result, err := results[i].Result()
-// 		if err == redis.Nil {
-// 			existing[i] = false
-// 			continue
-// 		}
+	for i, entry := range entries {
+		result, err := results[i].Result()
+		if err == redis.Nil {
+			existing[i] = false
+			continue
+		}
 
-// 		err = cache.unmarshalValue(result, entry.Value)
-// 		if err != nil {
-// 			log.WithField("value", entry.Value).
-// 				WithError(err).
-// 				Error("Get: failed to unmarshal value")
-// 			return nil, err
-// 		}
-// 	}
+		err = cache.unmarshalValue(result, entry.Value)
+		if err != nil {
+			log.WithField("value", entry.Value).
+				WithError(err).
+				Error("Get: failed to unmarshal value")
+			return nil, err
+		}
+	}
 
-// 	return existing, nil
-// }
+	return existing, nil
+}
 
 // Delete deletes multiple keys from cache.
 // Operations are pipelined so there is only one message sent to Redis instance.
@@ -226,7 +227,7 @@ func (cache *redisCache) Flush(ctx context.Context) error {
 	return cache.client.FlushAll(ctx).Err()
 }
 
-// unmarshalValue unmarshals single value from string.
+// unmarshalValue unmarshal single value from string.
 func (cache *redisCache) unmarshalValue(result string, value Value) error {
 	var (
 		val int64
@@ -321,23 +322,23 @@ func (cache *redisCache) unmarshalValues(results []string, values Values) error 
 }
 
 // convertKeyToHash joins multiple fields in `key` to single hash
-// func (cache *redisCache) convertKeyToHash(key Key) string {
-// 	stringFields := make([]string, 0, len(key))
+func (cache *redisCache) convertKeyToHash(key Key) string {
+	stringFields := make([]string, 0, len(key))
 
-// 	for _, field := range key {
-// 		switch field.(type) {
-// 		case string:
-// 			stringFields = append(stringFields, field.(string))
-// 		case int:
-// 			stringFields = append(stringFields, strconv.FormatInt(int64(field.(int)), 10))
-// 		case int32:
-// 			stringFields = append(stringFields, strconv.FormatInt(int64(field.(int32)), 10))
-// 		case int64:
-// 			stringFields = append(stringFields, strconv.FormatInt(int64(field.(int64)), 10))
-// 		default:
-// 			panic("convertKeyToHash: unsupported field in key")
-// 		}
-// 	}
+	for _, field := range key {
+		switch field.(type) {
+		case string:
+			stringFields = append(stringFields, field.(string))
+		case int:
+			stringFields = append(stringFields, strconv.FormatInt(int64(field.(int)), 10))
+		case int32:
+			stringFields = append(stringFields, strconv.FormatInt(int64(field.(int32)), 10))
+		case int64:
+			stringFields = append(stringFields, strconv.FormatInt(int64(field.(int64)), 10))
+		default:
+			panic("convertKeyToHash: unsupported field in key")
+		}
+	}
 
-// 	return strings.Join(stringFields, ":")
-// }
+	return strings.Join(stringFields, ":")
+}
