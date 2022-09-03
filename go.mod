@@ -8,7 +8,10 @@ require (
 	github.com/swaggo/swag v1.8.1
 )
 
-require github.com/Melon-Network-Inc/common v1.0.19
+require (
+	github.com/Melon-Network-Inc/common v1.0.30
+	github.com/golang-jwt/jwt/v4 v4.4.2
+)
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
@@ -45,8 +48,7 @@ require (
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
 	golang.org/x/net v0.0.0-20220617184016-355a448f1bc9 // indirect
 	golang.org/x/tools v0.1.11 // indirect
-	google.golang.org/appengine v1.6.0 // indirect
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
+	google.golang.org/appengine v1.6.7 // indirect
 	gorm.io/gorm v1.23.8 // indirect
 )
 

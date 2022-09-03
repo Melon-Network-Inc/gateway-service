@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "token",
+    srcs = ["token.go"],
+    importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/token",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/config",
+        "@com_github_golang_jwt_jwt_v4//:jwt",
+        "@com_github_melon_network_inc_common//pkg/log",
+    ],
+)

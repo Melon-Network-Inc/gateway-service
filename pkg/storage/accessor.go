@@ -7,7 +7,7 @@ import (
 )
 
 type usersDataAccessor interface {
-	GetUser(ctx context.Context, token string) (entity.CachedUser, error)
+	GetCachedUserByToken(ctx context.Context, userID string) (entity.CachedUser, error)
 }
 
 // Accessor is interface which defines all functions used on database/cache/fts

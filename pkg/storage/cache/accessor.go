@@ -2,7 +2,7 @@ package cache
 
 import "context"
 
-// Key represents abstract identificator for cache at which values/sets can be stored.
+// Key represents abstract identification for cache at which values/sets can be stored.
 type Key []interface{}
 
 // Value represents single value which can be added or retrieved from cache.
@@ -25,7 +25,7 @@ type Accessor interface {
 
 	// GetSingle retrieves value for key in `entry`.
 	// If key exists `true` is returned, `false` otherwise.
-	GetSingle(ctx context.Context, key string, value Value) (bool, error)
+	GetSingle(ctx context.Context, key Key, value Value) (bool, error)
 
 	// Get retrieves values for each key in `entries`.
 	// Returns array of booleans which tells if key existed or not.

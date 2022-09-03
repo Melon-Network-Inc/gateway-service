@@ -14,18 +14,18 @@ func (cache *fakeCache) Set(ctx context.Context, entries ...Entry) error {
 	return nil
 }
 
-func (cache *fakeCache) GetSingle(ctx context.Context, key string, value Value) (bool, error) {
+func (cache *fakeCache) GetSingle(ctx context.Context, key Key, value Value) (bool, error) {
 	return false, nil
 }
 
-// func (cache *fakeCache) Get(ctx context.Context, entries ...Entry) ([]bool, error) {
-// 	results := make([]bool, len(entries))
-// 	for i := range results {
-// 		results[i] = false
-// 	}
+func (cache *fakeCache) Get(ctx context.Context, entries ...Entry) ([]bool, error) {
+	results := make([]bool, len(entries))
+	for i := range results {
+		results[i] = false
+	}
 
-// 	return results, nil
-// }
+	return results, nil
+}
 
 func (cache *fakeCache) Delete(ctx context.Context, keys ...string) error {
 	return nil

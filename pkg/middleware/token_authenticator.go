@@ -3,7 +3,6 @@ package middleware
 import (
 	"errors"
 	"net/http"
-	"strconv"
 	"strings"
 
 	"github.com/Melon-Network-Inc/gateway-service/pkg/storage"
@@ -11,17 +10,19 @@ import (
 )
 
 const (
-	UsernameKey = "username"
-	UserIDKey = "user_id"
+	UsernameKey      = "username"
+	UserIDKey        = "user_id"
+	UserRoleKey      = "role"
 	AuthorizationKey = "Authorization"
-	RegistrationKey = "RegistrationSession"
+	RegistrationKey  = "RegistrationSession"
 )
 
+// TokenForwarder check if token is valid and forward token to backend service.
 func TokenForwarder() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		registrationTokenString := context.Request.Header.Get(RegistrationKey)
 		if registrationTokenString == "" {
-			context.AbortWithError(http.StatusUnauthorized, errors.New("Registration is timed out"))
+			context.AbortWithError(http.StatusUnauthorized, errors.New("registration is timed out"))
 			return
 		}
 		context.Set(RegistrationKey, registrationTokenString)
@@ -30,22 +31,24 @@ func TokenForwarder() gin.HandlerFunc {
 }
 
 // TokenAuthenticator check if token is valid and sets context key and value
-// appropiretly. Aborts when there was a problem in validating token.
+// appropriately. Aborts when there was a problem in validating token.
 func TokenAuthenticator(cache storage.Accessor) gin.HandlerFunc {
-	return func(context *gin.Context) {
-		fullAuthTokenString := context.Request.Header.Get(AuthorizationKey)
+	return func(ctx *gin.Context) {
+		fullAuthTokenString := ctx.Request.Header.Get(AuthorizationKey)
 		if fullAuthTokenString != "" {
-			context.Set(AuthorizationKey, fullAuthTokenString)
+			ctx.Set(AuthorizationKey, fullAuthTokenString)
 		}
 		tokenString := strings.TrimPrefix(fullAuthTokenString, "Bearer ")
 
-		user, err := cache.GetUser(context.Request.Context(), tokenString)
+		user, err := cache.GetCachedUserByToken(ctx, tokenString)
 		if err != nil {
-			context.AbortWithError(http.StatusUnauthorized, err)
+			ctx.AbortWithError(http.StatusUnauthorized, err)
 			return
 		}
-		context.Set(UserIDKey,  strconv.FormatUint(uint64(user.ID), 10))
-		context.Set(UsernameKey, user.Username)
-		context.Next()
+
+		ctx.Set(UserIDKey, user.ID)
+		ctx.Set(UsernameKey, user.Username)
+		ctx.Set(UserRoleKey, user.Role)
+		ctx.Next()
 	}
 }

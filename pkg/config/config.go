@@ -8,6 +8,7 @@ import (
 type Configuration struct {
 	ServerPort int
 	Redis      RedisConfigProvider
+	Token      TokenConfigProvider
 }
 
 // New reads and creates configuration from path provided in env `$MELON_CONFIG_PATH`
@@ -23,7 +24,8 @@ func New() *Configuration {
 
 	config := &generalConfig{v}
 	return &Configuration{
-		ServerPort: 8080,
+		ServerPort: config.getPort(),
 		Redis:      config.getRedisConfig(),
+		Token:		config.getTokenConfig(),
 	}
 }

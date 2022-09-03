@@ -1,17 +1,24 @@
 package processor
 
 import (
+	"fmt"
+
+	"github.com/Melon-Network-Inc/common/pkg/entity"
 	"github.com/gin-gonic/gin"
 	"github.com/go-resty/resty/v2"
 )
 
-const UsernameKey = "username"
-const UserIDKey = "user_id"
-const ContextUserKey = "Username"
-const ContextUserIDKey = "User-Id"
-const AuthorizationKey = "Authorization"
-const RegistrationKey = "RegistrationSession"
-const ContextRegistrationTokenKey = "RegistrationSessionToken"
+const (
+	UsernameKey = "username"
+	UserIDKey   = "user_id"
+
+	ContextUserKey              = "Username"
+	ContextUserIDKey            = "UserID"
+	AuthorizationKey            = "Authorization"
+	RegistrationKey             = "RegistrationSession"
+	ContextRoleKey              = "UserRole"
+	ContextRegistrationTokenKey = "RegistrationSessionToken"
+)
 
 func PrepareRequest(ctx *gin.Context, client *resty.Client) *resty.Request {
 	var req *resty.Request
@@ -35,8 +42,14 @@ func GetUserData(ctx *gin.Context) (map[string]string, bool) {
 	token, existsToken := ctx.Get(AuthorizationKey)
 	if existsName && existsID && existsToken {
 		userData[ContextUserKey] = username.(string)
-		userData[ContextUserIDKey] = userID.(string)
+		userData[ContextUserIDKey] = fmt.Sprintf("%d", userID.(uint))
 		userData[AuthorizationKey] = token.(string)
+	}
+	userRole, existsRole := ctx.Get(ContextRoleKey)
+	if existsRole {
+		userData[ContextRoleKey] = userRole.(string)
+	} else {
+		userData[ContextRoleKey] = fmt.Sprintf("%d", entity.UserRole)
 	}
 
 	registrationToken, existsRegistrationToken := ctx.Get(RegistrationKey)

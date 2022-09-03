@@ -2,11 +2,16 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "processor",
-    srcs = ["request.go"],
+    srcs = [
+        "request.go",
+        "response.go",
+    ],
     importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/processor",
     visibility = ["//visibility:public"],
     deps = [
         "@com_github_gin_gonic_gin//:gin",
         "@com_github_go_resty_resty_v2//:resty",
+        "@com_github_melon_network_inc_common//pkg/entity",
+        "@com_github_melon_network_inc_common//pkg/log",
     ],
 )

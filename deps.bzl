@@ -195,6 +195,13 @@ def go_dependencies():
         version = "v0.9.10",
     )
     go_repository(
+        name = "com_github_golang_jwt_jwt_v4",
+        importpath = "github.com/golang-jwt/jwt/v4",
+        sum = "h1:rcc4lwaZgFMCZ5jxF9ABolDcIHdBytAFgqFPbSJQAYs=",
+        version = "v4.4.2",
+    )
+
+    go_repository(
         name = "com_github_golang_protobuf",
         importpath = "github.com/golang/protobuf",
         sum = "h1:ROPKBNFfQgOUMifHyP+KYbvpjbdoFNs+aK7DXlji0Tw=",
@@ -381,8 +388,8 @@ def go_dependencies():
     go_repository(
         name = "com_github_melon_network_inc_common",
         importpath = "github.com/Melon-Network-Inc/common",
-        sum = "h1:R3Od73UCnUd1pvBf8YG2ENOu+Tg2FzOIJflvJWL4mFA=",
-        version = "v1.0.19",
+        sum = "h1:rOiJNaTPjh/K4mIGv0Gmrbfo/dOJNEwH9Wnwnm3M3+Q=",
+        version = "v1.0.30",
     )
     go_repository(
         name = "com_github_mitchellh_mapstructure",
@@ -696,8 +703,8 @@ def go_dependencies():
     go_repository(
         name = "org_golang_google_appengine",
         importpath = "google.golang.org/appengine",
-        sum = "h1:Tfd7cKwKbFRsI8RMAD3oqqw7JPFRrvFlOsfbgVkjOOw=",
-        version = "v1.6.0",
+        sum = "h1:FZR1q0exgwxzPzp/aF+VccGrSfxfPpkBqjIIEq3ru6c=",
+        version = "v1.6.7",
     )
     go_repository(
         name = "org_golang_google_protobuf",

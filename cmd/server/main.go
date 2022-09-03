@@ -48,7 +48,11 @@ func main() {
 
 	s := Server{App: gin.Default()}
 
-	s.setupRouter(storage.New(context.Background(), conf.Redis), logger)
+	cache, err := storage.New(context.Background(), conf.Redis, conf.Token, logger)
+	if err != nil {
+		panic(err)
+	}
+	s.SetupRouter(cache, logger)
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", conf.ServerPort),
@@ -85,7 +89,7 @@ func main() {
 	logger.Info("Server exiting")
 }
 
-func (s *Server) setupRouter(storage storage.Accessor, logger log.Logger) *gin.Engine {
+func (s *Server) SetupRouter(storage storage.Accessor, logger log.Logger) *gin.Engine {
 	forwarder := middleware.TokenForwarder()
 	authenticator := middleware.TokenAuthenticator(storage)
 	accountService := service.NewAccountService("http://localhost:6000", logger)
@@ -185,7 +189,7 @@ func (s *Server) buildSwagger() {
 func newCorsHandler() gin.HandlerFunc {
 	defaultConfig := cors.DefaultConfig()
 	defaultConfig.AllowAllOrigins = true
-	defaultConfig.AddAllowHeaders("Authorization")
+	defaultConfig.AddAllowHeaders("Authorization", "RegistrationSession")
 
 	return cors.New(defaultConfig)
 }
