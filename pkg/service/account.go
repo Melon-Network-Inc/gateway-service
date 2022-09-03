@@ -1,8 +1,6 @@
 package service
 
 import (
-	"net/http"
-
 	"github.com/Melon-Network-Inc/common/pkg/log"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/processor"
 
@@ -14,70 +12,40 @@ type AccountService interface {
 	HandlePostRequest(ctx *gin.Context)
 	HandleUpdateRequest(ctx *gin.Context)
 	HandleDeleteRequest(ctx *gin.Context)
-	HandleServiceUnavailable(ctx *gin.Context, err error)
 }
 
 type accountService struct {
 	serviceUrlPrefix string
-	logger log.Logger
+	logger           log.Logger
 }
 
 func NewAccountService(serviceUrlPrefix string, logger log.Logger) AccountService {
 	return &accountService{
 		serviceUrlPrefix: serviceUrlPrefix,
-		logger: logger,
+		logger:           logger,
 	}
 }
 
 func (s *accountService) HandleGetRequest(ctx *gin.Context) {
-	client := CreateRetryRestyClient()
-	resp, err := processor.PrepareRequest(ctx, client).
+	resp, err := processor.PrepareRequest(ctx, CreateRetryRestyClient()).
 		Get(s.serviceUrlPrefix + ctx.Request.URL.String())
-	if err != nil {
-		s.HandleServiceUnavailable(ctx, err)
-		return
-	}
-	
-	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
+	processor.HandleResponse(ctx, resp, err, s.logger)
 }
 
 func (s *accountService) HandlePostRequest(ctx *gin.Context) {
-	client := CreateRetryRestyClient()
-	resp, err := processor.PrepareRequest(ctx, client).
+	resp, err := processor.PrepareRequest(ctx, CreateRetryRestyClient()).
 		Post(s.serviceUrlPrefix + ctx.Request.URL.String())
-	if err != nil {
-		s.HandleServiceUnavailable(ctx, err)
-		return
-	}
-	
-	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
+	processor.HandleResponse(ctx, resp, err, s.logger)
 }
 
 func (s *accountService) HandleUpdateRequest(ctx *gin.Context) {
-	client := CreateRetryRestyClient()
-	resp, err := processor.PrepareRequest(ctx, client).
+	resp, err := processor.PrepareRequest(ctx, CreateRetryRestyClient()).
 		Put(s.serviceUrlPrefix + ctx.Request.URL.String())
-	if err != nil {
-		s.HandleServiceUnavailable(ctx, err)
-		return
-	}
-
-	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
+	processor.HandleResponse(ctx, resp, err, s.logger)
 }
 
 func (s *accountService) HandleDeleteRequest(ctx *gin.Context) {
-	client := CreateRetryRestyClient()
-	resp, err := processor.PrepareRequest(ctx, client).
+	resp, err := processor.PrepareRequest(ctx, CreateRetryRestyClient()).
 		Delete(s.serviceUrlPrefix + ctx.Request.URL.String())
-    if err != nil {
-    	s.HandleServiceUnavailable(ctx, err)
-        return
-    }
-
-	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
-}
-
-func (s *accountService) HandleServiceUnavailable(ctx *gin.Context, err error) {
-	s.logger.Errorf("Account Service: unable to connect AccountService due to", err)
-	ctx.Status(http.StatusServiceUnavailable)
+	processor.HandleResponse(ctx, resp, err, s.logger)
 }

@@ -298,7 +298,7 @@ func (cache *redisCache) marshalValues(values Values) ([]interface{}, error) {
 	return members, nil
 }
 
-// unmarshalValues unmarshals array of values from array of strings.
+// unmarshalValues unmarshal array of values from array of strings.
 func (cache *redisCache) unmarshalValues(results []string, values Values) error {
 	for _, result := range results {
 		var err error

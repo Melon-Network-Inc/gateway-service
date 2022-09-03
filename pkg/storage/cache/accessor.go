@@ -2,7 +2,7 @@ package cache
 
 import "context"
 
-// Key represents abstract identificator for cache at which values/sets can be stored.
+// Key represents abstract identification for cache at which values/sets can be stored.
 type Key []interface{}
 
 // Value represents single value which can be added or retrieved from cache.

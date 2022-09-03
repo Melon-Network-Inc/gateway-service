@@ -14,11 +14,11 @@ type storage struct{
 
 // New constructs Accessor
 func New(ctx context.Context, redisConfig config.RedisConfigProvider) Accessor {
-	cache := cache.NewRedisCache(ctx, redisConfig)
-	if cache == nil {
+	redisCache := cache.NewRedisCache(ctx, redisConfig)
+	if redisCache == nil {
 		panic("failed to connect to Redis instance")
 	}
-	usersStorage := newUserStorage(cache)
+	usersStorage := newUserStorage(redisCache)
 	return &storage{
 		usersDataAccessor:  usersStorage,
 	}

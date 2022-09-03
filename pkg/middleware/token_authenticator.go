@@ -11,17 +11,18 @@ import (
 )
 
 const (
-	UsernameKey = "username"
-	UserIDKey = "user_id"
+	UsernameKey      = "username"
+	UserIDKey        = "user_id"
 	AuthorizationKey = "Authorization"
-	RegistrationKey = "RegistrationSession"
+	RegistrationKey  = "RegistrationSession"
 )
 
+// TokenForwarder check if token is valid and forward token to backend service.
 func TokenForwarder() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		registrationTokenString := context.Request.Header.Get(RegistrationKey)
 		if registrationTokenString == "" {
-			context.AbortWithError(http.StatusUnauthorized, errors.New("Registration is timed out"))
+			context.AbortWithError(http.StatusUnauthorized, errors.New("registration is timed out"))
 			return
 		}
 		context.Set(RegistrationKey, registrationTokenString)
@@ -30,7 +31,7 @@ func TokenForwarder() gin.HandlerFunc {
 }
 
 // TokenAuthenticator check if token is valid and sets context key and value
-// appropiretly. Aborts when there was a problem in validating token.
+// appropriately. Aborts when there was a problem in validating token.
 func TokenAuthenticator(cache storage.Accessor) gin.HandlerFunc {
 	return func(context *gin.Context) {
 		fullAuthTokenString := context.Request.Header.Get(AuthorizationKey)
@@ -44,7 +45,7 @@ func TokenAuthenticator(cache storage.Accessor) gin.HandlerFunc {
 			context.AbortWithError(http.StatusUnauthorized, err)
 			return
 		}
-		context.Set(UserIDKey,  strconv.FormatUint(uint64(user.ID), 10))
+		context.Set(UserIDKey, strconv.FormatUint(uint64(user.ID), 10))
 		context.Set(UsernameKey, user.Username)
 		context.Next()
 	}

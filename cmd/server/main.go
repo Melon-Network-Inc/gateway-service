@@ -185,7 +185,7 @@ func (s *Server) buildSwagger() {
 func newCorsHandler() gin.HandlerFunc {
 	defaultConfig := cors.DefaultConfig()
 	defaultConfig.AllowAllOrigins = true
-	defaultConfig.AddAllowHeaders("Authorization")
+	defaultConfig.AddAllowHeaders("Authorization", "RegistrationSession")
 
 	return cors.New(defaultConfig)
 }
