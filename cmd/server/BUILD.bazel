@@ -22,7 +22,10 @@ go_library(
 
 go_binary(
     name = "server",
-    data = ["//config:gateway.yml"],
+    data = [
+        "//config:gateway.yml",
+        "//config:lb.yml",
+    ],
     embed = [":server_lib"],
     visibility = ["//visibility:public"],
 )
