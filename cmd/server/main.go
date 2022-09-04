@@ -9,15 +9,15 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/Melon-Network-Inc/common/pkg/config"
 	"github.com/Melon-Network-Inc/common/pkg/log"
-	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
+	"github.com/Melon-Network-Inc/gateway-service/docs"
+	tokenConfig "github.com/Melon-Network-Inc/gateway-service/pkg/config"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/middleware"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/service"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/storage"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-
-	"github.com/Melon-Network-Inc/gateway-service/docs"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -30,7 +30,9 @@ const Version = "1.0.0"
 var swagHandler gin.HandlerFunc
 
 type Server struct {
-	App *gin.Engine
+	App 		*gin.Engine
+	Storage 	storage.Accessor
+	logger  	log.Logger
 }
 
 func init() {
@@ -38,24 +40,30 @@ func init() {
 }
 
 func main() {
-	// create root logger tagged with server version
-	logger := log.New(ServiceName).With(context.Background(), "version", Version)
+	serverConfig := config.BuildServerConfig("config/gateway.yml")
 
-	conf := config.New()
+	// create root logger tagged with server version
+	logger := log.New(serverConfig.ServiceName).With(context.Background(), "version", serverConfig.Version)
+
+	conf := tokenConfig.NewTokenConfig()
 	if conf == nil {
 		panic("Failed to get config.")
 	}
 
-	s := Server{App: gin.Default()}
-
-	cache, err := storage.New(context.Background(), conf.Redis, conf.Token, logger)
+	cache, err := storage.New(context.Background(), serverConfig, conf.Token, logger)
 	if err != nil {
 		panic(err)
 	}
-	s.SetupRouter(cache, logger)
+
+	s := Server{
+		App: 		gin.Default(),
+		Storage: 	cache,
+		logger: 	logger,
+	}
+	s.SetupRouter()
 
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%d", conf.ServerPort),
+		Addr:    fmt.Sprintf(":%d", serverConfig.ServerPort),
 		Handler: s.App,
 	}
 
@@ -89,11 +97,11 @@ func main() {
 	logger.Info("Server exiting")
 }
 
-func (s *Server) SetupRouter(storage storage.Accessor, logger log.Logger) *gin.Engine {
+func (s *Server) SetupRouter() *gin.Engine {
 	forwarder := middleware.TokenForwarder()
-	authenticator := middleware.TokenAuthenticator(storage)
-	accountService := service.NewAccountService("http://localhost:6000", logger)
-	paymentService := service.NewPaymentService("http://localhost:7001", logger)
+	authenticator := middleware.TokenAuthenticator(s.Storage)
+	accountService := service.NewAccountService("http://localhost:6000", s.logger)
+	paymentService := service.NewPaymentService("http://localhost:7001", s.logger)
 	corsHandler := newCorsHandler()
 
 	s.App.Use(corsHandler)
