@@ -9,7 +9,7 @@ require (
 )
 
 require (
-	github.com/Melon-Network-Inc/common v1.0.30
+	github.com/Melon-Network-Inc/common v1.0.32
 	github.com/golang-jwt/jwt/v4 v4.4.2
 )
 
@@ -18,6 +18,7 @@ require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect

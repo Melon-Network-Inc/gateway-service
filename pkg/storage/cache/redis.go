@@ -2,12 +2,11 @@ package cache
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 	"strings"
 
+	"github.com/Melon-Network-Inc/common/pkg/config"
 	"github.com/Melon-Network-Inc/common/pkg/entity"
-	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 
 	"gopkg.in/vmihailenco/msgpack.v2"
 
@@ -17,19 +16,15 @@ import (
 
 type redisCache struct {
 	client *redis.Client
-	config config.CacheConfigProvider
+	config config.ServiceConfig
 }
 
 // NewRedisCache constructs Redis cache which implements all Accessor functions.
-func NewRedisCache(ctx context.Context, config config.RedisConfigProvider) Accessor {
-	address := fmt.Sprintf("%s:%s", config.GetHost(), config.GetPort())
-	password := config.GetPassword()
-	db := config.GetDB()
-
+func NewRedisCache(ctx context.Context, config config.ServiceConfig) Accessor {
 	client := redis.NewClient(&redis.Options{
-		Addr:       address,
-		Password:   password,
-		DB:         db,
+		Addr:       config.CacheUrl,
+		Password:   "",
+		DB:         0,
 		MaxRetries: 3,
 	})
 

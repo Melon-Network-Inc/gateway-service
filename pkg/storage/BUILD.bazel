@@ -14,6 +14,7 @@ go_library(
         "//pkg/config",
         "//pkg/storage/cache",
         "//pkg/token",
+        "@com_github_melon_network_inc_common//pkg/config",
         "@com_github_melon_network_inc_common//pkg/entity",
         "@com_github_melon_network_inc_common//pkg/log",
         "@com_github_sirupsen_logrus//:logrus",

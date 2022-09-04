@@ -10,8 +10,8 @@ go_library(
     importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/storage/cache",
     visibility = ["//visibility:public"],
     deps = [
-        "//pkg/config",
         "@com_github_go_redis_redis_v9//:redis",
+        "@com_github_melon_network_inc_common//pkg/config",
         "@com_github_melon_network_inc_common//pkg/entity",
         "@com_github_sirupsen_logrus//:logrus",
         "@in_gopkg_vmihailenco_msgpack_v2//:msgpack_v2",

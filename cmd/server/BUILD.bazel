@@ -13,6 +13,7 @@ go_library(
         "//pkg/storage",
         "@com_github_gin_contrib_cors//:cors",
         "@com_github_gin_gonic_gin//:gin",
+        "@com_github_melon_network_inc_common//pkg/config",
         "@com_github_melon_network_inc_common//pkg/log",
         "@com_github_swaggo_files//:files",
         "@com_github_swaggo_gin_swagger//:gin-swagger",
@@ -21,6 +22,7 @@ go_library(
 
 go_binary(
     name = "server",
+    data = ["//config:gateway.yml"],
     embed = [":server_lib"],
     visibility = ["//visibility:public"],
 )
