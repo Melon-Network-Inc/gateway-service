@@ -32,4 +32,33 @@ pipeline {
             }
         }
     }
+    environment {
+        EMAIL_TO = 'michaelzhou@melonnetwork.io'
+    }
+    post {
+        success {
+            emailext mimeType: 'text/html',
+            body: 'Check console output at $BUILD_URL to view the results.', 
+            to: "${EMAIL_TO}", 
+            subject: 'Build Success in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+        }
+        failure {
+            emailext mimeType: 'text/html',
+            body: 'Check console output at $BUILD_URL to view the results.', 
+            to: "${EMAIL_TO}", 
+            subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+        }
+        unstable {
+            emailext mimeType: 'text/html',
+            body: 'Check console output at $BUILD_URL to view the results.', 
+            to: "${EMAIL_TO}", 
+            subject: 'Unstable build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+        }
+        changed {
+            emailext mimeType: 'text/html',
+            body: 'Check console output at $BUILD_URL to view the results.', 
+            to: "${EMAIL_TO}", 
+            subject: 'Jenkins build is back to normal: $PROJECT_NAME - #$BUILD_NUMBER'
+        }
+    }
 }
