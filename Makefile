@@ -3,12 +3,16 @@ server: ## run the server
 	go run cmd/server/main.go
 
 .PHONY: run
-run: ## run the server with bazel
-	bazel run //cmd/server:server
+run: ## run the dev server with bazel
+	export TARGET_ENV=DEV && bazel run //cmd/server:server
+
+.PHONY: staging
+staging: ## run the staging server with bazel
+	export TARGET_ENV=STAGING && bazel run //cmd/server:server
 
 .PHONY: prod
-prod: ## run the production server with bazel
-	bazel run --action_env=GIN_MODE=release //cmd/server:server
+prod: ## run the prod server with bazel
+	export TARGET_ENV=PROD && export GIN_MODE=release && bazel run //cmd/server:server
 
 .PHONY: build
 build: ## update dependency and build using bazel

@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Build') {
             agent any
-            when { branch "main" }
             steps {
                 echo 'Run bazel build on gateway service target'
                 sh 'export GOPRIVATE=github.com/Melon-Network-Inc/common && bazel build //...'
@@ -16,6 +15,10 @@ pipeline {
             steps {
                 echo 'New release is approved. Clean up previous release.'
                 sh 'screen -XS gateway-host quit'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
+                {
+                    echo 'No need to clean up and proceed to the Release stage.'
+                }
             }
         }
         stage('Release') {
@@ -23,7 +26,7 @@ pipeline {
             when { branch "main" }
             steps {
                 echo 'Deploying the gateway service application to Production.'
-                sh 'export JENKINS_NODE_COOKIE=dontKillMe; screen -S gateway-host  -d -m -c /dev/null -- sh -c "export GOPRIVATE=github.com/Melon-Network-Inc/common; make run; exec sh"'
+                sh 'export JENKINS_NODE_COOKIE=dontKillMe; screen -S gateway-host  -d -m -c /dev/null -- sh -c "export GOPRIVATE=github.com/Melon-Network-Inc/common; make staging; exec sh"'
             }
         }
     }
