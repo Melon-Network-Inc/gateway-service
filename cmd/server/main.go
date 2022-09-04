@@ -22,11 +22,6 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// ServiceName indicates the name of current service.
-// Version indicates the current version of the application.
-const ServiceName = "gateway-service"
-const Version = "1.0.0"
-
 var swagHandler gin.HandlerFunc
 
 type Server struct {
