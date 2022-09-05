@@ -1,6 +1,6 @@
 # MelonWallet Gateway Service
 
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/569/badge)](https://bestpractices.coreinfrastructure.org/projects/569)
+[![Build status](https://badge.buildkite.com/55efa927385f2f57f050295d5f2416ad0e67db5051ed68372f.svg)](https://buildkite.com/melon-network-inc/gateway-service-pipeline)
 
 <img src="https://avatars.githubusercontent.com/u/104064333?s=400&u=fe08053ed0a72719e2ea4bb0229766ef9b4fdfee&v=4" width="100">
 
