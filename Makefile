@@ -16,7 +16,6 @@ prod: ## run the prod server with bazel
 
 .PHONY: build
 build: ## update dependency and build using bazel
-	go mod tidy
 	bazel run //:gazelle -- update-repos -from_file=go.mod -to_macro=deps.bzl%go_dependencies
 	bazel run //:gazelle
 	bazel build //...
