@@ -1,0 +1,33 @@
+env:
+  GOPRIVATE: "github.com/Melon-Network-Inc/common"
+
+steps:
+  - label: ":pipeline: Pipeline upload"
+    command: buildkite-agent pipeline upload
+
+  - label: ":bazel: Build"
+    command: "make build"
+    key: "build"
+    timeout: 5
+
+  - wait
+
+  - label: ":bazel: Test"
+    command: "make test"
+    key: "test"
+    timeout: 5
+  
+  - block: ":rocket: Approval"
+    key: "approval"
+
+  - label: ":bazel: Staging"
+    command: "~/deploy/ssh_deploy.sh -e staging -s gateway"
+    if: build.branch == 'main'
+    key: "staging"
+    timeout: 5
+    depends_on: 
+    concurrency_group: staging-deploy
+    concurrency: 1
+    
+notify:
+  - email: "michaelzhou@melonnetwork.io"
