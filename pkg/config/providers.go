@@ -8,3 +8,9 @@ type TokenConfigProvider interface {
 	GetAuthTokenValidityPeriod() time.Duration
 	GetRefreshTokenValidityPeriod() time.Duration
 }
+
+// LoadBalancerConfigProvider provides load balancer server address.
+type LoadBalancerConfigProvider interface {
+	GetAccountServiceAddressesList() 	[]string
+	GetPaymentServiceAddressesList() 	[]string
+}

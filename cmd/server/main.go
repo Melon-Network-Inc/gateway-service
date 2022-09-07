@@ -12,7 +12,8 @@ import (
 	"github.com/Melon-Network-Inc/common/pkg/config"
 	"github.com/Melon-Network-Inc/common/pkg/log"
 	"github.com/Melon-Network-Inc/gateway-service/docs"
-	tokenConfig "github.com/Melon-Network-Inc/gateway-service/pkg/config"
+	gatewayConfig "github.com/Melon-Network-Inc/gateway-service/pkg/config"
+	"github.com/Melon-Network-Inc/gateway-service/pkg/lb"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/middleware"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/service"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/storage"
@@ -25,9 +26,10 @@ import (
 var swagHandler gin.HandlerFunc
 
 type Server struct {
-	App 		*gin.Engine
-	Storage 	storage.Accessor
-	logger  	log.Logger
+	App 			*gin.Engine
+	Storage 		storage.Accessor
+	LoadBalancer 	lb.Accessor
+	logger  		log.Logger
 }
 
 func init() {
@@ -40,20 +42,27 @@ func main() {
 	// create root logger tagged with server version
 	logger := log.New(serverConfig.ServiceName).With(context.Background(), "version", serverConfig.Version)
 
-	conf := tokenConfig.NewTokenConfig()
-	if conf == nil {
+	tokenConf := gatewayConfig.NewTokenConfig("config/token.yml")
+	if tokenConf == nil {
 		panic("Failed to get config.")
 	}
 
-	cache, err := storage.New(context.Background(), serverConfig, conf.Token, logger)
+	cache, err := storage.New(context.Background(), serverConfig, tokenConf.Token, logger)
+	if err != nil {
+		panic(err)
+	}
+
+	lbConf := gatewayConfig.NewLoadBalancerConfig("config/lb.yml")
+	loadBalancer, err := lb.New(context.Background(), lbConf.LoadBalancer)
 	if err != nil {
 		panic(err)
 	}
 
 	s := Server{
-		App: 		gin.Default(),
-		Storage: 	cache,
-		logger: 	logger,
+		App: 			gin.Default(),
+		Storage: 		cache,
+		LoadBalancer: 	loadBalancer,
+		logger: 		logger,
 	}
 	s.SetupRouter()
 
@@ -95,8 +104,9 @@ func main() {
 func (s *Server) SetupRouter() *gin.Engine {
 	forwarder := middleware.TokenForwarder()
 	authenticator := middleware.TokenAuthenticator(s.Storage)
-	accountService := service.NewAccountService("http://localhost:6000", s.logger)
-	paymentService := service.NewPaymentService("http://localhost:7001", s.logger)
+
+	accountService := service.NewAccountService(s.LoadBalancer.GetNextAccountServiceAddress(), s.logger)
+	paymentService := service.NewPaymentService(s.LoadBalancer.GetNextPaymentServiceAddress(), s.logger)
 	corsHandler := newCorsHandler()
 
 	s.App.Use(corsHandler)

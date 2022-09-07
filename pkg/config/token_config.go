@@ -9,8 +9,11 @@ type TokenConfiguration struct {
 	Token      TokenConfigProvider
 }
 
-func NewTokenConfig() *TokenConfiguration {
+func NewTokenConfig(path string) *TokenConfiguration {
 	v := viper.New()
+
+	v.SetConfigFile(path)
+	v.SetConfigType("yml")
 
 	config := &generalConfig{v}
 	return &TokenConfiguration{

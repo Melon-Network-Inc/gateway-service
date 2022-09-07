@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "lb",
+    srcs = [
+        "accessor.go",
+        "account.go",
+        "lb.go",
+        "payment.go",
+    ],
+    importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/lb",
+    visibility = ["//visibility:public"],
+    deps = ["//pkg/config"],
+)

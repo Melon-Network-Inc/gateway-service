@@ -8,6 +8,7 @@ go_library(
     deps = [
         "//docs",
         "//pkg/config",
+        "//pkg/lb",
         "//pkg/middleware",
         "//pkg/service",
         "//pkg/storage",
@@ -25,6 +26,7 @@ go_binary(
     data = [
         "//config:gateway.yml",
         "//config:lb.yml",
+        "//config:token.yml",
     ],
     embed = [":server_lib"],
     visibility = ["//visibility:public"],

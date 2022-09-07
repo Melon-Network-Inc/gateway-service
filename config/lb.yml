@@ -1,38 +1,22 @@
 name: lb-config
 version: v1.20220903.1
 prod:
-  - account:
-      node: 1
-      address: "localhost:6000"
-  - payment:
-      node: 1
-      address: "localhost:7001"
-  - blockchain:
-      node: 0
+  account:
+      - "localhost:6000"
+  payment:
+      - "localhost:7001"
 staging:
-  - account:
-      node: 1
-      address: "localhost:6000"
-  - payment:
-      node: 1
-      address: "localhost:7001"
-  - blockchain:
-      node: 0
+  account:
+      - "localhost:6000"
+  payment:
+      - "localhost:7001"
 dev:
-  - account:
-      node: 1
-      address: "localhost:6000"
-  - payment:
-      node: 1
-      address: "localhost:7001"
-  - blockchain:
-      node: 0
+  account:
+      - "localhost:6000"
+  payment:
+      - "localhost:7001"
 test:
-  - account:
-      node: 1
-      address: "localhost:6000"
-  - payment:
-      node: 1
-      address: "localhost:7001"
-  - blockchain:
-      node: 0
+  account:
+      - "localhost:6000"
+  payment:
+      - "localhost:7001"
