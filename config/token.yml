@@ -1,0 +1,18 @@
+name: token-config
+version: v1.20220907.1
+prod:
+  secret: YmLP66KfwOJxg3m39DicPvzh8Cg33exw
+  auth_token_period: 24
+  refresh_token_period: 24
+staging:
+  secret: secret
+  auth_token_period: 24
+  refresh_token_period: 24
+dev:
+  secret: secret
+  auth_token_period: 24
+  refresh_token_period: 24
+test:
+  secret: secret
+  auth_token_period: 24
+  refresh_token_period: 24
