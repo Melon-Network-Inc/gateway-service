@@ -1,7 +1,9 @@
 .idea
-.vscode
+.vscode/*
 .ijwb
 dist
 bazel-**
 coverage**
 *.out
+
+!.vscode/*.json
