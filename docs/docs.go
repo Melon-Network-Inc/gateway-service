@@ -8,7 +8,7 @@ const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
     "swagger": "2.0",
     "info": {
-        "description": "This is backend server for Melon Wallet..",
+        "description": "This is backend server for Melon Wallet.",
         "title": "Melon Wallet Service API",
         "contact": {
             "name": "API Support",
@@ -22,6 +22,11 @@ const docTemplate = `{
     "paths": {
         "/account": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a user resource",
                 "consumes": [
                     "application/json"
@@ -35,6 +40,13 @@ const docTemplate = `{
                 "summary": "Update a user resource",
                 "operationId": "update-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "User Update Data",
                         "name": "user",
@@ -64,6 +76,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a user resource",
                 "consumes": [
                     "application/json"
@@ -77,6 +94,13 @@ const docTemplate = `{
                 "summary": "Create a user resource",
                 "operationId": "create-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "RegistrationSession",
+                        "name": "RegistrationSession",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "User Data",
                         "name": "user",
@@ -108,6 +132,11 @@ const docTemplate = `{
         },
         "/account/activate": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Activate a user resource",
                 "consumes": [
                     "application/json"
@@ -121,6 +150,13 @@ const docTemplate = `{
                 "summary": "Activate a user resource",
                 "operationId": "activate-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "User Update Status Data",
                         "name": "user",
@@ -149,6 +185,11 @@ const docTemplate = `{
         },
         "/account/deactivate": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deactivate a user resource",
                 "consumes": [
                     "application/json"
@@ -162,6 +203,13 @@ const docTemplate = `{
                 "summary": "Deactivate a user resource",
                 "operationId": "deactivate-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "User Update Status Data",
                         "name": "user",
@@ -238,6 +286,11 @@ const docTemplate = `{
         },
         "/account/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a user resource",
                 "consumes": [
                     "application/json"
@@ -251,6 +304,13 @@ const docTemplate = `{
                 "summary": "Get a user resource",
                 "operationId": "get-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "User ID",
@@ -272,6 +332,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a user resource by ID",
                 "consumes": [
                     "application/json"
@@ -285,6 +350,13 @@ const docTemplate = `{
                 "summary": "Delete a user resource by ID",
                 "operationId": "delete-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "User ID",
@@ -308,6 +380,11 @@ const docTemplate = `{
         },
         "/activity": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "List activities of an account",
                 "consumes": [
                     "application/json"
@@ -320,6 +397,15 @@ const docTemplate = `{
                 ],
                 "summary": "List activities of an account",
                 "operationId": "list-activities",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -338,6 +424,11 @@ const docTemplate = `{
         },
         "/address": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Query addresses of an account by pages",
                 "consumes": [
                     "application/json"
@@ -350,6 +441,15 @@ const docTemplate = `{
                 ],
                 "summary": "Query addresses of an account by pages",
                 "operationId": "query-addresses-by-page",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -366,6 +466,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update an addresses",
                 "consumes": [
                     "application/json"
@@ -379,6 +484,13 @@ const docTemplate = `{
                 "summary": "Update an address",
                 "operationId": "update-address",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Address Data",
                         "name": "address",
@@ -405,6 +517,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add an address to account",
                 "consumes": [
                     "application/json"
@@ -418,6 +535,13 @@ const docTemplate = `{
                 "summary": "Add an address to account",
                 "operationId": "add-address",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Address Data",
                         "name": "address",
@@ -446,6 +570,11 @@ const docTemplate = `{
         },
         "/address/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get an address",
                 "consumes": [
                     "application/json"
@@ -459,6 +588,13 @@ const docTemplate = `{
                 "summary": "Get an address",
                 "operationId": "get-address",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Address ID",
@@ -480,6 +616,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete an addresses by ID",
                 "consumes": [
                     "application/json"
@@ -493,6 +634,13 @@ const docTemplate = `{
                 "summary": "Delete an address by ID",
                 "operationId": "delete-address",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Address ID",
@@ -639,6 +787,11 @@ const docTemplate = `{
         },
         "/auth/logout": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Log out an account",
                 "consumes": [
                     "application/json"
@@ -651,6 +804,15 @@ const docTemplate = `{
                 ],
                 "summary": "Log out an account",
                 "operationId": "logout",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "202": {
                         "description": "Logged out",
@@ -710,6 +872,11 @@ const docTemplate = `{
         },
         "/friend/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "List friends of requester",
                 "consumes": [
                     "application/json"
@@ -722,6 +889,15 @@ const docTemplate = `{
                 ],
                 "summary": "List friends of requester",
                 "operationId": "list-friends",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -740,6 +916,11 @@ const docTemplate = `{
         },
         "/friend/list/user/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "List friend of a user",
                 "consumes": [
                     "application/json"
@@ -752,6 +933,15 @@ const docTemplate = `{
                 ],
                 "summary": "List friend of a user",
                 "operationId": "list-friend-request-of-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -770,6 +960,11 @@ const docTemplate = `{
         },
         "/friend/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Remove a friend by ID",
                 "consumes": [
                     "application/json"
@@ -783,6 +978,13 @@ const docTemplate = `{
                 "summary": "Remove a friend by ID",
                 "operationId": "delete-friend",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "User ID",
@@ -803,6 +1005,11 @@ const docTemplate = `{
         },
         "/referral/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get the referral code status",
                 "consumes": [
                     "application/json"
@@ -816,6 +1023,13 @@ const docTemplate = `{
                 "summary": "Get the referral code status",
                 "operationId": "get-referral-status",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Referral Code ID",
@@ -846,6 +1060,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a referral code",
                 "consumes": [
                     "application/json"
@@ -859,6 +1078,13 @@ const docTemplate = `{
                 "summary": "Delete a referral code",
                 "operationId": "delete-referral",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Referral Code ID",
@@ -891,6 +1117,11 @@ const docTemplate = `{
         },
         "/referral/accept": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Accept a referral code",
                 "consumes": [
                     "application/json"
@@ -904,6 +1135,13 @@ const docTemplate = `{
                 "summary": "Accept a referral code",
                 "operationId": "accept-referral",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Referral Code Data",
                         "name": "accept_invite_request",
@@ -938,6 +1176,11 @@ const docTemplate = `{
         },
         "/referral/acceptor": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "View referral status by acceptor",
                 "consumes": [
                     "application/json"
@@ -950,6 +1193,15 @@ const docTemplate = `{
                 ],
                 "summary": "View referral status by acceptor",
                 "operationId": "view-referral-status-by-acceptor",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -968,6 +1220,11 @@ const docTemplate = `{
         },
         "/referral/count/accept": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Count the accepted referral codes",
                 "consumes": [
                     "application/json"
@@ -980,6 +1237,15 @@ const docTemplate = `{
                 ],
                 "summary": "Count the accepted referral codes",
                 "operationId": "count-accepted-referral",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1001,6 +1267,11 @@ const docTemplate = `{
         },
         "/referral/count/left": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Count rest of the available referral codes",
                 "consumes": [
                     "application/json"
@@ -1013,6 +1284,15 @@ const docTemplate = `{
                 ],
                 "summary": "Count rest of the available referral codes",
                 "operationId": "count-left-referral",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1037,6 +1317,11 @@ const docTemplate = `{
         },
         "/referral/create": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a referral code",
                 "consumes": [
                     "application/json"
@@ -1049,6 +1334,15 @@ const docTemplate = `{
                 ],
                 "summary": "Create a referral code",
                 "operationId": "create-referral-code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -1070,6 +1364,11 @@ const docTemplate = `{
         },
         "/referral/list": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "List all invite codes of a user",
                 "consumes": [
                     "application/json"
@@ -1082,6 +1381,15 @@ const docTemplate = `{
                 ],
                 "summary": "List all invite codes of a user",
                 "operationId": "list-invitations",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1100,6 +1408,11 @@ const docTemplate = `{
         },
         "/referral/revoke": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Revoke a referral code",
                 "consumes": [
                     "application/json"
@@ -1113,6 +1426,13 @@ const docTemplate = `{
                 "summary": "Revoke a referral code",
                 "operationId": "revoke-referral-code",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Referral Code ID",
@@ -1145,6 +1465,11 @@ const docTemplate = `{
         },
         "/request": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "List friend requests of an account",
                 "consumes": [
                     "application/json"
@@ -1157,6 +1482,15 @@ const docTemplate = `{
                 ],
                 "summary": "List friend requests of an account",
                 "operationId": "list-friend-request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1173,6 +1507,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add friendship with another user",
                 "consumes": [
                     "application/json"
@@ -1186,6 +1525,13 @@ const docTemplate = `{
                 "summary": "Add friend",
                 "operationId": "add-friend",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "FriendRequest Data",
                         "name": "friend_request",
@@ -1214,6 +1560,11 @@ const docTemplate = `{
         },
         "/request/confirm/{id}": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Confirm a friend request by ID",
                 "consumes": [
                     "application/json"
@@ -1227,6 +1578,13 @@ const docTemplate = `{
                 "summary": "Confirm a friend request by ID",
                 "operationId": "confirm-friend-request",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "FriendRequest ID",
@@ -1250,6 +1608,11 @@ const docTemplate = `{
         },
         "/request/reject/{id}": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Reject a friend request by ID",
                 "consumes": [
                     "application/json"
@@ -1263,6 +1626,13 @@ const docTemplate = `{
                 "summary": "Reject a friend request by ID",
                 "operationId": "reject-friend-request",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "FriendRequest ID",
@@ -1286,6 +1656,11 @@ const docTemplate = `{
         },
         "/request/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Drop a friend request by ID",
                 "consumes": [
                     "application/json"
@@ -1299,6 +1674,13 @@ const docTemplate = `{
                 "summary": "Drop a friend request by ID",
                 "operationId": "drop-friend-request",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "FriendRequest ID",
@@ -1319,6 +1701,11 @@ const docTemplate = `{
         },
         "/search/user/{keyword}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Search users by keyword",
                 "consumes": [
                     "application/json"
@@ -1332,6 +1719,13 @@ const docTemplate = `{
                 "summary": "Search users by keyword",
                 "operationId": "search-users",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "Keyword Data",
@@ -1566,6 +1960,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update a transaction",
                 "consumes": [
                     "application/json"
@@ -1579,6 +1978,13 @@ const docTemplate = `{
                 "summary": "Update a transaction",
                 "operationId": "update-transaction",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Transaction Data",
                         "name": "transaction",
@@ -1605,6 +2011,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add a transaction to account",
                 "consumes": [
                     "application/json"
@@ -1618,6 +2029,13 @@ const docTemplate = `{
                 "summary": "Add a transaction to account",
                 "operationId": "add-transaction",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Transaction Data",
                         "name": "transaction",
@@ -1644,6 +2062,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a transaction",
                 "consumes": [
                     "application/json"
@@ -1657,6 +2080,13 @@ const docTemplate = `{
                 "summary": "Delete a transaction",
                 "operationId": "delete-transaction",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Transaction ID",
@@ -1683,6 +2113,11 @@ const docTemplate = `{
         },
         "/transaction/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get a transaction",
                 "consumes": [
                     "application/json"
@@ -1696,6 +2131,13 @@ const docTemplate = `{
                 "summary": "Get a transaction",
                 "operationId": "get-transaction",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Transaction ID",
