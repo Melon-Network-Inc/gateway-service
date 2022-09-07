@@ -17,7 +17,7 @@ const docTemplate = `{
         },
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": "34.168.151.218:8080",
     "basePath": "/api/v1",
     "paths": {
         "/account": {
@@ -53,6 +53,9 @@ const docTemplate = `{
                         }
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     },
                     "404": {
@@ -2028,18 +2031,17 @@ const docTemplate = `{
         "api.LoginUserRequest": {
             "type": "object",
             "required": [
-                "password",
-                "username"
+                "login_info",
+                "password"
             ],
             "properties": {
+                "login_info": {
+                    "description": "Login Info includes username, email, or phone.",
+                    "type": "string"
+                },
                 "password": {
                     "type": "string",
                     "minLength": 8
-                },
-                "username": {
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 2
                 }
             }
         },

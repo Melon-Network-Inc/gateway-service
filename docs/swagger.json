@@ -48,6 +48,9 @@
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     }
@@ -2021,18 +2024,17 @@
         "api.LoginUserRequest": {
             "type": "object",
             "required": [
-                "password",
-                "username"
+                "login_info",
+                "password"
             ],
             "properties": {
+                "login_info": {
+                    "description": "Login Info includes username, email, or phone.",
+                    "type": "string"
+                },
                 "password": {
                     "type": "string",
                     "minLength": 8
-                },
-                "username": {
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 2
                 }
             }
         },
