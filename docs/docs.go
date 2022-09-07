@@ -8,7 +8,7 @@ const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
     "swagger": "2.0",
     "info": {
-        "description": "This is backend server for Melon Wallet.",
+        "description": "This is backend server for Melon Wallet..",
         "title": "Melon Wallet Service API",
         "contact": {
             "name": "API Support",
@@ -1923,6 +1923,11 @@ const docTemplate = `{
         },
         "/transaction": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "List all transactions by an account",
                 "consumes": [
                     "application/json"
@@ -1936,6 +1941,13 @@ const docTemplate = `{
                 "summary": "List all transactions by an account",
                 "operationId": "list-transactions-by-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "Transaction ID",
