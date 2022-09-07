@@ -2,21 +2,21 @@ name: lb-config
 version: v1.20220903.1
 prod:
   account:
-      - "localhost:6000"
+      - "http://localhost:6000"
   payment:
-      - "localhost:7001"
+      - "http://localhost:7001"
 staging:
   account:
-      - "localhost:6000"
+      - "http://localhost:6000"
   payment:
-      - "localhost:7001"
+      - "http://localhost:7001"
 dev:
   account:
-      - "localhost:6000"
+      - "http://localhost:6000"
   payment:
-      - "localhost:7001"
+      - "http://localhost:7001"
 test:
   account:
-      - "localhost:6000"
+      - "http://localhost:6000"
   payment:
-      - "localhost:7001"
+      - "http://localhost:7001"
