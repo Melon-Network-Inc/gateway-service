@@ -293,6 +293,12 @@ def go_dependencies():
         sum = "h1:JzTglcal01DrghUqt+PmzWsZx/Yh7SC/CTQmSBMTd0Y=",
         version = "v4.16.1",
     )
+    go_repository(
+        name = "com_github_jinzhu_copier",
+        importpath = "github.com/jinzhu/copier",
+        sum = "h1:GlvfUwHk62RokgqVNvYsku0TATCF7bAHVwEXoBh3iJg=",
+        version = "v0.3.5",
+    )
 
     go_repository(
         name = "com_github_jinzhu_inflection",
@@ -388,8 +394,8 @@ def go_dependencies():
     go_repository(
         name = "com_github_melon_network_inc_common",
         importpath = "github.com/Melon-Network-Inc/common",
-        sum = "h1:YjHcn1W9Hf7Bz3zHLYuc1M9J6CNc7HfsVulOAR8ExRY=",
-        version = "v1.0.32",
+        sum = "h1:I82IEbm4iif5ZXl1QVnVCI6mnwtN1OVrD8PgoRs3/hk=",
+        version = "v1.0.36",
     )
     go_repository(
         name = "com_github_mitchellh_mapstructure",
