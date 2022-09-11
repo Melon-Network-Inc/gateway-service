@@ -585,14 +585,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/address/receipient/{id}": {
+        "/address/recipient/{id}": {
             "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Get addresses of a receipient",
+                "description": "Get addresses of a recipient",
                 "consumes": [
                     "application/json"
                 ],
@@ -602,8 +602,8 @@ const docTemplate = `{
                 "tags": [
                     "addresses"
                 ],
-                "summary": "Get addresses of a receipient",
-                "operationId": "get-addresses-of-recepient",
+                "summary": "Get addresses of a recipient",
+                "operationId": "get-addresses-of-recipient",
                 "parameters": [
                     {
                         "type": "string",
@@ -614,7 +614,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "User ID of receipient",
+                        "description": "User ID of recipient",
                         "name": "id",
                         "in": "path",
                         "required": true
