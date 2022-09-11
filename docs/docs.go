@@ -2670,14 +2670,6 @@ const docTemplate = `{
                 "name"
             ],
             "properties": {
-                "blockchain": {
-                    "type": "string",
-                    "enum": [
-                        "bitcoin",
-                        "ethereum",
-                        "solana"
-                    ]
-                },
                 "is_primary": {
                     "type": "boolean"
                 },
