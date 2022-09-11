@@ -523,7 +523,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/address/page": {
+        "/address/pagination": {
             "get": {
                 "security": [
                     {

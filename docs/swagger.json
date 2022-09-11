@@ -8,10 +8,10 @@
             "url": "https://melonnetwork.io",
             "email": "support@melonnetwork.io"
         },
-        "version": "{{.Version}}"
+        "version": "1.0"
     },
-    "host": "{{.Host}}",
-    "basePath": "{{.BasePath}}",
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
     "paths": {
         "/account": {
             "put": {
@@ -516,7 +516,7 @@
                 }
             }
         },
-        "/address/page": {
+        "/address/pagination": {
             "get": {
                 "security": [
                     {
