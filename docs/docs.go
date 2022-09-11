@@ -429,7 +429,7 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "Query addresses of an account by pages",
+                "description": "List addresses of an account",
                 "consumes": [
                     "application/json"
                 ],
@@ -439,8 +439,8 @@ const docTemplate = `{
                 "tags": [
                     "addresses"
                 ],
-                "summary": "Query addresses of an account by pages",
-                "operationId": "query-addresses-by-page",
+                "summary": "List addresses of an account",
+                "operationId": "list-addresses",
                 "parameters": [
                     {
                         "type": "string",
@@ -456,59 +456,11 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/api.AddressResponse"
+                                "$ref": "#/definitions/api.AddressesResponse"
                             }
                         }
                     },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            },
-            "put": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Update an addresses",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "addresses"
-                ],
-                "summary": "Update an address",
-                "operationId": "update-address",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "description": "Address Data",
-                        "name": "address",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateAddressRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/api.AddressResponse"
-                        }
-                    },
-                    "400": {
+                    "401": {
                         "description": ""
                     },
                     "404": {
@@ -562,6 +514,125 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "403": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/address/page": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query addresses of an account by pages",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Query addresses of an account by pages",
+                "operationId": "query-addresses-by-page",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.AddressesResponse"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/address/receipient/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get addresses of a receipient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Get addresses of a receipient",
+                "operationId": "get-addresses-of-recepient",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID of receipient",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.AddressResponse"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     }
@@ -610,7 +681,77 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.AddressResponse"
                         }
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update an addresses",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Update an address",
+                "operationId": "update-address",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Address ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Address Data",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateAddressRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.AddressResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -655,6 +796,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.AddressResponse"
                         }
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
                     },
                     "404": {
                         "description": ""
@@ -2256,12 +2403,21 @@ const docTemplate = `{
         "api.AddAddressRequest": {
             "type": "object",
             "required": [
+                "blockchain",
                 "currency",
                 "is_primary",
                 "name",
                 "pubkey"
             ],
             "properties": {
+                "blockchain": {
+                    "type": "string",
+                    "enum": [
+                        "bitcoin",
+                        "ethereum",
+                        "solana"
+                    ]
+                },
                 "currency": {
                     "type": "string",
                     "enum": [
@@ -2302,32 +2458,19 @@ const docTemplate = `{
         "api.AddressResponse": {
             "type": "object",
             "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "is_primary": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "owner": {
-                    "type": "string"
-                },
-                "pubkey": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
+                "address": {
+                    "$ref": "#/definitions/entity.Address"
+                }
+            }
+        },
+        "api.AddressesResponse": {
+            "type": "object",
+            "properties": {
+                "addresses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Address"
+                    }
                 }
             }
         },
@@ -2524,10 +2667,17 @@ const docTemplate = `{
         "api.UpdateAddressRequest": {
             "type": "object",
             "required": [
-                "is_primary",
                 "name"
             ],
             "properties": {
+                "blockchain": {
+                    "type": "string",
+                    "enum": [
+                        "bitcoin",
+                        "ethereum",
+                        "solana"
+                    ]
+                },
                 "is_primary": {
                     "type": "boolean"
                 },
@@ -2672,6 +2822,38 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "twitter": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Address": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_primary": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "owner_id": {
+                    "type": "integer"
+                },
+                "pubkey": {
                     "type": "string"
                 },
                 "updatedAt": {
