@@ -194,7 +194,11 @@ func (s *Server) buildSwagger() {
 	docs.SwaggerInfo.Title = "Melon Wallet Service API"
 	docs.SwaggerInfo.Description = "This is backend server for Melon Wallet."
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "34.168.151.218:8080"
+	if os.Getenv("TARGET_ENV") == "STAGING" {
+		docs.SwaggerInfo.Host = "34.168.151.218:8080"
+	} else {
+		docs.SwaggerInfo.Host = "localhost:8080"
+	}
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 }
