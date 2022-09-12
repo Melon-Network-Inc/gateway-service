@@ -1554,7 +1554,7 @@ const docTemplate = `{
             }
         },
         "/referral/nextAvailable": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "ApiKeyAuth": []

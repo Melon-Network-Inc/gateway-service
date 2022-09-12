@@ -167,7 +167,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	referral := v1.Group("/referral")
 	referral.GET("/create", authenticator, accountService.HandleGetRequest)
 	referral.POST("/accept", accountService.HandlePostRequest)
-	referral.DELETE("/nextAvailable", authenticator, accountService.HandleGetRequest)
+	referral.POST("/nextAvailable", authenticator, accountService.HandlePostRequest)
 	referral.GET("/revoke/:id", authenticator, accountService.HandleGetRequest)
 	referral.GET("/list", authenticator, accountService.HandleGetRequest)
 	referral.GET("/count/accepted", authenticator, accountService.HandleGetRequest)
