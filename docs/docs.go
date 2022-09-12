@@ -1553,6 +1553,56 @@ const docTemplate = `{
                 }
             }
         },
+        "/referral/nextAvailable": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Next invite available time",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Next invite available time",
+                "operationId": "next-invite-available-time",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetNextInviteAvailableTimeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/referral/revoke": {
             "get": {
                 "security": [
@@ -2608,6 +2658,14 @@ const docTemplate = `{
             "properties": {
                 "left_invite_number": {
                     "type": "integer"
+                }
+            }
+        },
+        "api.GetNextInviteAvailableTimeResponse": {
+            "type": "object",
+            "properties": {
+                "next_available_time": {
+                    "type": "string"
                 }
             }
         },
