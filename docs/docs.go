@@ -1579,6 +1579,15 @@ const docTemplate = `{
                         "name": "Authorization",
                         "in": "header",
                         "required": true
+                    },
+                    {
+                        "description": "Timezone information",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.GetNextInviteAvailableTimeRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -2658,6 +2667,14 @@ const docTemplate = `{
             "properties": {
                 "left_invite_number": {
                     "type": "integer"
+                }
+            }
+        },
+        "api.GetNextInviteAvailableTimeRequest": {
+            "type": "object",
+            "properties": {
+                "location": {
+                    "type": "string"
                 }
             }
         },
