@@ -2,8 +2,8 @@ github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
 github.com/KyleBanks/depth v1.2.1/go.mod h1:jzSb9d0L43HxTQfT+oSA1EEp2q+ne2uh6XgeJcm8brE=
-github.com/Melon-Network-Inc/common v1.0.41 h1:DUSqtw9zcA5fZh3wv6itQjBmX+Q0TnlF5XTo/3PxwOU=
-github.com/Melon-Network-Inc/common v1.0.41/go.mod h1:QATtDQU4piRJFdkX/hQ9pPDky/QaPo0zfptCuIbUfn8=
+github.com/Melon-Network-Inc/common v1.0.43 h1:4DZ3MqLb3u8TAQGAJL9lMCaj0tZ60TSGMadJPoiKoyU=
+github.com/Melon-Network-Inc/common v1.0.43/go.mod h1:QATtDQU4piRJFdkX/hQ9pPDky/QaPo0zfptCuIbUfn8=
 github.com/PuerkitoBio/purell v1.1.1 h1:WEQqlqaGbrPkxLJWfBwQmfEAE1Z7ONdDLqrN38tNFfI=
 github.com/PuerkitoBio/purell v1.1.1/go.mod h1:c11w/QuzBsJSee3cPx9rAFu61PvFxuPbtSwDGJws/X0=
 github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 h1:d+Bc7a5rLufV/sSk/8dngufqelfh6jnri85riMAaF/M=
