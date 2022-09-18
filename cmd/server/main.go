@@ -26,10 +26,10 @@ import (
 var swagHandler gin.HandlerFunc
 
 type Server struct {
-	App 			*gin.Engine
-	Storage 		storage.Accessor
-	LoadBalancer 	lb.Accessor
-	logger  		log.Logger
+	App          *gin.Engine
+	Storage      storage.Accessor
+	LoadBalancer lb.Accessor
+	logger       log.Logger
 }
 
 func init() {
@@ -62,10 +62,10 @@ func main() {
 	router.Use(log.GinLogger(logger), log.GinRecovery(logger, true))
 
 	s := Server{
-		App: 			router,
-		Storage: 		cache,
-		LoadBalancer: 	loadBalancer,
-		logger: 		logger,
+		App:          router,
+		Storage:      cache,
+		LoadBalancer: loadBalancer,
+		logger:       logger,
 	}
 	s.SetupRouter()
 
@@ -177,7 +177,11 @@ func (s *Server) SetupRouter() *gin.Engine {
 	referral.GET("/count/left", authenticator, accountService.HandleGetRequest)
 	referral.GET("/:id", authenticator, accountService.HandleGetRequest)
 	referral.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
-	
+
+	setting := v1.Group("/setting")
+	device := setting.Group("/device")
+	device.GET("/", authenticator, accountService.HandleGetRequest)
+
 	// Handle by Payment Service
 	transaction := v1.Group("/transactions")
 	transaction.POST("/", authenticator, paymentService.HandlePostRequest)
