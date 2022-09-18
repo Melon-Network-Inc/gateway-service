@@ -40,7 +40,7 @@ func main() {
 	serverConfig := config.BuildServerConfig("config/gateway.yml")
 
 	// create root logger tagged with server version
-	logger := log.New(serverConfig.ServiceName).With(context.Background(), "version", serverConfig.Version)
+	logger := log.New(serverConfig.ServiceName).Default(context.Background(), serverConfig, "version", serverConfig.Version)
 
 	tokenConf := gatewayConfig.NewTokenConfig("config/token.yml")
 	if tokenConf == nil {
@@ -58,8 +58,11 @@ func main() {
 		panic(err)
 	}
 
+	router := gin.Default()
+	router.Use(log.GinLogger(logger), log.GinRecovery(logger, true))
+
 	s := Server{
-		App: 			gin.Default(),
+		App: 			router,
 		Storage: 		cache,
 		LoadBalancer: 	loadBalancer,
 		logger: 		logger,
