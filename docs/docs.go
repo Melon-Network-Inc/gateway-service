@@ -177,7 +177,13 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -230,7 +236,13 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -275,10 +287,13 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.UserResponse"
                         }
                     },
-                    "400": {
+                    "403": {
                         "description": ""
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -326,7 +341,13 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.UserResponse"
                         }
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -372,7 +393,13 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.UserResponse"
                         }
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -841,7 +868,7 @@ const docTemplate = `{
                             "type": "string"
                         }
                     },
-                    "400": {
+                    "409": {
                         "description": ""
                     },
                     "500": {
@@ -882,10 +909,10 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.RegistrationSessionResponse"
                         }
                     },
-                    "400": {
+                    "422": {
                         "description": ""
                     },
-                    "401": {
+                    "500": {
                         "description": ""
                     }
                 }
@@ -928,6 +955,12 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
+                    },
+                    "422": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             }
@@ -967,10 +1000,13 @@ const docTemplate = `{
                             "type": "string"
                         }
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
-                    "404": {
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1007,9 +1043,6 @@ const docTemplate = `{
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    "400": {
-                        "description": ""
                     },
                     "500": {
                         "description": ""
@@ -1952,6 +1985,56 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/setting/devices/": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List devices",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "setting"
+                ],
+                "summary": "List devices",
+                "operationId": "list-devices",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ListDevicesResponse"
+                        }
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             }
@@ -1983,7 +2066,13 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -2022,7 +2111,16 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -2061,7 +2159,16 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -2091,7 +2198,16 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -2121,7 +2237,13 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -2555,6 +2677,9 @@ const docTemplate = `{
                 "avatar": {
                     "type": "string"
                 },
+                "device_info": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                },
                 "email": {
                     "type": "string"
                 },
@@ -2606,6 +2731,23 @@ const docTemplate = `{
             "properties": {
                 "deleted_invitation": {
                     "$ref": "#/definitions/entity.InviteCode"
+                }
+            }
+        },
+        "api.DeviceInfo": {
+            "type": "object",
+            "properties": {
+                "model": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "os": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
                 }
             }
         },
@@ -2686,6 +2828,17 @@ const docTemplate = `{
                 }
             }
         },
+        "api.ListDevicesResponse": {
+            "type": "object",
+            "properties": {
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.DeviceInfo"
+                    }
+                }
+            }
+        },
         "api.ListInvitationResponse": {
             "type": "object",
             "properties": {
@@ -2707,6 +2860,9 @@ const docTemplate = `{
                 "password"
             ],
             "properties": {
+                "device_info": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                },
                 "login_info": {
                     "description": "Login Info includes username, email, or phone.",
                     "type": "string"
@@ -2803,6 +2959,12 @@ const docTemplate = `{
                 },
                 "deletedAt": {
                     "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Device"
+                    }
                 },
                 "email": {
                     "type": "string"
@@ -2925,6 +3087,41 @@ const docTemplate = `{
                 },
                 "updatedAt": {
                     "type": "string"
+                }
+            }
+        },
+        "entity.Device": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "device_model": {
+                    "type": "string"
+                },
+                "device_token": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_disabled": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "os": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
                 }
             }
         },
