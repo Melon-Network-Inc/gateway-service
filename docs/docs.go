@@ -2040,7 +2040,7 @@ const docTemplate = `{
             }
         },
         "/whitelist": {
-            "post": {
+            "get": {
                 "description": "List all whitelist user records",
                 "consumes": [
                     "application/json"
@@ -2070,6 +2070,45 @@ const docTemplate = `{
                         "description": ""
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a whitelist user record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Create a whitelist user record",
+                "operationId": "create-whitelist-user",
+                "parameters": [
+                    {
+                        "description": "Record Data",
+                        "name": "record",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.CreateWhiteListUserInfoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.WhitelistUserInfo"
+                        }
+                    },
+                    "400": {
                         "description": ""
                     },
                     "500": {
