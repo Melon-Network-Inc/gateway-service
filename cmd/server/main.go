@@ -11,6 +11,7 @@ import (
 
 	"github.com/Melon-Network-Inc/common/pkg/config"
 	"github.com/Melon-Network-Inc/common/pkg/log"
+	"github.com/Melon-Network-Inc/common/pkg/utils"
 	"github.com/Melon-Network-Inc/gateway-service/docs"
 	gatewayConfig "github.com/Melon-Network-Inc/gateway-service/pkg/config"
 	"github.com/Melon-Network-Inc/gateway-service/pkg/lb"
@@ -69,39 +70,43 @@ func main() {
 	}
 	s.SetupRouter()
 
-	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%d", serverConfig.ServerPort),
-		Handler: s.App,
-	}
-
-	go func() {
-		// service connections
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			logger.Errorf("listen: %s\n", err)
+	if !utils.IsProdEnvironment() {
+		logger.Debug(router.Run(fmt.Sprintf(":%d", serverConfig.ServerPort)))
+	} else {
+		srv := &http.Server{
+			Addr:    fmt.Sprintf(":%d", serverConfig.ServerPort),
+			Handler: s.App,
 		}
-	}()
-
-	// Wait for interrupt signal to gracefully shut down the server with
-	// a timeout of 5 seconds.
-	quit := make(chan os.Signal)
-	// kill (no param) default send syscall.SIGTERM
-	// kill -2 is syscall.SIGINT
-	// kill -9 is syscall. SIGKILL but can"t be caught, so don't need to add it
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	<-quit
-	logger.Info("Shutdown Server ...")
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if err := srv.Shutdown(ctx); err != nil {
-		logger.Errorf("Server Shutdown:", err)
+	
+		go func() {
+			// service connections
+			if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+				logger.Errorf("listen: %s\n", err)
+			}
+		}()
+	
+		// Wait for interrupt signal to gracefully shut down the server with
+		// a timeout of 5 seconds.
+		quit := make(chan os.Signal)
+		// kill (no param) default send syscall.SIGTERM
+		// kill -2 is syscall.SIGINT
+		// kill -9 is syscall. SIGKILL but can"t be caught, so don't need to add it
+		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+		<-quit
+		logger.Info("Shutdown Server ...")
+	
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		if err := srv.Shutdown(ctx); err != nil {
+			logger.Errorf("Server Shutdown:", err)
+		}
+		// catching ctx.Done(). timeout of 5 seconds.
+		select {
+		case <-ctx.Done():
+			logger.Info("timeout of 5 seconds.")
+		}
+		logger.Info("Server exiting")
 	}
-	// catching ctx.Done(). timeout of 5 seconds.
-	select {
-	case <-ctx.Done():
-		logger.Info("timeout of 5 seconds.")
-	}
-	logger.Info("Server exiting")
 }
 
 func (s *Server) SetupRouter() *gin.Engine {
@@ -191,7 +196,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	transaction.PUT("/:id", authenticator, paymentService.HandleUpdateRequest)
 	transaction.DELETE("/:id", authenticator, paymentService.HandleDeleteRequest)
 
-	if swagHandler != nil {
+	if !utils.IsProdEnvironment() && swagHandler != nil {
 		s.buildSwagger()
 		s.App.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
@@ -203,8 +208,10 @@ func (s *Server) buildSwagger() {
 	docs.SwaggerInfo.Title = "Melon Wallet Service API"
 	docs.SwaggerInfo.Description = "This is backend server for Melon Wallet."
 	docs.SwaggerInfo.Version = "1.0"
-	if os.Getenv("TARGET_ENV") == "STAGING" {
-		docs.SwaggerInfo.Host = "34.168.151.218:8080"
+	if utils.IsProdEnvironment() {
+		docs.SwaggerInfo.Host = "prod.melonnetwork.io:8080"
+	} else if utils.IsStagingEnvironment() {
+		docs.SwaggerInfo.Host = "staging.melonnetwork.io:8080"
 	} else {
 		docs.SwaggerInfo.Host = "localhost:8080"
 	}
