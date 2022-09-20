@@ -18,6 +18,7 @@ const (
 	RegistrationKey             = "RegistrationSession"
 	ContextRoleKey              = "UserRole"
 	ContextRegistrationTokenKey = "RegistrationSessionToken"
+	ContextClientIP             = "X-Forwarded-For"
 )
 
 func PrepareRequest(ctx *gin.Context, client *resty.Client) *resty.Request {
@@ -56,5 +57,7 @@ func GetUserData(ctx *gin.Context) (map[string]string, bool) {
 	if existsRegistrationToken {
 		userData[ContextRegistrationTokenKey] = registrationToken.(string)
 	}
+
+	userData[ContextClientIP] = ctx.ClientIP()
 	return userData, (existsName && existsID && existsToken) || existsRegistrationToken
 }
