@@ -19,6 +19,8 @@ const (
 	ContextRoleKey              = "UserRole"
 	ContextRegistrationTokenKey = "RegistrationSessionToken"
 	ContextClientIP             = "X-Forwarded-For"
+	ContextRequestID            = "X-Request-ID"
+	ContextCorrelationID        = "X-Correlation-ID"
 )
 
 func PrepareRequest(ctx *gin.Context, client *resty.Client) *resty.Request {
@@ -59,5 +61,9 @@ func GetUserData(ctx *gin.Context) (map[string]string, bool) {
 	}
 
 	userData[ContextClientIP] = ctx.ClientIP()
+	userData[ContextRequestID] = ctx.GetString(ContextRequestID)
+	if correlationID, existsID := ctx.Get(ContextCorrelationID); existsID {
+		userData[ContextCorrelationID] = correlationID.(string)
+	}
 	return userData, (existsName && existsID && existsToken) || existsRegistrationToken
 }

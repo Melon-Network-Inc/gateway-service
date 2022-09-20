@@ -12,7 +12,6 @@ func HandleResponse(ctx *gin.Context, resp *resty.Response, err error, logger lo
 		HandleServiceUnavailable(ctx, err, logger)
 		return
 	}
-
 	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
 }
 
