@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/Melon-Network-Inc/common/pkg/config"
 	"github.com/Melon-Network-Inc/common/pkg/log"
-	"github.com/Melon-Network-Inc/gateway-service/pkg/config"
 	"github.com/golang-jwt/jwt/v4"
 )
 
@@ -22,7 +22,7 @@ type HashedTokenManager interface {
 	CreateRefreshToken(userID int64) (string, error)
 }
 
-func NewHashedTokenManager(tokenConfig config.TokenConfigProvider, logger log.Logger) HashedTokenManager {
+func NewHashedTokenManager(tokenConfig *config.TokenConfig, logger log.Logger) HashedTokenManager {
 	return &tokenManager{
 		secretKey:                  tokenConfig.GetSecretKey(),
 		refreshTokenValidityPeriod: tokenConfig.GetRefreshTokenValidityPeriod(),

@@ -43,12 +43,12 @@ func main() {
 	// create root logger tagged with server version
 	logger := log.New(serverConfig.ServiceName).Default(context.Background(), serverConfig, "version", serverConfig.Version)
 
-	tokenConf := gatewayConfig.NewTokenConfig("config/token.yml")
-	if tokenConf == nil {
+	tokenConfig := config.BuildTokenConfig("config/token.yml")
+	if tokenConfig == nil {
 		panic("Failed to get config.")
 	}
 
-	cache, err := storage.New(context.Background(), serverConfig, tokenConf.Token, logger)
+	cache, err := storage.New(context.Background(), serverConfig, tokenConfig, logger)
 	if err != nil {
 		panic(err)
 	}
@@ -77,14 +77,14 @@ func main() {
 			Addr:    fmt.Sprintf(":%d", serverConfig.ServerPort),
 			Handler: s.App,
 		}
-	
+
 		go func() {
 			// service connections
 			if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 				logger.Errorf("listen: %s\n", err)
 			}
 		}()
-	
+
 		// Wait for interrupt signal to gracefully shut down the server with
 		// a timeout of 5 seconds.
 		quit := make(chan os.Signal)
@@ -94,7 +94,7 @@ func main() {
 		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 		<-quit
 		logger.Info("Shutdown Server ...")
-	
+
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		if err := srv.Shutdown(ctx); err != nil {

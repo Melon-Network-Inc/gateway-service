@@ -1,5 +1,5 @@
 name: lb-config
-version: v1.20220903.1
+version: v1.20220919.1
 prod:
   account:
       - "http://localhost:6000"

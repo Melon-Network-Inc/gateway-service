@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"errors"
 	"net/http"
 	"strings"
 
@@ -22,7 +21,7 @@ func TokenForwarder() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		registrationTokenString := context.Request.Header.Get(RegistrationKey)
 		if registrationTokenString == "" {
-			context.AbortWithError(http.StatusUnauthorized, errors.New("registration is timed out"))
+			context.String(http.StatusUnauthorized, "registration is timed out")
 			return
 		}
 		context.Set(RegistrationKey, registrationTokenString)
@@ -42,7 +41,7 @@ func TokenAuthenticator(cache storage.Accessor) gin.HandlerFunc {
 
 		user, err := cache.GetCachedUserByToken(ctx, tokenString)
 		if err != nil {
-			ctx.AbortWithError(http.StatusUnauthorized, err)
+			ctx.String(http.StatusUnauthorized, err.Error())
 			return
 		}
 

@@ -11,7 +11,6 @@ go_library(
     importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/storage",
     visibility = ["//visibility:public"],
     deps = [
-        "//pkg/config",
         "//pkg/storage/cache",
         "//pkg/token",
         "@com_github_melon_network_inc_common//pkg/config",
