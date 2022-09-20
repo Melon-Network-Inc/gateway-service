@@ -2041,6 +2041,11 @@ const docTemplate = `{
         },
         "/whitelist": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "List all whitelist user records",
                 "consumes": [
                     "application/json"
@@ -2053,6 +2058,15 @@ const docTemplate = `{
                 ],
                 "summary": "List all whitelist user records",
                 "operationId": "list-records",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2078,6 +2092,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a whitelist user record",
                 "consumes": [
                     "application/json"
@@ -2091,6 +2110,13 @@ const docTemplate = `{
                 "summary": "Create a whitelist user record",
                 "operationId": "create-whitelist-user",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "RegistrationSession",
+                        "name": "RegistrationSession",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "Record Data",
                         "name": "record",
@@ -2117,8 +2143,95 @@ const docTemplate = `{
                 }
             }
         },
+        "/whitelist/email/generate": {
+            "post": {
+                "description": "Generate email verification passcode and send passcode to user email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Generate email verification passcode",
+                "operationId": "whitelist-email-generate",
+                "parameters": [
+                    {
+                        "description": "Email",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.GenerateEmailPasscodeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Email verification was sent to user email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/whitelist/email/verify": {
+            "post": {
+                "description": "Verify email passcode",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Verify email passcode",
+                "operationId": "whitelist-email-verify",
+                "parameters": [
+                    {
+                        "description": "Verify information",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.VerifyEmailPasscodeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RegistrationSessionResponse"
+                        }
+                    },
+                    "422": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/whitelist/email/{email}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get whitelist user records by email",
                 "consumes": [
                     "application/json"
@@ -2133,9 +2246,16 @@ const docTemplate = `{
                 "operationId": "get-record-by-email",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "Whitelist User Record ID",
-                        "name": "id",
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Email Address",
+                        "name": "email",
                         "in": "path",
                         "required": true
                     }
@@ -2167,6 +2287,11 @@ const docTemplate = `{
         },
         "/whitelist/name/{name}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get whitelist user records by name",
                 "consumes": [
                     "application/json"
@@ -2181,9 +2306,16 @@ const docTemplate = `{
                 "operationId": "get-record-by-name",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "Whitelist User Record ID",
-                        "name": "id",
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "email",
                         "in": "path",
                         "required": true
                     }
@@ -2215,6 +2347,11 @@ const docTemplate = `{
         },
         "/whitelist/phone/{phone}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Get whitelist user records by phone",
                 "consumes": [
                     "application/json"
@@ -2227,6 +2364,22 @@ const docTemplate = `{
                 ],
                 "summary": "Get whitelist user records by phone",
                 "operationId": "get-record-by-phone",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Phone Number",
+                        "name": "phone",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -2254,6 +2407,11 @@ const docTemplate = `{
         },
         "/whitelist/{id}": {
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a whitelist user record",
                 "consumes": [
                     "application/json"
@@ -2266,11 +2424,27 @@ const docTemplate = `{
                 ],
                 "summary": "Delete a whitelist user record",
                 "operationId": "delete-whitelist-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Whitelist Record ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "Object"
+                            "$ref": "#/definitions/api.WhitelistUserInfo"
                         }
                     },
                     "400": {
