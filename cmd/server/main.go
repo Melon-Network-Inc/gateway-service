@@ -127,7 +127,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	auth.POST("/email/verify", accountService.HandlePostRequest)
 	auth.POST("/username/validate", accountService.HandlePostRequest)
 	auth.POST("/login", accountService.HandlePostRequest)
-	auth.GET("/logout", authenticator, accountService.HandleGetRequest)
+	auth.POST("/logout", authenticator, accountService.HandlePostRequest)
 
 	address := v1.Group("/address")
 	address.POST("/", authenticator, accountService.HandlePostRequest)

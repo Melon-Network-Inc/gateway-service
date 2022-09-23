@@ -959,7 +959,7 @@
             }
         },
         "/auth/logout": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "ApiKeyAuth": []
@@ -988,9 +988,9 @@
                 ],
                 "responses": {
                     "202": {
-                        "description": "Logged out",
+                        "description": "Accepted",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/api.LogoutUserResponse"
                         }
                     },
                     "401": {
@@ -1034,7 +1034,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/api.UsernameVerificationResponse"
                         }
                     },
                     "500": {
@@ -3070,12 +3070,19 @@
                     "$ref": "#/definitions/api.DeviceInfo"
                 },
                 "login_info": {
-                    "description": "Login Info includes username, email, or phone.",
                     "type": "string"
                 },
                 "password": {
                     "type": "string",
                     "minLength": 8
+                }
+            }
+        },
+        "api.LogoutUserResponse": {
+            "type": "object",
+            "properties": {
+                "device": {
+                    "$ref": "#/definitions/api.DeviceInfo"
                 }
             }
         },
@@ -3211,6 +3218,14 @@
                     "type": "string",
                     "maxLength": 30,
                     "minLength": 2
+                }
+            }
+        },
+        "api.UsernameVerificationResponse": {
+            "type": "object",
+            "properties": {
+                "unique": {
+                    "type": "boolean"
                 }
             }
         },
