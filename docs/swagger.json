@@ -1083,6 +1083,9 @@
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             }
@@ -1126,6 +1129,9 @@
                         }
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1171,6 +1177,9 @@
                         "description": ""
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1735,6 +1744,9 @@
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             },
@@ -1786,6 +1798,12 @@
                     },
                     "404": {
                         "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             }
@@ -1823,6 +1841,15 @@
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1832,7 +1859,16 @@
                             "$ref": "#/definitions/api.FriendRequestResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1871,6 +1907,15 @@
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1880,7 +1925,13 @@
                             "$ref": "#/definitions/api.FriendRequestResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1919,13 +1970,28 @@
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": ""
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -3121,6 +3187,14 @@
                     "type": "string",
                     "maxLength": 30,
                     "minLength": 2
+                }
+            }
+        },
+        "api.UpdateFriendStatusRequest": {
+            "type": "object",
+            "properties": {
+                "notification_id": {
+                    "type": "string"
                 }
             }
         },
