@@ -158,8 +158,11 @@ func (s *Server) SetupRouter() *gin.Engine {
 	account.PUT("/activate", authenticator, accountService.HandleUpdateRequest)
 	account.PUT("/deactivate", authenticator, accountService.HandleUpdateRequest)
 
-	routes := v1.Group("/search")
-	routes.GET("/user/:keyword", accountService.HandleGetRequest)
+	search := v1.Group("/search")
+	search.GET("/user/:keyword", accountService.HandleGetRequest)
+
+	notification := v1.Group("/notification")
+	notification.GET("/", accountService.HandleGetRequest)
 
 	activity := v1.Group("/activity")
 	activity.GET("/", authenticator, accountService.HandleGetRequest)
