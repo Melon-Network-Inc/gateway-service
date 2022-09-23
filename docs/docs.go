@@ -966,7 +966,7 @@ const docTemplate = `{
             }
         },
         "/auth/logout": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "ApiKeyAuth": []
@@ -995,9 +995,9 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "202": {
-                        "description": "Logged out",
+                        "description": "Accepted",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/api.LogoutUserResponse"
                         }
                     },
                     "401": {
@@ -1041,7 +1041,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/api.UsernameVerificationResponse"
                         }
                     },
                     "500": {
@@ -1090,6 +1090,9 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             }
@@ -1133,6 +1136,9 @@ const docTemplate = `{
                         }
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1178,6 +1184,9 @@ const docTemplate = `{
                         "description": ""
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1742,6 +1751,9 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             },
@@ -1793,6 +1805,12 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             }
@@ -1830,6 +1848,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1839,7 +1866,16 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.FriendRequestResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1878,6 +1914,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1887,7 +1932,13 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.FriendRequestResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -1926,13 +1977,28 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": ""
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -3077,12 +3143,19 @@ const docTemplate = `{
                     "$ref": "#/definitions/api.DeviceInfo"
                 },
                 "login_info": {
-                    "description": "Login Info includes username, email, or phone.",
                     "type": "string"
                 },
                 "password": {
                     "type": "string",
                     "minLength": 8
+                }
+            }
+        },
+        "api.LogoutUserResponse": {
+            "type": "object",
+            "properties": {
+                "device": {
+                    "$ref": "#/definitions/api.DeviceInfo"
                 }
             }
         },
@@ -3121,6 +3194,14 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 30,
                     "minLength": 2
+                }
+            }
+        },
+        "api.UpdateFriendStatusRequest": {
+            "type": "object",
+            "properties": {
+                "notification_id": {
+                    "type": "string"
                 }
             }
         },
@@ -3218,6 +3299,14 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 30,
                     "minLength": 2
+                }
+            }
+        },
+        "api.UsernameVerificationResponse": {
+            "type": "object",
+            "properties": {
+                "unique": {
+                    "type": "boolean"
                 }
             }
         },
