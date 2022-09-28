@@ -1237,7 +1237,9 @@ const docTemplate = `{
                         "description": ""
                     }
                 }
-            },
+            }
+        },
+        "/notification/:id": {
             "delete": {
                 "security": [
                     {

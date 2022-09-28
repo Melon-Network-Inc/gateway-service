@@ -1230,7 +1230,9 @@
                         "description": ""
                     }
                 }
-            },
+            }
+        },
+        "/notification/:id": {
             "delete": {
                 "security": [
                     {
