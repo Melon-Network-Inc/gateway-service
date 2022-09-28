@@ -193,7 +193,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	device.GET("/", authenticator, accountService.HandleGetRequest)
 
 	// Handle by Payment Service
-	transaction := v1.Group("/transactions")
+	transaction := v1.Group("/transaction")
 	transaction.POST("/", authenticator, paymentService.HandlePostRequest)
 	transaction.GET("/user/:id", authenticator, paymentService.HandleGetRequest)
 	transaction.GET("/:id", authenticator, paymentService.HandleGetRequest)
