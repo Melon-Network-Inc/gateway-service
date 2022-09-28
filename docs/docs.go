@@ -2582,7 +2582,7 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "List all transactions by an account",
+                "description": "List all transactions of requester",
                 "consumes": [
                     "application/json"
                 ],
@@ -2592,21 +2592,14 @@ const docTemplate = `{
                 "tags": [
                     "transactions"
                 ],
-                "summary": "List all transactions by an account",
-                "operationId": "list-transactions-by-user",
+                "summary": "List all transactions of requester",
+                "operationId": "list-transactions",
                 "parameters": [
                     {
                         "type": "string",
                         "description": "Authorization",
                         "name": "Authorization",
                         "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Transaction ID",
-                        "name": "id",
-                        "in": "path",
                         "required": true
                     }
                 ],
@@ -2770,6 +2763,57 @@ const docTemplate = `{
                     },
                     "400": {
                         "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/transaction/user/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all transactions of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "List all transactions of an account",
+                "operationId": "list-transactions-by-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.TransactionResponse"
+                            }
+                        }
                     },
                     "404": {
                         "description": ""
