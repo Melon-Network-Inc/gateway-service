@@ -162,7 +162,8 @@ func (s *Server) SetupRouter() *gin.Engine {
 	search.GET("/user/:keyword", accountService.HandleGetRequest)
 
 	notification := v1.Group("/notification")
-	notification.GET("/", accountService.HandleGetRequest)
+	notification.GET("/", authenticator, accountService.HandleGetRequest)
+	notification.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
 	activity := v1.Group("/activity")
 	activity.GET("/", authenticator, accountService.HandleGetRequest)

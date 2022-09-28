@@ -1207,7 +1207,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "notification"
+                    "notifications"
                 ],
                 "summary": "List notifications",
                 "operationId": "list-notifications",
@@ -1225,6 +1225,58 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.ListNotificationResponse"
+                        }
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete notifications",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notifications"
+                ],
+                "summary": "Delete notification",
+                "operationId": "delete-notifications",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Notification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.DeleteNotificationResponse"
                         }
                     },
                     "401": {
@@ -3101,6 +3153,14 @@ const docTemplate = `{
             "properties": {
                 "deleted_invitation": {
                     "$ref": "#/definitions/entity.InviteCode"
+                }
+            }
+        },
+        "api.DeleteNotificationResponse": {
+            "type": "object",
+            "properties": {
+                "notification": {
+                    "$ref": "#/definitions/entity.Notification"
                 }
             }
         },
