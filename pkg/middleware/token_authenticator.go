@@ -36,6 +36,9 @@ func TokenAuthenticator(cache storage.Accessor) gin.HandlerFunc {
 		fullAuthTokenString := ctx.Request.Header.Get(AuthorizationKey)
 		if fullAuthTokenString != "" {
 			ctx.Set(AuthorizationKey, fullAuthTokenString)
+		} else {
+			ctx.String(http.StatusUnauthorized, "Missing authentication key from header")
+			return
 		}
 		tokenString := strings.TrimPrefix(fullAuthTokenString, "Bearer ")
 
