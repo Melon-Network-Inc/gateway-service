@@ -9,11 +9,12 @@ import (
 )
 
 const (
-	UsernameKey      = "username"
-	UserIDKey        = "user_id"
-	UserRoleKey      = "role"
-	AuthorizationKey = "Authorization"
-	RegistrationKey  = "RegistrationSession"
+	UsernameKey           = "username"
+	UserIDKey             = "user_id"
+	UserRoleKey           = "role"
+	AuthorizationTokenKey = "AuthorizationToken"
+	AuthorizationKey      = "Authorization"
+	RegistrationKey       = "RegistrationSession"
 )
 
 // TokenForwarder check if token is valid and forward token to backend service.
@@ -33,7 +34,10 @@ func TokenForwarder() gin.HandlerFunc {
 // appropriately. Aborts when there was a problem in validating token.
 func TokenAuthenticator(cache storage.Accessor) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		fullAuthTokenString := ctx.Request.Header.Get(AuthorizationKey)
+		fullAuthTokenString := ctx.GetHeader(AuthorizationKey)
+		if fullAuthTokenString == "" {
+			fullAuthTokenString = ctx.GetHeader(AuthorizationTokenKey)
+		}
 		if fullAuthTokenString != "" {
 			ctx.Set(AuthorizationKey, fullAuthTokenString)
 		} else {
