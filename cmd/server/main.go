@@ -159,7 +159,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	account.PUT("/deactivate", authenticator, accountService.HandleUpdateRequest)
 
 	search := v1.Group("/search")
-	search.GET("/user/:keyword", accountService.HandleGetRequest)
+	search.GET("/user/:keyword", authenticator, accountService.HandleGetRequest)
 
 	notification := v1.Group("/notification")
 	notification.GET("/", authenticator, accountService.HandleGetRequest)
