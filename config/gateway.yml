@@ -1,5 +1,5 @@
 name: gateway-service
-version: v1.20220903.1
+version: v1.20220919.1
 prod:
   port: 8080
   postgres: postgres://postgres:postgres@localhost:5432/melon_service
