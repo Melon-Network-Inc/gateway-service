@@ -2667,7 +2667,16 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -2718,7 +2727,13 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -2767,6 +2782,9 @@ const docTemplate = `{
                         }
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     },
                     "404": {
@@ -2818,13 +2836,135 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/transaction/:id": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Get a transaction",
+                "operationId": "get-transaction",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.TransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     }
                 }
             }
         },
-        "/transaction/user/{id}": {
+        "/transaction/query/:id": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query requester's transactions by page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Query requester's transactions by page",
+                "operationId": "query-transactions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.TransactionResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/transaction/user/:id": {
             "get": {
                 "security": [
                     {
@@ -2869,55 +3009,16 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
-                    }
-                }
-            }
-        },
-        "/transaction/{id}": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Get a transaction",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "transactions"
-                ],
-                "summary": "Get a transaction",
-                "operationId": "get-transaction",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
                     },
-                    {
-                        "type": "integer",
-                        "description": "Transaction ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/api.TransactionResponse"
-                        }
-                    },
-                    "404": {
+                    "500": {
                         "description": ""
                     }
                 }
