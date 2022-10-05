@@ -2221,7 +2221,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/setting/devices/": {
+        "/setting/devices": {
             "get": {
                 "security": [
                     {
