@@ -138,7 +138,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	address.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
 	friend := v1.Group("/friend")
-	friend.GET("/list/", authenticator, accountService.HandleGetRequest)
+	friend.GET("/list", authenticator, accountService.HandleGetRequest)
 	friend.GET("/list/user/:id", authenticator, accountService.HandleGetRequest)
 	friend.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
@@ -162,6 +162,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	search.GET("/user/:keyword", authenticator, accountService.HandleGetRequest)
 
 	notification := v1.Group("/notification")
+	notification.GET("/query", authenticator, accountService.HandleGetRequest)
 	notification.GET("/", authenticator, accountService.HandleGetRequest)
 	notification.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
