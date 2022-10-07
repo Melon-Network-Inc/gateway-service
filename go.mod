@@ -2,7 +2,7 @@ module github.com/Melon-Network-Inc/gateway-service
 
 go 1.18
 
-require github.com/Melon-Network-Inc/common v1.0.50
+require github.com/Melon-Network-Inc/common v1.0.64
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
