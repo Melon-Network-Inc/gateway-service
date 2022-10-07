@@ -2214,7 +2214,7 @@
                 }
             }
         },
-        "/setting/devices": {
+        "/setting/device": {
             "get": {
                 "security": [
                     {
@@ -2229,7 +2229,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "setting"
+                    "settings"
                 ],
                 "summary": "List devices",
                 "operationId": "list-devices",
