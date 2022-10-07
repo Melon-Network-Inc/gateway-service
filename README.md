@@ -43,7 +43,7 @@ python3 ../NestedJsonMerger/merge.py
 ## Swagger Doc
 
 Staging URL
-<http://34.168.151.218:8080/swagger/index.html>
+<http://staging.melonnetwork.io:8080/swagger/index.html>
 
 Development URL
 <http://localhost:8080/swagger/index.html>
