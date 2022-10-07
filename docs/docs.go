@@ -3179,10 +3179,10 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "blockchain",
-                "currency",
                 "is_primary",
                 "name",
-                "pubkey"
+                "pubkey",
+                "symbol"
             ],
             "properties": {
                 "blockchain": {
@@ -3190,16 +3190,13 @@ const docTemplate = `{
                     "enum": [
                         "bitcoin",
                         "ethereum",
-                        "solana"
+                        "solana",
+                        "polygon",
+                        "binance"
                     ]
                 },
                 "currency": {
-                    "type": "string",
-                    "enum": [
-                        "bitcoin",
-                        "ethereum",
-                        "solana"
-                    ]
+                    "type": "string"
                 },
                 "is_primary": {
                     "type": "boolean"
@@ -3211,6 +3208,11 @@ const docTemplate = `{
                 },
                 "pubkey": {
                     "type": "string"
+                },
+                "symbol": {
+                    "type": "string",
+                    "maxLength": 10,
+                    "minLength": 1
                 }
             }
         },
@@ -3697,6 +3699,9 @@ const docTemplate = `{
         "entity.Address": {
             "type": "object",
             "properties": {
+                "blockchain": {
+                    "type": "string"
+                },
                 "createdAt": {
                     "type": "string"
                 },
@@ -3719,6 +3724,9 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "pubkey": {
+                    "type": "string"
+                },
+                "symbol": {
                     "type": "string"
                 },
                 "updatedAt": {
