@@ -2221,7 +2221,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/setting/devices": {
+        "/setting/device": {
             "get": {
                 "security": [
                     {
@@ -2236,7 +2236,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "setting"
+                    "settings"
                 ],
                 "summary": "List devices",
                 "operationId": "list-devices",
