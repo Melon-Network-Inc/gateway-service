@@ -131,6 +131,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 
 	address := v1.Group("/address")
 	address.POST("/", authenticator, accountService.HandlePostRequest)
+	address.GET("/query", authenticator, accountService.HandleGetRequest)
 	address.GET("/recipient/:id", authenticator, accountService.HandleGetRequest)
 	address.GET("/:id", authenticator, accountService.HandleGetRequest)
 	address.GET("/", authenticator, accountService.HandleGetRequest)
