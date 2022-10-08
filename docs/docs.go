@@ -3996,6 +3996,9 @@ const docTemplate = `{
                 "symbol": {
                     "type": "string"
                 },
+                "transaction_type": {
+                    "type": "string"
+                },
                 "updatedAt": {
                     "type": "string"
                 }
@@ -4063,6 +4066,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "symbol": {
+                    "type": "string"
+                },
+                "transaction_type": {
                     "type": "string"
                 }
             }

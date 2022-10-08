@@ -3989,6 +3989,9 @@
                 "symbol": {
                     "type": "string"
                 },
+                "transaction_type": {
+                    "type": "string"
+                },
                 "updatedAt": {
                     "type": "string"
                 }
@@ -4056,6 +4059,9 @@
                     "type": "string"
                 },
                 "symbol": {
+                    "type": "string"
+                },
+                "transaction_type": {
                     "type": "string"
                 }
             }
