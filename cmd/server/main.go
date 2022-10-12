@@ -182,6 +182,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	whitelist.GET("/name/:name", authenticator, accountService.HandleGetRequest)
 	whitelist.GET("/email/:email", authenticator, accountService.HandleGetRequest)
 	whitelist.GET("/phone/:phone", authenticator, accountService.HandleGetRequest)
+	whitelist.GET("/query", authenticator, accountService.HandleGetRequest)
 	whitelist.GET("/", authenticator, accountService.HandleGetRequest)
 	whitelist.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
