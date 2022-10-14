@@ -248,7 +248,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/account/security/{id}": {
+        "/account/security/:id": {
             "put": {
                 "description": "Update the password for a user resource",
                 "consumes": [
@@ -299,7 +299,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/account/{id}": {
+        "/account/:id": {
             "get": {
                 "security": [
                     {
@@ -1221,7 +1221,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/friend/list/user/{id}": {
+        "/friend/list/user/:id": {
             "get": {
                 "security": [
                     {
@@ -1346,7 +1346,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/friend/query/user/{id}": {
+        "/friend/query/user/:id": {
             "get": {
                 "security": [
                     {
@@ -1418,7 +1418,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/friend/{id}": {
+        "/friend/:id": {
             "delete": {
                 "security": [
                     {
@@ -2255,7 +2255,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/request/confirm/{id}": {
+        "/request/confirm/:id": {
             "put": {
                 "security": [
                     {
@@ -2371,7 +2371,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/request/reject/{id}": {
+        "/request/reject/:id": {
             "put": {
                 "security": [
                     {
@@ -2434,7 +2434,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/request/{id}": {
+        "/request/:id": {
             "delete": {
                 "security": [
                     {
@@ -3041,7 +3041,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/whitelist/{id}": {
+        "/whitelist/:id": {
             "delete": {
                 "security": [
                     {
