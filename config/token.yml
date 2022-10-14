@@ -1,5 +1,5 @@
 name: token-config
-version: v1.20220919.1
+version: v1.20221013.1
 prod:
   secret: NPl6iLAa1rqBbDLdhZRCAc9dU0gQzzAZr12WObz6uNsjjVV7uo
   auth_token_period: 24
@@ -10,21 +10,21 @@ prod:
 staging:
   secret: secret
   auth_token_period: 24
-  refresh_token_period: 24
+  refresh_token_period: 168
   registration_period: 30
   whitelist_period: 20
   email_verification_period: 10
 dev:
   secret: secret
   auth_token_period: 24
-  refresh_token_period: 24
+  refresh_token_period: 168
   registration_period: 20
   whitelist_period: 20
   email_verification_period: 10
 test:
   secret: secret
   auth_token_period: 24
-  refresh_token_period: 24
+  refresh_token_period: 168
   registration_period: 20
   whitelist_period: 20
   email_verification_period: 10

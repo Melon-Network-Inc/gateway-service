@@ -26,7 +26,7 @@ func newUserStorage(cache cache.Accessor, tokenMgr token.HashedTokenManager) use
 func (s *usersStorage) GetCachedUserByToken(ctx context.Context, token string) (entity.CachedUser, error) {
 	var user entity.CachedUser
 
-	userID, err := s.tokenMgr.ValidateAuthToken(token)
+	userID, lastLogin, err := s.tokenMgr.ValidateAuthToken(token)
 	if err != nil {
 		log.Error("unable to validate token")
 		return entity.CachedUser{}, err
@@ -40,6 +40,10 @@ func (s *usersStorage) GetCachedUserByToken(ctx context.Context, token string) (
 	if !exists {
 		log.Info("user information is not present in cache")
 		return entity.CachedUser{}, errors.New("user information is not present in cache")
+	}
+	if lastLogin != user.LastLogin {
+		log.Info("user secret not matched")
+		return entity.CachedUser{}, errors.New("actual user information does not the one in token")
 	}
 	return user, nil
 }
