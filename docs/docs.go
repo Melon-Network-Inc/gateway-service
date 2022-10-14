@@ -1059,6 +1059,15 @@ const docTemplate = `{
                         "name": "Authorization",
                         "in": "header",
                         "required": true
+                    },
+                    {
+                        "description": "Device Information",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.LogoutUserRequest"
+                        }
                     }
                 ],
                 "responses": {
@@ -1072,6 +1081,53 @@ const docTemplate = `{
                         "description": ""
                     },
                     "403": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "description": "Refresh access token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Refresh access token",
+                "operationId": "refresh-access-token",
+                "parameters": [
+                    {
+                        "description": "Client refresh token",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RefreshTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RefreshTokenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
                         "description": ""
                     },
                     "500": {
@@ -3796,6 +3852,14 @@ const docTemplate = `{
                 }
             }
         },
+        "api.LogoutUserRequest": {
+            "type": "object",
+            "properties": {
+                "device_info": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                }
+            }
+        },
         "api.LogoutUserResponse": {
             "type": "object",
             "properties": {
@@ -3814,6 +3878,44 @@ const docTemplate = `{
                     "$ref": "#/definitions/entity.Transaction"
                 },
                 "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.RefreshTokenRequest": {
+            "type": "object",
+            "required": [
+                "grant_type",
+                "refresh_token"
+            ],
+            "properties": {
+                "client_id": {
+                    "type": "string"
+                },
+                "client_secret": {
+                    "type": "string"
+                },
+                "grant_type": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.RefreshTokenResponse": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "expires": {
+                    "type": "integer"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "token_type": {
                     "type": "string"
                 }
             }
@@ -3900,6 +4002,9 @@ const docTemplate = `{
                 "phone"
             ],
             "properties": {
+                "access_token": {
+                    "type": "string"
+                },
                 "avatar": {
                     "type": "string"
                 },
@@ -3918,6 +4023,9 @@ const docTemplate = `{
                 "email": {
                     "type": "string"
                 },
+                "expires": {
+                    "type": "integer"
+                },
                 "id": {
                     "type": "integer"
                 },
@@ -3933,7 +4041,10 @@ const docTemplate = `{
                 "phone": {
                     "type": "string"
                 },
-                "token": {
+                "refresh_token": {
+                    "type": "string"
+                },
+                "token_type": {
                     "type": "string"
                 },
                 "updatedAt": {
