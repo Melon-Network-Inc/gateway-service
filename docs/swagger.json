@@ -65,6 +65,9 @@
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             },
@@ -114,7 +117,16 @@
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
+                        "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "422": {
                         "description": ""
                     },
                     "500": {
@@ -168,6 +180,9 @@
                         }
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     },
                     "403": {
@@ -229,6 +244,9 @@
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
@@ -279,6 +297,12 @@
                         "schema": {
                             "$ref": "#/definitions/api.UserResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
                     },
                     "403": {
                         "description": ""
@@ -334,6 +358,12 @@
                             "$ref": "#/definitions/api.UserResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
@@ -386,6 +416,12 @@
                             "$ref": "#/definitions/api.UserResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
@@ -436,13 +472,13 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
                     "404": {
-                        "description": ""
-                    },
-                    "500": {
                         "description": ""
                     }
                 }
@@ -498,13 +534,13 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
                     "404": {
-                        "description": ""
-                    },
-                    "500": {
                         "description": ""
                     }
                 }
@@ -547,6 +583,9 @@
                                 "$ref": "#/definitions/api.AddressesResponse"
                             }
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "401": {
                         "description": ""
@@ -602,10 +641,13 @@
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
-                    "404": {
+                    "500": {
                         "description": ""
                     }
                 }
@@ -652,6 +694,9 @@
                         "schema": {
                             "$ref": "#/definitions/api.AddressResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "403": {
                         "description": ""
@@ -769,6 +814,9 @@
                             "$ref": "#/definitions/api.AddressResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
@@ -831,6 +879,9 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
@@ -888,6 +939,9 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
@@ -929,6 +983,9 @@
                             "type": "string"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "409": {
                         "description": ""
                     },
@@ -969,6 +1026,12 @@
                         "schema": {
                             "$ref": "#/definitions/api.RegistrationSessionResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
                     },
                     "422": {
                         "description": ""
@@ -1070,6 +1133,9 @@
                             "$ref": "#/definitions/api.LogoutUserResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
@@ -1161,7 +1227,10 @@
                             "$ref": "#/definitions/api.UsernameVerificationResponse"
                         }
                     },
-                    "500": {
+                    "400": {
+                        "description": ""
+                    },
+                    "409": {
                         "description": ""
                     }
                 }
@@ -1204,6 +1273,9 @@
                                 "$ref": "#/definitions/api.FriendRequestResponse"
                             }
                         }
+                    },
+                    "401": {
+                        "description": ""
                     },
                     "404": {
                         "description": ""
@@ -1450,6 +1522,12 @@
                     "200": {
                         "description": ""
                     },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     },
@@ -1548,6 +1626,9 @@
                             "$ref": "#/definitions/api.DeleteNotificationResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
@@ -1609,6 +1690,9 @@
                                 "$ref": "#/definitions/api.ListNotificationResponse"
                             }
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "401": {
                         "description": ""
@@ -2182,10 +2266,10 @@
                     "400": {
                         "description": ""
                     },
-                    "404": {
+                    "401": {
                         "description": ""
                     },
-                    "500": {
+                    "404": {
                         "description": ""
                     }
                 }
@@ -2234,6 +2318,9 @@
                         }
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     },
                     "404": {
@@ -2302,6 +2389,9 @@
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     },
@@ -2355,10 +2445,10 @@
                     "400": {
                         "description": ""
                     },
-                    "404": {
+                    "401": {
                         "description": ""
                     },
-                    "500": {
+                    "404": {
                         "description": ""
                     }
                 }
@@ -2416,6 +2506,9 @@
                         }
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     },
                     "404": {
@@ -2476,6 +2569,9 @@
                         "description": ""
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     },
                     "404": {
@@ -2727,6 +2823,9 @@
                             "type": "string"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "409": {
                         "description": ""
                     },
@@ -2767,6 +2866,9 @@
                         "schema": {
                             "$ref": "#/definitions/api.RegistrationSessionResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "422": {
                         "description": ""
@@ -3027,9 +3129,6 @@
                     },
                     "404": {
                         "description": ""
-                    },
-                    "500": {
-                        "description": ""
                     }
                 }
             }
@@ -3195,6 +3294,9 @@
                     "401": {
                         "description": ""
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     },
@@ -3253,6 +3355,9 @@
                         "description": ""
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -3430,7 +3535,7 @@
                     "401": {
                         "description": ""
                     },
-                    "500": {
+                    "404": {
                         "description": ""
                     }
                 }
