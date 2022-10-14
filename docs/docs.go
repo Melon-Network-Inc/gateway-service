@@ -72,6 +72,9 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
+                    },
+                    "500": {
+                        "description": ""
                     }
                 }
             },
@@ -119,6 +122,139 @@ const docTemplate = `{
                         }
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    },
+                    "422": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/account/:id": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a user resource",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get a user resource",
+                "operationId": "get-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete a user resource by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete a user resource by ID",
+                "operationId": "delete-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Refresh Token to be invalidated",
+                        "name": "refresh_token",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
                         "description": ""
                     },
                     "404": {
@@ -175,6 +311,9 @@ const docTemplate = `{
                         }
                     },
                     "400": {
+                        "description": ""
+                    },
+                    "401": {
                         "description": ""
                     },
                     "403": {
@@ -236,6 +375,9 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
@@ -287,111 +429,11 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.UserResponse"
                         }
                     },
-                    "403": {
+                    "400": {
                         "description": ""
                     },
-                    "404": {
+                    "401": {
                         "description": ""
-                    },
-                    "500": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/account/:id": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Get a user resource",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "Get a user resource",
-                "operationId": "get-user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
-                    },
-                    "403": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    },
-                    "500": {
-                        "description": ""
-                    }
-                }
-            },
-            "delete": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Delete a user resource by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "Delete a user resource by ID",
-                "operationId": "delete-user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
                     },
                     "403": {
                         "description": ""
@@ -443,13 +485,13 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
                     "404": {
-                        "description": ""
-                    },
-                    "500": {
                         "description": ""
                     }
                 }
@@ -505,13 +547,13 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
                     "404": {
-                        "description": ""
-                    },
-                    "500": {
                         "description": ""
                     }
                 }
@@ -554,6 +596,9 @@ const docTemplate = `{
                                 "$ref": "#/definitions/api.AddressesResponse"
                             }
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "401": {
                         "description": ""
@@ -609,10 +654,13 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
-                    "404": {
+                    "500": {
                         "description": ""
                     }
                 }
@@ -659,6 +707,9 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.AddressResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "403": {
                         "description": ""
@@ -776,6 +827,9 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.AddressResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
@@ -838,6 +892,9 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
@@ -895,6 +952,9 @@ const docTemplate = `{
                             }
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "403": {
                         "description": ""
                     },
@@ -936,6 +996,9 @@ const docTemplate = `{
                             "type": "string"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "409": {
                         "description": ""
                     },
@@ -976,6 +1039,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.RegistrationSessionResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
                     },
                     "422": {
                         "description": ""
@@ -1068,6 +1137,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.LogoutUserRequest"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Refresh Token to be invalidated",
+                        "name": "refresh_token",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -1076,6 +1151,9 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.LogoutUserResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "401": {
                         "description": ""
@@ -1091,7 +1169,7 @@ const docTemplate = `{
         },
         "/auth/refresh": {
             "post": {
-                "description": "Refresh access token",
+                "description": "Revoke token",
                 "consumes": [
                     "application/json"
                 ],
@@ -1101,33 +1179,27 @@ const docTemplate = `{
                 "tags": [
                     "auth"
                 ],
-                "summary": "Refresh access token",
-                "operationId": "refresh-access-token",
+                "summary": "Revoke token",
+                "operationId": "revoke-token",
                 "parameters": [
                     {
-                        "description": "Client refresh token",
+                        "description": "Revoke token data",
                         "name": "request",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/api.RefreshTokenRequest"
+                            "$ref": "#/definitions/api.RevokeTokenRequest"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/api.RefreshTokenResponse"
-                        }
+                        "description": ""
                     },
                     "400": {
                         "description": ""
                     },
                     "401": {
-                        "description": ""
-                    },
-                    "404": {
                         "description": ""
                     },
                     "500": {
@@ -1167,6 +1239,63 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.UsernameVerificationResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "409": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/friend/:id": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Remove a friend by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "friends"
+                ],
+                "summary": "Remove a friend by ID",
+                "operationId": "delete-friend",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
                     },
                     "500": {
                         "description": ""
@@ -1211,6 +1340,9 @@ const docTemplate = `{
                                 "$ref": "#/definitions/api.FriendRequestResponse"
                             }
                         }
+                    },
+                    "401": {
+                        "description": ""
                     },
                     "404": {
                         "description": ""
@@ -1418,54 +1550,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/friend/:id": {
-            "delete": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Remove a friend by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "friends"
-                ],
-                "summary": "Remove a friend by ID",
-                "operationId": "delete-friend",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    },
-                    "500": {
-                        "description": ""
-                    }
-                }
-            }
-        },
         "/notification/": {
             "get": {
                 "security": [
@@ -1555,6 +1639,9 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.DeleteNotificationResponse"
                         }
                     },
+                    "400": {
+                        "description": ""
+                    },
                     "401": {
                         "description": ""
                     },
@@ -1616,6 +1703,9 @@ const docTemplate = `{
                                 "$ref": "#/definitions/api.ListNotificationResponse"
                             }
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "401": {
                         "description": ""
@@ -2189,10 +2279,10 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
-                    "404": {
+                    "401": {
                         "description": ""
                     },
-                    "500": {
+                    "404": {
                         "description": ""
                     }
                 }
@@ -2243,10 +2333,76 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     },
                     "409": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/request/:id": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Drop a friend request by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Drop a friend request by ID",
+                "operationId": "drop-friend-request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "FriendRequest ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
                         "description": ""
                     },
                     "500": {
@@ -2309,6 +2465,9 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
+                    "401": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     },
@@ -2362,10 +2521,10 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
-                    "404": {
+                    "401": {
                         "description": ""
                     },
-                    "500": {
+                    "404": {
                         "description": ""
                     }
                 }
@@ -2425,64 +2584,7 @@ const docTemplate = `{
                     "400": {
                         "description": ""
                     },
-                    "404": {
-                        "description": ""
-                    },
-                    "500": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/request/:id": {
-            "delete": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Drop a friend request by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "requests"
-                ],
-                "summary": "Drop a friend request by ID",
-                "operationId": "drop-friend-request",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "FriendRequest ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Notification ID",
-                        "name": "friend_status_request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    },
-                    "400": {
+                    "401": {
                         "description": ""
                     },
                     "404": {
@@ -2702,6 +2804,66 @@ const docTemplate = `{
                 }
             }
         },
+        "/whitelist/:id": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete a whitelist user record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Delete a whitelist user record",
+                "operationId": "delete-whitelist-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Whitelist Record ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.WhitelistUserInfo"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/whitelist/email/generate": {
             "post": {
                 "description": "Generate email verification passcode and send passcode to user email",
@@ -2733,6 +2895,9 @@ const docTemplate = `{
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "409": {
                         "description": ""
@@ -2774,6 +2939,9 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.RegistrationSessionResponse"
                         }
+                    },
+                    "400": {
+                        "description": ""
                     },
                     "422": {
                         "description": ""
@@ -3034,69 +3202,6 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": ""
-                    },
-                    "500": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/whitelist/:id": {
-            "delete": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Delete a whitelist user record",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "whitelist"
-                ],
-                "summary": "Delete a whitelist user record",
-                "operationId": "delete-whitelist-user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Whitelist Record ID",
-                        "name": "ID",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/api.WhitelistUserInfo"
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "401": {
-                        "description": ""
-                    },
-                    "403": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    },
-                    "500": {
-                        "description": ""
                     }
                 }
             }
@@ -3202,6 +3307,9 @@ const docTemplate = `{
                     "401": {
                         "description": ""
                     },
+                    "403": {
+                        "description": ""
+                    },
                     "404": {
                         "description": ""
                     },
@@ -3260,6 +3368,9 @@ const docTemplate = `{
                         "description": ""
                     },
                     "404": {
+                        "description": ""
+                    },
+                    "500": {
                         "description": ""
                     }
                 }
@@ -3437,7 +3548,7 @@ const docTemplate = `{
                     "401": {
                         "description": ""
                     },
-                    "500": {
+                    "404": {
                         "description": ""
                     }
                 }
@@ -3939,6 +4050,20 @@ const docTemplate = `{
                 },
                 "left_invite_number": {
                     "type": "integer"
+                }
+            }
+        },
+        "api.RevokeTokenRequest": {
+            "type": "object",
+            "required": [
+                "token"
+            ],
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "token_type_hint": {
+                    "type": "string"
                 }
             }
         },
