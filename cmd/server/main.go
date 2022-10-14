@@ -126,6 +126,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	auth.POST("/email/generate", accountService.HandlePostRequest)
 	auth.POST("/email/verify", accountService.HandlePostRequest)
 	auth.POST("/username/validate", accountService.HandlePostRequest)
+	auth.POST("/refresh", accountService.HandlePostRequest)
 	auth.POST("/login", accountService.HandlePostRequest)
 	auth.POST("/logout", authenticator, accountService.HandlePostRequest)
 
