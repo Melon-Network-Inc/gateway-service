@@ -54,18 +54,18 @@ func (m *tokenManager) ValidateAuthToken(tokenString string) (int64, string, err
 			return 0, "", errors.New("token does not contain required data")
 		}
 
-		claimLogin, isSetLogin := claims["lastLogin"]
-		login, ok := claimLogin.(string)
-		if !ok || !isSetLogin {
-			return 0, "", errors.New("token does not contain required data")
-		}
+		// claimLogin, isSetLogin := claims["lastLogin"]
+		// login, ok := claimLogin.(string)
+		// if !ok || !isSetLogin {
+		// 	return 0, "", errors.New("token does not contain required data")
+		// }
 
 		// check if token contains expiry date
 		if unexpired := claims.VerifyExpiresAt(time.Now().Unix(), true); !unexpired {
 			return 0, "", errors.New("token has expired")
 		}
 
-		return int64(userID), login, nil
+		return int64(userID), "", nil
 	}
 
 	return 0, "", errors.New("malformed authentication token")
