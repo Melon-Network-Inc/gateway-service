@@ -4081,10 +4081,10 @@ const docTemplate = `{
         "api.RegistrationSessionResponse": {
             "type": "object",
             "properties": {
-                "email": {
+                "access_token": {
                     "type": "string"
                 },
-                "token": {
+                "email": {
                     "type": "string"
                 }
             }
