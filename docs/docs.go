@@ -447,118 +447,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/activity": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "List activities of an account",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "activities"
-                ],
-                "summary": "List activities of an account",
-                "operationId": "list-activities",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/api.ActivityResponse"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "401": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/activity/query": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Query activities of an account",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "activities"
-                ],
-                "summary": "Query activities of an account",
-                "operationId": "query-activities",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "page number",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "page size",
-                        "name": "per_page",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/api.Post"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": ""
-                    },
-                    "401": {
-                        "description": ""
-                    },
-                    "404": {
-                        "description": ""
-                    }
-                }
-            }
-        },
         "/address": {
             "get": {
                 "security": [
@@ -3253,6 +3141,118 @@ const docTemplate = `{
                 }
             }
         },
+        "/activity": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List activities of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "activities"
+                ],
+                "summary": "List activities of an account",
+                "operationId": "list-activities",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.ActivityResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/activity/query": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query activities of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "activities"
+                ],
+                "summary": "Query activities of an account",
+                "operationId": "query-activities",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.Post"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/transaction": {
             "get": {
                 "security": [
@@ -3688,17 +3688,6 @@ const docTemplate = `{
                 }
             }
         },
-        "api.ActivityResponse": {
-            "type": "object",
-            "properties": {
-                "posts": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/api.Post"
-                    }
-                }
-            }
-        },
         "api.AddAddressRequest": {
             "type": "object",
             "required": [
@@ -4023,20 +4012,6 @@ const docTemplate = `{
             "properties": {
                 "device": {
                     "$ref": "#/definitions/api.DeviceInfo"
-                }
-            }
-        },
-        "api.Post": {
-            "type": "object",
-            "properties": {
-                "moment": {
-                    "$ref": "#/definitions/entity.Moment"
-                },
-                "transaction": {
-                    "$ref": "#/definitions/entity.Transaction"
-                },
-                "type": {
-                    "type": "string"
                 }
             }
         },
@@ -4428,36 +4403,6 @@ const docTemplate = `{
                 }
             }
         },
-        "entity.Moment": {
-            "type": "object",
-            "required": [
-                "message"
-            ],
-            "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                },
-                "user_ref": {
-                    "type": "integer"
-                }
-            }
-        },
         "entity.Notification": {
             "type": "object",
             "required": [
@@ -4499,6 +4444,165 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "api.ActivityResponse": {
+            "type": "object",
+            "properties": {
+                "posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.Post"
+                    }
+                }
+            }
+        },
+        "api.AddTransactionRequest": {
+            "type": "object",
+            "required": [
+                "amount",
+                "blockchain",
+                "name",
+                "show_type",
+                "symbol"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "blockchain": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "receiver_pk": {
+                    "type": "string"
+                },
+                "sender_id": {
+                    "type": "integer"
+                },
+                "sender_pk": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string",
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
+                },
+                "status": {
+                    "type": "string"
+                },
+                "symbol": {
+                    "type": "string"
+                },
+                "transaction_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.Post": {
+            "type": "object",
+            "properties": {
+                "moment": {
+                    "$ref": "#/definitions/entity.Moment"
+                },
+                "transaction": {
+                    "$ref": "#/definitions/entity.Transaction"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.TransactionResponse": {
+            "type": "object",
+            "properties": {
+                "transaction": {
+                    "$ref": "#/definitions/entity.Transaction"
+                }
+            }
+        },
+        "api.UpdateTransactionRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "show_type"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string",
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Moment": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "user_ref": {
                     "type": "integer"
                 }
             }
@@ -4564,110 +4668,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
-        "gorm.DeletedAt": {
-            "type": "object",
-            "properties": {
-                "time": {
-                    "type": "string"
-                },
-                "valid": {
-                    "description": "Valid is true if Time is not NULL",
-                    "type": "boolean"
-                }
-            }
-        },
-        "api.AddTransactionRequest": {
-            "type": "object",
-            "required": [
-                "amount",
-                "blockchain",
-                "name",
-                "show_type",
-                "symbol"
-            ],
-            "properties": {
-                "amount": {
-                    "type": "number"
-                },
-                "blockchain": {
-                    "type": "string"
-                },
-                "currency": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "receiver_id": {
-                    "type": "integer"
-                },
-                "receiver_pk": {
-                    "type": "string"
-                },
-                "sender_id": {
-                    "type": "integer"
-                },
-                "sender_pk": {
-                    "type": "string"
-                },
-                "show_type": {
-                    "type": "string",
-                    "enum": [
-                        "Public",
-                        "Private",
-                        "Friend"
-                    ]
-                },
-                "status": {
-                    "type": "string"
-                },
-                "symbol": {
-                    "type": "string"
-                },
-                "transaction_type": {
-                    "type": "string"
-                }
-            }
-        },
-        "api.TransactionResponse": {
-            "type": "object",
-            "properties": {
-                "transaction": {
-                    "$ref": "#/definitions/entity.Transaction"
-                }
-            }
-        },
-        "api.UpdateTransactionRequest": {
-            "type": "object",
-            "required": [
-                "name",
-                "show_type"
-            ],
-            "properties": {
-                "message": {
-                    "type": "string",
-                    "maxLength": 200
-                },
-                "name": {
-                    "type": "string"
-                },
-                "show_type": {
-                    "type": "string",
-                    "enum": [
-                        "Public",
-                        "Private",
-                        "Friend"
-                    ]
-                },
-                "status": {
                     "type": "string"
                 }
             }
