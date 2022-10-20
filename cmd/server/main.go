@@ -174,8 +174,8 @@ func (s *Server) SetupRouter() *gin.Engine {
 	notification.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
 	activity := v1.Group("/activity")
-	activity.GET("/query", authenticator, accountService.HandleGetRequest)
-	activity.GET("/", authenticator, accountService.HandleGetRequest)
+	activity.GET("/query", authenticator, paymentService.HandleGetRequest)
+	activity.GET("/", authenticator, paymentService.HandleGetRequest)
 
 	whitelist := v1.Group("/whitelist")
 	whitelist.POST("/email/generate", accountService.HandlePostRequest)
