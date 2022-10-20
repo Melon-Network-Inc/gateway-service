@@ -173,10 +173,6 @@ func (s *Server) SetupRouter() *gin.Engine {
 	notification.GET("/", authenticator, accountService.HandleGetRequest)
 	notification.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
 
-	activity := v1.Group("/activity")
-	activity.GET("/query", authenticator, paymentService.HandleGetRequest)
-	activity.GET("/", authenticator, paymentService.HandleGetRequest)
-
 	whitelist := v1.Group("/whitelist")
 	whitelist.POST("/email/generate", accountService.HandlePostRequest)
 	whitelist.POST("/email/verify", accountService.HandlePostRequest)
@@ -212,6 +208,13 @@ func (s *Server) SetupRouter() *gin.Engine {
 	transaction.GET("/", authenticator, paymentService.HandleGetRequest)
 	transaction.PUT("/:id", authenticator, paymentService.HandleUpdateRequest)
 	transaction.DELETE("/:id", authenticator, paymentService.HandleDeleteRequest)
+
+	activity := v1.Group("/activity")
+	activity.GET("/query", authenticator, paymentService.HandleGetRequest)
+	activity.GET("/", authenticator, paymentService.HandleGetRequest)
+
+	news := v1.Group("/news")
+	news.GET("/query", authenticator, paymentService.HandleGetRequest)
 
 	if !utils.IsProdEnvironment() && swagHandler != nil {
 		s.buildSwagger()
