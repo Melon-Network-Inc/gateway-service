@@ -35,7 +35,36 @@ func PrepareRequest(ctx *gin.Context, client *resty.Client) *resty.Request {
 		req = client.R().
 			SetBody(ctx.Request.Body)
 	}
+
 	return req
+}
+
+func PrepareRequestWithAttachment(ctx *gin.Context, client *resty.Client) (*resty.Request, error) {
+	var req *resty.Request
+	userData, exists := GetUserData(ctx)
+
+	if exists {
+		req = client.R().
+			SetBody(ctx.Request.Body).
+			SetHeaders(userData)
+	} else {
+		req = client.R().
+			SetBody(ctx.Request.Body)
+	}
+
+	// Check if request contains file. If not, skip the multipart form.
+	file, fileHeader, err := ctx.Request.FormFile("file")
+	if err != nil {
+		return req, err
+	}
+	req.SetMultipartField(
+		"file",
+		fileHeader.Filename,
+		ctx.Request.Header.Get("Content-Type"),
+		file,
+	)
+
+	return req, nil
 }
 
 func GetUserData(ctx *gin.Context) (map[string]string, bool) {
