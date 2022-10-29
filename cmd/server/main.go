@@ -20,17 +20,23 @@ import (
 	"github.com/Melon-Network-Inc/gateway-service/pkg/storage"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+
+	libredis "github.com/go-redis/redis/v8"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	limiter "github.com/ulule/limiter/v3"
+	mgin "github.com/ulule/limiter/v3/drivers/middleware/gin"
+	sredis "github.com/ulule/limiter/v3/drivers/store/redis"
 )
 
 var swagHandler gin.HandlerFunc
 
 type Server struct {
-	App          *gin.Engine
-	Storage      storage.Accessor
-	LoadBalancer lb.Accessor
-	logger       log.Logger
+	App                *gin.Engine
+	Storage            storage.Accessor
+	LoadBalancer       lb.Accessor
+	RateLimiterSetting RateLimiterSetting
+	logger             log.Logger
 }
 
 func init() {
@@ -62,11 +68,17 @@ func main() {
 	router := gin.Default()
 	router.Use(log.GinLogger(logger), log.GinRecovery(logger, true))
 
+	rateLimiterSetting, err := CreateRateLimiterSetting()
+	if err != nil {
+		panic(err)
+	}
+
 	s := Server{
-		App:          router,
-		Storage:      cache,
-		LoadBalancer: loadBalancer,
-		logger:       logger,
+		App:                router,
+		Storage:            cache,
+		LoadBalancer:       loadBalancer,
+		RateLimiterSetting: rateLimiterSetting,
+		logger:             logger,
 	}
 	s.SetupRouter()
 
@@ -118,6 +130,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	corsHandler := newCorsHandler()
 
 	s.App.Use(corsHandler)
+	s.App.Use(s.RateLimiterSetting.CreateRateLimiter())
 
 	v1 := s.App.Group("api/v1")
 
@@ -222,6 +235,43 @@ func (s *Server) SetupRouter() *gin.Engine {
 	}
 
 	return s.App
+}
+
+type RateLimiterSetting struct {
+	RateSetting limiter.Rate
+	CacheOption libredis.Options
+	Store       limiter.Store
+}
+
+func (r *RateLimiterSetting) CreateRateLimiter() gin.HandlerFunc {
+	return mgin.NewMiddleware(limiter.New(r.Store, r.RateSetting))
+}
+
+func CreateRateLimiterSetting() (RateLimiterSetting, error) {
+	rate := limiter.Rate{
+		Period: 1 * time.Hour,
+		Limit:  1000,
+	}
+
+	option, err := libredis.ParseURL("redis://localhost:6379/0")
+	if err != nil {
+		return RateLimiterSetting{}, err
+	}
+
+	store, err := sredis.NewStoreWithOptions(libredis.NewClient(option), limiter.StoreOptions{
+		Prefix:   "mw_rate_limit",
+		MaxRetry: 3,
+	})
+	if err != nil {
+		return RateLimiterSetting{}, err
+	}
+
+	setting := RateLimiterSetting{
+		RateSetting: rate,
+		CacheOption: *option,
+		Store:       store,
+	}
+	return setting, nil
 }
 
 func (s *Server) buildSwagger() {

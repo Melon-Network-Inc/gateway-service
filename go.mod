@@ -2,7 +2,12 @@ module github.com/Melon-Network-Inc/gateway-service
 
 go 1.18
 
-require github.com/Melon-Network-Inc/common v1.0.71
+require (
+	github.com/Melon-Network-Inc/common v1.0.84
+	github.com/ulule/limiter/v3 v3.10.0
+)
+
+require github.com/pkg/errors v0.9.1 // indirect
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
@@ -53,6 +58,7 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
+	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
