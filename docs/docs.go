@@ -3963,6 +3963,10 @@ const docTemplate = `{
                 "avatar": {
                     "type": "string"
                 },
+                "bios": {
+                    "type": "string",
+                    "maxLength": 150
+                },
                 "device_info": {
                     "$ref": "#/definitions/api.DeviceInfo"
                 },
@@ -4305,6 +4309,10 @@ const docTemplate = `{
                 "avatar": {
                     "type": "string"
                 },
+                "bios": {
+                    "type": "string",
+                    "maxLength": 150
+                },
                 "email": {
                     "type": "string"
                 },
@@ -4336,6 +4344,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "avatar": {
+                    "type": "string"
+                },
+                "bios": {
                     "type": "string"
                 },
                 "createdAt": {
