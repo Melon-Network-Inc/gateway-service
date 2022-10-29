@@ -3956,6 +3956,10 @@
                 "avatar": {
                     "type": "string"
                 },
+                "bios": {
+                    "type": "string",
+                    "maxLength": 150
+                },
                 "device_info": {
                     "$ref": "#/definitions/api.DeviceInfo"
                 },
@@ -4298,6 +4302,10 @@
                 "avatar": {
                     "type": "string"
                 },
+                "bios": {
+                    "type": "string",
+                    "maxLength": 150
+                },
                 "email": {
                     "type": "string"
                 },
@@ -4329,6 +4337,9 @@
                     "type": "string"
                 },
                 "avatar": {
+                    "type": "string"
+                },
+                "bios": {
                     "type": "string"
                 },
                 "createdAt": {
