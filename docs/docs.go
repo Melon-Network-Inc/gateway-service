@@ -3964,8 +3964,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "bios": {
-                    "type": "string",
-                    "maxLength": 150
+                    "type": "string"
                 },
                 "device_info": {
                     "$ref": "#/definitions/api.DeviceInfo"
@@ -4310,8 +4309,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "bios": {
-                    "type": "string",
-                    "maxLength": 150
+                    "type": "string"
                 },
                 "email": {
                     "type": "string"
@@ -4321,8 +4319,7 @@ const docTemplate = `{
                 },
                 "username": {
                     "type": "string",
-                    "maxLength": 30,
-                    "minLength": 2
+                    "maxLength": 30
                 }
             }
         },
