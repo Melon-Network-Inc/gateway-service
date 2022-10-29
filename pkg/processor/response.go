@@ -12,10 +12,15 @@ func HandleResponse(ctx *gin.Context, resp *resty.Response, err error, logger lo
 		HandleServiceUnavailable(ctx, err, logger)
 		return
 	}
-	ctx.Data(resp.StatusCode(), "application/json", resp.Body())
+	ctx.Data(resp.StatusCode(), resp.Header().Get("Content-Type"), resp.Body())
 }
 
 func HandleServiceUnavailable(ctx *gin.Context, err error, logger log.Logger) {
 	logger.Errorf("unable to connect to backend service: ", err)
 	ctx.Status(http.StatusServiceUnavailable)
+}
+
+func HandleFileAttachmentNotFound(ctx *gin.Context, err error, logger log.Logger) {
+	logger.Errorf("unable to fetch file attachment: ", err)
+	ctx.Status(http.StatusBadRequest)
 }
