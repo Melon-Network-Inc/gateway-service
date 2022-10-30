@@ -1,6 +1,7 @@
 package processor
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/Melon-Network-Inc/common/pkg/entity"
@@ -55,7 +56,7 @@ func PrepareRequestWithAttachment(ctx *gin.Context, client *resty.Client) (*rest
 	// Check if request contains file. If not, skip the multipart form.
 	file, fileHeader, err := ctx.Request.FormFile("file")
 	if err != nil {
-		return req, err
+		return req, errors.New(fmt.Sprintf("%s-%s-%s", file, fileHeader.Filename, err))
 	}
 	req.SetMultipartField(
 		"file",
