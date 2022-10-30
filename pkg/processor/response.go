@@ -22,5 +22,5 @@ func HandleServiceUnavailable(ctx *gin.Context, err error, logger log.Logger) {
 
 func HandleFileAttachmentNotFound(ctx *gin.Context, err error, logger log.Logger) {
 	logger.Errorf("unable to fetch file attachment: ", err)
-	ctx.Status(http.StatusBadRequest)
+	ctx.String(http.StatusBadRequest, "unable to fetch file attachment: ", err)
 }
