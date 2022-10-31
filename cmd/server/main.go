@@ -171,7 +171,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 
 	account := v1.Group("/account")
 	account.POST("/uploadProfile", authenticator, accountService.HandlePostRequestWithAttachment)
-	account.POST("/downloadProfile/:id", authenticator, accountService.HandleGetRequest)
+	account.GET("/downloadProfile/:id", authenticator, accountService.HandleGetRequest)
 	account.POST("/", forwarder, accountService.HandlePostRequest)
 	account.GET("/:id", authenticator, accountService.HandleGetRequest)
 	account.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
