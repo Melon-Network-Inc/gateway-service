@@ -4611,6 +4611,9 @@ const docTemplate = `{
                 "user_id"
             ],
             "properties": {
+                "actor_id": {
+                    "type": "integer"
+                },
                 "actor_type": {
                     "type": "integer"
                 },
