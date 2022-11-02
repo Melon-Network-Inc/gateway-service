@@ -3976,6 +3976,10 @@ const docTemplate = `{
                 "device_info": {
                     "$ref": "#/definitions/api.DeviceInfo"
                 },
+                "display_name": {
+                    "type": "string",
+                    "maxLength": 50
+                },
                 "email": {
                     "type": "string"
                 },
@@ -4364,6 +4368,9 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/entity.Device"
                     }
+                },
+                "display_name": {
+                    "type": "string"
                 },
                 "email": {
                     "type": "string"
