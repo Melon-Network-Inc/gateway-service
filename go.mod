@@ -3,7 +3,7 @@ module github.com/Melon-Network-Inc/gateway-service
 go 1.18
 
 require (
-	github.com/Melon-Network-Inc/common v1.0.84
+	github.com/Melon-Network-Inc/common v1.0.99
 	github.com/ulule/limiter/v3 v3.10.0
 )
 
