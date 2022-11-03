@@ -179,6 +179,8 @@ func (s *Server) SetupRouter() *gin.Engine {
 	account.PUT("/security/:id", authenticator, accountService.HandleUpdateRequest)
 	account.PUT("/activate", authenticator, accountService.HandleUpdateRequest)
 	account.PUT("/deactivate", authenticator, accountService.HandleUpdateRequest)
+	account.POST("/addBackup", authenticator, accountService.HandlePostRequest)
+	account.POST("/restoreBackup", authenticator, accountService.HandlePostRequest)
 
 	search := v1.Group("/search")
 	search.GET("/user/:keyword", authenticator, accountService.HandleGetRequest)

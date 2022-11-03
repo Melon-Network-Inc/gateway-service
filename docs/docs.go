@@ -335,6 +335,68 @@ const docTemplate = `{
                 }
             }
         },
+        "/account/addBackup": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add cloud backup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Add cloud backup",
+                "operationId": "add-cloud-backup",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Add Cloud Backup Request",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AddCloudBackupRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.AddCloudBackupResponse"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "/account/deactivate": {
             "put": {
                 "security": [
@@ -440,6 +502,68 @@ const docTemplate = `{
                             "items": {
                                 "type": "integer"
                             }
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/account/restoreBackup": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Restore cloud backup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Restore cloud backup",
+                "operationId": "restore-cloud-backup",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Restore Cloud Backup Request",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RestoreCloudBackupRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RestoreCloudBackupResponse"
                         }
                     },
                     "400": {
@@ -3913,6 +4037,34 @@ const docTemplate = `{
                 }
             }
         },
+        "api.AddCloudBackupRequest": {
+            "type": "object",
+            "required": [
+                "passcode",
+                "user_id"
+            ],
+            "properties": {
+                "passcode": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                }
+            }
+        },
+        "api.AddCloudBackupResponse": {
+            "type": "object",
+            "properties": {
+                "last_access": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                }
+            }
+        },
         "api.AddFriendRequest": {
             "type": "object",
             "required": [
@@ -4256,6 +4408,34 @@ const docTemplate = `{
                 }
             }
         },
+        "api.RestoreCloudBackupRequest": {
+            "type": "object",
+            "required": [
+                "passcode",
+                "user_id"
+            ],
+            "properties": {
+                "passcode": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                }
+            }
+        },
+        "api.RestoreCloudBackupResponse": {
+            "type": "object",
+            "properties": {
+                "last_access": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                }
+            }
+        },
         "api.RevokeInviteCodeResponse": {
             "type": "object",
             "properties": {
@@ -4356,6 +4536,9 @@ const docTemplate = `{
                 },
                 "bios": {
                     "type": "string"
+                },
+                "cloud_backup": {
+                    "$ref": "#/definitions/entity.CloudBackup"
                 },
                 "createdAt": {
                     "type": "string"
@@ -4513,6 +4696,39 @@ const docTemplate = `{
                 },
                 "updatedAt": {
                     "type": "string"
+                }
+            }
+        },
+        "entity.CloudBackup": {
+            "type": "object",
+            "required": [
+                "passcode",
+                "secret"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_access_time": {
+                    "type": "string"
+                },
+                "passcode": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_ref": {
+                    "type": "integer"
                 }
             }
         },
