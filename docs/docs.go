@@ -2880,7 +2880,7 @@ const docTemplate = `{
             }
         },
         "/setting/socialMedia/link": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "ApiKeyAuth": []
