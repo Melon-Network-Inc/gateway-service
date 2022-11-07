@@ -215,7 +215,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	setting := v1.Group("/setting")
 	device := setting.Group("/device")
 	device.GET("/", authenticator, accountService.HandleGetRequest)
-	social := setting.Group("/social")
+	social := setting.Group("/socialMedia")
 	social.POST("/link", authenticator, accountService.HandlePostRequest)
 	social.DELETE("/link", authenticator, accountService.HandleDeleteRequest)
 

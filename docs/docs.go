@@ -2879,7 +2879,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/setting/link": {
+        "/setting/socialMedia/link": {
             "get": {
                 "security": [
                     {
