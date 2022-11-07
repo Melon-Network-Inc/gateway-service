@@ -2879,6 +2879,116 @@ const docTemplate = `{
                 }
             }
         },
+        "/setting/link": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add linked social media accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "Add linked social media accounts",
+                "operationId": "add-linked-social-media",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "The linked social media metadata includes platform and username",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AddLinkedSocialMedia"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.SocialMedia"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Remove linked social media accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "Remove linked social media accounts",
+                "operationId": "remove-linked-social-media",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "The linked social media platform name",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RemoveLinkedSocialMedia"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.SocialMedia"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/whitelist": {
             "get": {
                 "security": [
@@ -4081,6 +4191,17 @@ const docTemplate = `{
                 }
             }
         },
+        "api.AddLinkedSocialMedia": {
+            "type": "object",
+            "properties": {
+                "social_media": {
+                    "type": "string"
+                },
+                "social_media_username": {
+                    "type": "string"
+                }
+            }
+        },
         "api.AddressResponse": {
             "type": "object",
             "properties": {
@@ -4214,14 +4335,14 @@ const docTemplate = `{
         "api.FriendRequestResponse": {
             "type": "object",
             "properties": {
-                "createdAt": {
-                    "type": "string"
-                },
                 "creator_ref": {
                     "type": "integer"
                 },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
+                "creator_username": {
+                    "type": "string"
+                },
+                "creatr_url": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -4229,10 +4350,13 @@ const docTemplate = `{
                 "receiver_ref": {
                     "type": "integer"
                 },
-                "status": {
+                "receiver_url": {
                     "type": "string"
                 },
-                "updatedAt": {
+                "receiver_username": {
+                    "type": "string"
+                },
+                "status": {
                     "type": "string"
                 }
             }
@@ -4408,6 +4532,14 @@ const docTemplate = `{
                 }
             }
         },
+        "api.RemoveLinkedSocialMedia": {
+            "type": "object",
+            "properties": {
+                "social_media": {
+                    "type": "string"
+                }
+            }
+        },
         "api.RestoreCloudBackupRequest": {
             "type": "object",
             "required": [
@@ -4578,6 +4710,12 @@ const docTemplate = `{
                 },
                 "refresh_token": {
                     "type": "string"
+                },
+                "social_media": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.SocialMedia"
+                    }
                 },
                 "token_type": {
                     "type": "string"
@@ -4868,6 +5006,32 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SocialMedia": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "social_media": {
+                    "type": "string"
+                },
+                "social_media_username": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_ref": {
                     "type": "integer"
                 }
             }
