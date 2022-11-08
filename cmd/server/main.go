@@ -173,6 +173,7 @@ func (s *Server) SetupRouter() *gin.Engine {
 	account.POST("/uploadProfile", authenticator, accountService.HandlePostRequestWithAttachment)
 	account.GET("/downloadProfile/:id", authenticator, accountService.HandleGetRequest)
 	account.POST("/", forwarder, accountService.HandlePostRequest)
+	account.GET("/self", authenticator, accountService.HandleGetRequest)
 	account.GET("/:id", authenticator, accountService.HandleGetRequest)
 	account.PUT("/:id", authenticator, accountService.HandleUpdateRequest)
 	account.DELETE("/:id", authenticator, accountService.HandleDeleteRequest)
@@ -218,6 +219,8 @@ func (s *Server) SetupRouter() *gin.Engine {
 	social := setting.Group("/socialMedia")
 	social.POST("/link", authenticator, accountService.HandlePostRequest)
 	social.DELETE("/link", authenticator, accountService.HandleDeleteRequest)
+	social.GET("/link/:platform", authenticator, accountService.HandleGetRequest)
+	social.GET("/link/list", authenticator, accountService.HandleGetRequest)
 
 	// Handle by Payment Service
 	transaction := v1.Group("/transaction")
