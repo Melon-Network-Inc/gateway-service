@@ -143,6 +143,8 @@ func (s *Server) SetupRouter() *gin.Engine {
 	auth.POST("/revoke", authenticator, accountService.HandlePostRequest)
 	auth.POST("/login", accountService.HandlePostRequest)
 	auth.POST("/logout", authenticator, accountService.HandlePostRequest)
+	auth.GET("/forgetPassword/:email", accountService.HandleGetRequest)
+	auth.POST("/resetPassword", accountService.HandlePostRequest)
 
 	address := v1.Group("/address")
 	address.POST("/", authenticator, accountService.HandlePostRequest)
