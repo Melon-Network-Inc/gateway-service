@@ -1243,6 +1243,57 @@ const docTemplate = `{
                 }
             }
         },
+        "/auth/forgetPassword/:email": {
+            "get": {
+                "description": "Forget password API sends a password reset link to user email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Forget password",
+                "operationId": "forget-password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Request email address for password reset",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reset password link has been sent to request email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "invalid email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "target resource is not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/auth/login": {
             "post": {
                 "description": "Login an account",
@@ -1402,6 +1453,72 @@ const docTemplate = `{
                 }
             }
         },
+        "/auth/resetPassword": {
+            "post": {
+                "description": "Reset password API resets user password by using the password reset token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Reset password",
+                "operationId": "reset-password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The password reset code allows user to reset password",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Reset user password API request contains the new password and its confirmed password",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ResetUserPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reset password successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "422": {
+                        "description": "reset password code is used or expired",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/auth/revoke": {
             "post": {
                 "description": "Revoke token",
@@ -1480,57 +1597,6 @@ const docTemplate = `{
                     },
                     "409": {
                         "description": "Conflict"
-                    }
-                }
-            }
-        },
-        "/forgetPassword/:email": {
-            "get": {
-                "description": "Forget password API sends a password reset link to user email",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "auth"
-                ],
-                "summary": "Forget password",
-                "operationId": "forget-password",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Request email address for password reset",
-                        "name": "email",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "reset password link has been sent to request email",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "invalid email",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "target resource is not found",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "server error",
-                        "schema": {
-                            "type": "string"
-                        }
                     }
                 }
             }
@@ -2938,72 +3004,6 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Internal Server Error"
-                    }
-                }
-            }
-        },
-        "/resetPassword": {
-            "post": {
-                "description": "Reset password API resets user password by using the password reset token",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "auth"
-                ],
-                "summary": "Reset password",
-                "operationId": "reset-password",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "The password reset code allows user to reset password",
-                        "name": "code",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "description": "Reset user password API request contains the new password and its confirmed password",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/api.ResetUserPasswordRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "reset password successfully",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "422": {
-                        "description": "reset password code is used or expired",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
                     }
                 }
             }
