@@ -1,34 +1,42 @@
 name: token-config
-version: v1.20221102.1
+version: v1.20221121.1
 prod:
   secret: NPl6iLAa1rqBbDLdhZRCAc9dU0gQzzAZr12WObz6uNsjjVV7uo
   alternate_secret: c58WLI3BDpxL9T5mxIjTtUIxbrnqSwAg
+  reset_password_secret: d7cLahBLLPpEHYafwZ32Qu9zKhR6g1Lc
   auth_token_period: 24
   refresh_token_period: 24
   registration_period: 30
   whitelist_period: 20
+  reset_password_period: 30
   email_verification_period: 10
 staging:
   secret: secret
   alternate_secret: K4SICmxG6MSVdL3wGYuqAbVJdTT6em43
+  reset_password_secret: md4OsgY4xCYOztv06hQOf7nMWhkvqDyN
   auth_token_period: 24
   refresh_token_period: 168
   registration_period: 30
   whitelist_period: 20
+  reset_password_period: 30
   email_verification_period: 10
 dev:
   secret: secret
   alternate_secret: alternate_secret
+  reset_password_secret: 6sMJGAW7hbKm9Wn8z8WX8bgm6San0Kuc
   auth_token_period: 24
   refresh_token_period: 168
   registration_period: 20
   whitelist_period: 20
+  reset_password_period: 30
   email_verification_period: 10
 test:
   secret: secret
   alternate_secret: alternate_secret
+  reset_password_secret: 6sMJGAW7hbKm9Wn8z8WX8bgm6San0Kuc
   auth_token_period: 24
   refresh_token_period: 168
   registration_period: 20
   whitelist_period: 20
+  reset_password_period: 30
   email_verification_period: 10

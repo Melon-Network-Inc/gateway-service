@@ -1477,6 +1477,57 @@
                 }
             }
         },
+        "/forgetPassword/:email": {
+            "get": {
+                "description": "Forget password API sends a password reset link to user email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Forget password",
+                "operationId": "forget-password",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Request email address for password reset",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reset password link has been sent to request email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "invalid email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "target resource is not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/friend/:id": {
             "delete": {
                 "security": [
@@ -2708,6 +2759,66 @@
                 }
             }
         },
+        "/request/follow": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Follow friend",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Follow friend",
+                "operationId": "follow-friend",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Other User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.FollowResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/request/query": {
             "get": {
                 "security": [
@@ -2820,6 +2931,66 @@
                     },
                     "500": {
                         "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/resetPassword": {
+            "post": {
+                "description": "Reset password API resets user password by using the password reset token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Reset password",
+                "operationId": "reset-password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The password reset code allows user to reset password",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Reset user password API request contains the new password and its confirmed password",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ResetUserPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reset password successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -4470,6 +4641,20 @@
                 }
             }
         },
+        "api.FollowResponse": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
         "api.FriendRequestResponse": {
             "type": "object",
             "properties": {
@@ -4678,6 +4863,23 @@
                 }
             }
         },
+        "api.ResetUserPasswordRequest": {
+            "type": "object",
+            "required": [
+                "confirm_password",
+                "password"
+            ],
+            "properties": {
+                "confirm_password": {
+                    "type": "string",
+                    "minLength": 8
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8
+                }
+            }
+        },
         "api.RestoreCloudBackupRequest": {
             "type": "object",
             "required": [
@@ -4830,6 +5032,9 @@
                 },
                 "expires": {
                     "type": "integer"
+                },
+                "friend_status": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
