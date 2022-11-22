@@ -1500,7 +1500,7 @@ const docTemplate = `{
                 "operationId": "forget-password",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Request email address for password reset",
                         "name": "email",
                         "in": "path",
@@ -2989,6 +2989,12 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "422": {
+                        "description": "reset password code is used or expired",
                         "schema": {
                             "type": "string"
                         }
