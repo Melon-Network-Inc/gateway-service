@@ -2974,7 +2974,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "FriendRequest ID",
+                        "description": "User ID",
                         "name": "id",
                         "in": "path",
                         "required": true
