@@ -4465,10 +4465,14 @@
         "api.AddCloudBackupRequest": {
             "type": "object",
             "required": [
+                "backup_name",
                 "passcode",
                 "user_id"
             ],
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "passcode": {
                     "type": "string"
                 },
@@ -4482,6 +4486,9 @@
         "api.AddCloudBackupResponse": {
             "type": "object",
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "last_access": {
                     "type": "string"
                 },
@@ -4889,10 +4896,14 @@
         "api.RestoreCloudBackupRequest": {
             "type": "object",
             "required": [
+                "backup_name",
                 "passcode",
                 "user_id"
             ],
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "passcode": {
                     "type": "string"
                 },
@@ -4906,6 +4917,9 @@
         "api.RestoreCloudBackupResponse": {
             "type": "object",
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "last_access": {
                     "type": "string"
                 },
@@ -5015,8 +5029,11 @@
                 "bios": {
                     "type": "string"
                 },
-                "cloud_backup": {
-                    "$ref": "#/definitions/entity.CloudBackup"
+                "cloud_backups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.CloudBackup"
+                    }
                 },
                 "createdAt": {
                     "type": "string"
@@ -5189,6 +5206,7 @@
         "entity.CloudBackup": {
             "type": "object",
             "required": [
+                "name",
                 "passcode",
                 "secret"
             ],
@@ -5203,6 +5221,9 @@
                     "type": "integer"
                 },
                 "last_access_time": {
+                    "type": "string"
+                },
+                "name": {
                     "type": "string"
                 },
                 "passcode": {

@@ -4472,10 +4472,14 @@ const docTemplate = `{
         "api.AddCloudBackupRequest": {
             "type": "object",
             "required": [
+                "backup_name",
                 "passcode",
                 "user_id"
             ],
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "passcode": {
                     "type": "string"
                 },
@@ -4489,6 +4493,9 @@ const docTemplate = `{
         "api.AddCloudBackupResponse": {
             "type": "object",
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "last_access": {
                     "type": "string"
                 },
@@ -4896,10 +4903,14 @@ const docTemplate = `{
         "api.RestoreCloudBackupRequest": {
             "type": "object",
             "required": [
+                "backup_name",
                 "passcode",
                 "user_id"
             ],
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "passcode": {
                     "type": "string"
                 },
@@ -4913,6 +4924,9 @@ const docTemplate = `{
         "api.RestoreCloudBackupResponse": {
             "type": "object",
             "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
                 "last_access": {
                     "type": "string"
                 },
@@ -5022,8 +5036,11 @@ const docTemplate = `{
                 "bios": {
                     "type": "string"
                 },
-                "cloud_backup": {
-                    "$ref": "#/definitions/entity.CloudBackup"
+                "cloud_backups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.CloudBackup"
+                    }
                 },
                 "createdAt": {
                     "type": "string"
@@ -5196,6 +5213,7 @@ const docTemplate = `{
         "entity.CloudBackup": {
             "type": "object",
             "required": [
+                "name",
                 "passcode",
                 "secret"
             ],
@@ -5210,6 +5228,9 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "last_access_time": {
+                    "type": "string"
+                },
+                "name": {
                     "type": "string"
                 },
                 "passcode": {
