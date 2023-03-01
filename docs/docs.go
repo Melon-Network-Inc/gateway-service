@@ -8,7 +8,7 @@ const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
     "swagger": "2.0",
     "info": {
-        "description": "This is backend server for Melon Wallet..",
+        "description": "This is backend server for Melon Wallet.",
         "title": "Melon Wallet Service API",
         "contact": {
             "name": "API Support",

@@ -293,7 +293,7 @@ func (s *Server) buildSwagger() {
 	if utils.IsProdEnvironment() {
 		docs.SwaggerInfo.Host = "prod.melonnetwork.io:8080"
 	} else if utils.IsStagingEnvironment() {
-		docs.SwaggerInfo.Host = "staging.melonnetwork.io:8080"
+		docs.SwaggerInfo.Host = "staging.melonnetwork.io"
 	} else {
 		docs.SwaggerInfo.Host = "localhost:8080"
 	}
