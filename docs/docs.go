@@ -2073,11 +2073,6 @@ const docTemplate = `{
         },
         "/referral/accept": {
             "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
                 "description": "Accept a referral code",
                 "consumes": [
                     "application/json"
@@ -2091,13 +2086,6 @@ const docTemplate = `{
                 "summary": "Accept a referral code",
                 "operationId": "accept-referral",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
                     {
                         "description": "Referral Code Data",
                         "name": "accept_invite_request",
