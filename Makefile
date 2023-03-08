@@ -36,7 +36,7 @@ gazelle: ## run gazelle to add bazel to each directory
 dependency: ## update all bazel file with necessary dependency
 	go get -u github.com/Melon-Network-Inc/common
 	go mod tidy
-	bazel run //:gazelle -- update-repos -from_file=go.mod -to_macro=deps.bzl%go_dependencies
+	bazel run //:gazelle -- update-repos -from_file=go.mod  -prune=true -build_file_proto_mode=disable_global -to_macro=deps.bzl%go_repositories
 
 .PHONE: doc
 doc: ## update swagger document

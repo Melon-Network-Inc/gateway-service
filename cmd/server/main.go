@@ -145,6 +145,8 @@ func (s *Server) SetupRouter() *gin.Engine {
 	auth.POST("/logout", authenticator, accountService.HandlePostRequest)
 	auth.GET("/forgetPassword/:email", accountService.HandleGetRequest)
 	auth.POST("/resetPassword", accountService.HandlePostRequest)
+	auth.GET("/google/login", accountService.HandleGetRequest)
+	auth.GET("/google/callback", accountService.HandleGetRequest)
 
 	address := v1.Group("/address")
 	address.POST("/", authenticator, accountService.HandlePostRequest)
