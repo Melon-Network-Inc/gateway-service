@@ -20,5687 +20,5698 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/whitelist/email/{email}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.WhitelistUserInfo"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Get whitelist user records by email", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "Email Address", 
-                        "name": "email"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "Get whitelist user records by email", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-record-by-email"
-            }
-        }, 
-        "/news/query": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/entity.News"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query news by page", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "news"
-                ], 
-                "summary": "Query news by page", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-news"
-            }
-        }, 
-        "/account/restoreBackup": {
+        "/account": {
             "post": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.RestoreCloudBackupResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Restore cloud backup", 
-                "parameters": [
+                "security": [
                     {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.RestoreCloudBackupRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Restore Cloud Backup Request", 
-                        "name": "user"
+                        "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "Create a user resource",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
-                ], 
+                ],
                 "tags": [
                     "users"
-                ], 
-                "summary": "Restore cloud backup", 
-                "security": [
+                ],
+                "summary": "Create a user resource",
+                "operationId": "create-user",
+                "parameters": [
                     {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "restore-cloud-backup"
-            }
-        }, 
-        "/referral/{id}": {
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
+                        "type": "string",
+                        "description": "RegistrationSession",
+                        "name": "RegistrationSession",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Create user request contains username, password and etc.",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
                         "schema": {
-                            "$ref": "#/definitions/api.DeleteInvitationResponse"
+                            "$ref": "#/definitions/api.CreateUserRequest"
                         }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
                     "400": {
                         "description": "Bad Request"
-                    }
-                }, 
-                "description": "Delete a referral code", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Referral Code ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Delete a referral code", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "delete-referral"
-            }, 
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.RevokeInviteCodeResponse"
-                        }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
+                    },
                     "401": {
                         "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Get the referral code status", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Referral Code ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Get the referral code status", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-referral-status"
-            }
-        }, 
-        "/auth/google/login": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "redirect to google oauth login page", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Login with Google OAuth", 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Login with Google OAuth", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "google-oauth-login"
-            }
-        }, 
-        "/setting/socialMedia/link": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/entity.SocialMedia"
-                        }
-                    }, 
+                    },
                     "404": {
                         "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }, 
-                "description": "Add linked social media accounts", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddLinkedSocialMedia"
-                        }, 
-                        "in": "body", 
-                        "description": "The linked social media metadata includes platform and username", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "settings"
-                ], 
-                "summary": "Add linked social media accounts", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "add-linked-social-media"
-            }, 
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/entity.SocialMedia"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }, 
-                "description": "Remove linked social media accounts", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.RemoveLinkedSocialMedia"
-                        }, 
-                        "in": "body", 
-                        "description": "The linked social media platform name", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "settings"
-                ], 
-                "summary": "Remove linked social media accounts", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "remove-linked-social-media"
-            }, 
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/entity.SocialMedia"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }, 
-                "description": "List linked social media accounts", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "settings"
-                ], 
-                "summary": "List linked social media accounts", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-linked-social-media"
-            }
-        }, 
-        "/auth/email/generate": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "Email verification was sent to user email", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
+                    },
                     "409": {
                         "description": "Conflict"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Generate email verification passcode and send passcode to user email", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.GenerateEmailPasscodeRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Email", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Generate email verification passcode", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "email-generate"
-            }
-        }, 
-        "/friend/query": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.FriendRequestResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
                     "500": {
                         "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
                     }
-                }, 
-                "description": "Query friends of requester", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "friends"
-                ], 
-                "summary": "Query friends of requester", 
+                }
+            }
+        },
+        "/account/activate": {
+            "put": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "Activate a user resource",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "query-friends"
-            }
-        }, 
-        "/auth/refresh": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.RefreshTokenResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Refresh access token", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.RefreshTokenRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Client refresh token", 
-                        "name": "request"
-                    }
-                ], 
+                ],
                 "produces": [
                     "application/json"
-                ], 
+                ],
                 "tags": [
-                    "auth"
-                ], 
-                "summary": "Refresh access token", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "refresh-access-token"
-            }
-        }, 
-        "/account/addBackup": {
-            "post": {
+                    "users"
+                ],
+                "summary": "Activate a user resource",
+                "operationId": "activate-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Update user status request metadata",
+                        "name": "UpdateUserStatusRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateUserStatusRequest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/account/addBackup": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add cloud backup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Add cloud backup",
+                "operationId": "add-cloud-backup",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Add cloud backup request contains user identifier and passcode",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AddCloudBackupRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.AddCloudBackupResponse"
                         }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
                     "403": {
                         "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Add cloud backup", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddCloudBackupRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Add cloud backup request contains user identifier and passcode", 
-                        "name": "user"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Add cloud backup", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "add-cloud-backup"
-            }
-        }, 
-        "/referral/acceptor": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.GetInvitationResponse"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }, 
-                "description": "View referral status by acceptor", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "View referral status by acceptor", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "view-referral-status-by-acceptor"
-            }
-        }, 
-        "/friend/{id}": {
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }, 
+                    },
                     "404": {
                         "description": "Not Found"
-                    }, 
+                    },
                     "500": {
                         "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
                     }
-                }, 
-                "description": "Remove a friend by ID", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "friends"
-                ], 
-                "summary": "Remove a friend by ID", 
+                }
+            }
+        },
+        "/account/deactivate": {
+            "put": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "Deactivate a user resource",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "delete-friend"
-            }
-        }, 
-        "/account": {
-            "post": {
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Deactivate a user resource",
+                "operationId": "deactivate-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Update user status request metadata",
+                        "name": "UpdateUserStatusRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateUserStatusRequest"
+                        }
+                    }
+                ],
                 "responses": {
-                    "201": {
-                        "description": "Created", 
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.UserResponse"
                         }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
+                    },
                     "400": {
                         "description": "Bad Request"
-                    }, 
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    }, 
-                    "409": {
-                        "description": "Conflict"
-                    }
-                }, 
-                "description": "Create a user resource", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "RegistrationSession", 
-                        "name": "RegistrationSession"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.CreateUserRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Create user request contains username, password and etc.", 
-                        "name": "user"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Create a user resource", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "create-user"
-            }
-        }, 
-        "/referral/list": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.ListInvitationResponse"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
+                    },
                     "401": {
                         "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
-                }, 
-                "description": "List all invite codes of a user", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "List all invite codes of a user", 
+                }
+            }
+        },
+        "/account/downloadProfile": {
+            "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "Download user profile picture",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "list-invitations"
-            }
-        }, 
-        "/auth/email/verify": {
-            "post": {
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Download user profile picture",
+                "operationId": "download-profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/account/restoreBackup": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Restore cloud backup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Restore cloud backup",
+                "operationId": "restore-cloud-backup",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Restore Cloud Backup Request",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RestoreCloudBackupRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RestoreCloudBackupResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/account/security/{id}": {
+            "put": {
+                "description": "Update the password for a user resource",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update the password for a user resource",
+                "operationId": "update-password",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "UserID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update password request metadata",
+                        "name": "UpdateUserPasswordRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateUserPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/account/self": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get self user resource",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get self user resource",
+                "operationId": "get-self",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/account/uploadProfile": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Upload user profile picture",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Upload user profile picture",
+                "operationId": "upload-profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "image url",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/account/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a user resource",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get a user resource",
+                "operationId": "get-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update a user resource",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update a user resource",
+                "operationId": "update-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "User Update Data",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateUserRequest"
+                        }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "UserID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete a user resource by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete a user resource by ID",
+                "operationId": "delete-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "UserID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Refresh token to be invalidated",
+                        "name": "RefreshToken",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/address": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List addresses of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "List addresses of an account",
+                "operationId": "list-addresses",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.AddressesResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add an address to account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Add an address to account",
+                "operationId": "add-address",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Address Data",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AddAddressRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.AddressResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/address/query": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query addresses of an account by pages",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Query addresses of an account by pages",
+                "operationId": "query-addresses-by-page",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.AddressesResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/address/recipient/:id": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get addresses of a recipient",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Get addresses of a recipient",
+                "operationId": "get-addresses-of-recipient",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID of recipient",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.AddressResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/address/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get an address",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Get an address",
+                "operationId": "get-address",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Address ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.AddressResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update an addresses",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Update an address",
+                "operationId": "update-address",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Address ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Address Data",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateAddressRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.AddressResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete an addresses by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "addresses"
+                ],
+                "summary": "Delete an address by ID",
+                "operationId": "delete-address",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Address ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.AddressResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/auth/email/generate": {
+            "post": {
+                "description": "Generate email verification passcode and send passcode to user email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Generate email verification passcode",
+                "operationId": "email-generate",
+                "parameters": [
+                    {
+                        "description": "Email",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.GenerateEmailPasscodeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Email verification was sent to user email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/auth/email/verify": {
+            "post": {
+                "description": "Verify email passcode",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Verify email passcode",
+                "operationId": "email-verify",
+                "parameters": [
+                    {
+                        "description": "Passcode",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.VerifyEmailPasscodeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.RegistrationSessionResponse"
                         }
-                    }, 
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
                     "404": {
                         "description": "Not Found"
-                    }, 
+                    },
                     "422": {
                         "description": "Unprocessable Entity"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Verify email passcode", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.VerifyEmailPasscodeRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Passcode", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Verify email passcode", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "email-verify"
-            }
-        }, 
-        "/request/query": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.FriendRequestResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query friend requests of an account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "requests"
-                ], 
-                "summary": "Query friend requests of an account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-friend-request"
-            }
-        }, 
-        "/auth/resetPassword": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "reset password successfully", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "422": {
-                        "description": "reset password code is used or expired", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "400": {
-                        "description": "Bad Request", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }, 
-                "description": "Reset password API resets user password by using the password reset token", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "The password reset code allows user to reset password", 
-                        "name": "code"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.ResetUserPasswordRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Reset user password API request contains the new password and its confirmed password", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Reset password", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "reset-password"
-            }
-        }, 
-        "/account/downloadProfile": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "type": "integer"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Download user profile picture", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Download user profile picture", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "download-profile"
+                }
             }
-        }, 
-        "/activity": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.ActivityResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "List activities of an account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "activities"
-                ], 
-                "summary": "List activities of an account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-activities"
-            }
-        }, 
-        "/transaction/query/{id}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.TransactionResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query requester's transactions by page", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "transactions"
-                ], 
-                "summary": "Query requester's transactions by page", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-transactions"
-            }
-        }, 
-        "/request/confirm/{id}": {
-            "put": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.FriendRequestResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "409": {
-                        "description": "Conflict"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Confirm a friend request by ID", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Notification ID", 
-                        "name": "friend_status_request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "requests"
-                ], 
-                "summary": "Confirm a friend request by ID", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "confirm-friend-request"
-            }
-        }, 
-        "/setting/device": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.ListDevicesResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }, 
-                "description": "List devices", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "settings"
-                ], 
-                "summary": "List devices", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-devices"
-            }
-        }, 
-        "/address/{id}": {
-            "put": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddressResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Update an addresses", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Address ID", 
-                        "name": "id"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateAddressRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Address Data", 
-                        "name": "address"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "addresses"
-                ], 
-                "summary": "Update an address", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "update-address"
-            }, 
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddressResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Delete an addresses by ID", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Address ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "addresses"
-                ], 
-                "summary": "Delete an address by ID", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "delete-address"
-            }, 
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddressResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Get an address", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Address ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "addresses"
-                ], 
-                "summary": "Get an address", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-address"
-            }
-        }, 
-        "/transaction/user/{id}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.TransactionResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "List all transactions of an account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "transactions"
-                ], 
-                "summary": "List all transactions of an account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-transactions-by-user"
-            }
-        }, 
+        },
         "/auth/forgetPassword/{email}": {
             "get": {
-                "responses": {
-                    "200": {
-                        "description": "reset password link has been sent to request email", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "404": {
-                        "description": "target resource is not found", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "500": {
-                        "description": "server error", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "400": {
-                        "description": "invalid email", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }, 
-                "description": "Forget password API sends a password reset link to user email", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "Request email address for password reset", 
-                        "name": "email"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Forget password", 
+                "description": "Forget password API sends a password reset link to user email",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "forget-password"
-            }
-        }, 
-        "/account/deactivate": {
-            "put": {
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Forget password",
+                "operationId": "forget-password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Request email address for password reset",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "reset password link has been sent to request email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "invalid email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "target resource is not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/google/callback": {
+            "get": {
+                "description": "Google OAuth callback",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Google OAuth callback",
+                "operationId": "google-oauth-callback",
+                "responses": {
+                    "200": {
+                        "description": "sign in successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "created new user",
                         "schema": {
                             "$ref": "#/definitions/api.UserResponse"
                         }
-                    }, 
+                    },
                     "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
+                        "description": "user not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Deactivate a user resource", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateUserStatusRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Update user status request metadata", 
-                        "name": "UpdateUserStatusRequest"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Deactivate a user resource", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
+                }
+            }
+        },
+        "/auth/google/login": {
+            "get": {
+                "description": "Login with Google OAuth",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "deactivate-user"
-            }
-        }, 
-        "/address/query": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.AddressesResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query addresses of an account by pages", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }
-                ], 
+                ],
                 "produces": [
                     "application/json"
-                ], 
+                ],
                 "tags": [
-                    "addresses"
-                ], 
-                "summary": "Query addresses of an account by pages", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-addresses-by-page"
-            }
-        }, 
-        "/referral/revoke": {
-            "get": {
+                    "auth"
+                ],
+                "summary": "Login with Google OAuth",
+                "operationId": "google-oauth-login",
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "redirect to google oauth login page",
                         "schema": {
-                            "$ref": "#/definitions/api.RevokeInviteCodeResponse"
+                            "type": "string"
                         }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
+                    },
                     "500": {
                         "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
                     }
-                }, 
-                "description": "Revoke a referral code", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Referral Code ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Revoke a referral code", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "revoke-referral-code"
+                }
             }
-        }, 
-        "/notification/query": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.ListNotificationResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query notifications of an account by pages", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "notifications"
-                ], 
-                "summary": "Query notifications of an account by pages", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-notifications-by-page"
-            }
-        }, 
-        "/friend/query/user/{id}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.UserResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query friend of a user", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "friends"
-                ], 
-                "summary": "Query friend of a user", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-friend-request-of-user"
-            }
-        }, 
+        },
         "/auth/login": {
             "post": {
-                "responses": {
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "202": {
-                        "description": "Accepted", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
-                    }, 
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Login an account", 
+                "description": "Login an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login an account",
+                "operationId": "login",
                 "parameters": [
                     {
-                        "required": true, 
+                        "description": "Login Data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/api.LoginUserRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Login Data", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Login an account", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "login"
-            }
-        }, 
-        "/request/{id}": {
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Drop a friend request by ID", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Notification ID", 
-                        "name": "friend_status_request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "requests"
-                ], 
-                "summary": "Drop a friend request by ID", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "drop-friend-request"
-            }
-        }, 
-        "/account/{id}": {
-            "put": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
                         }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
                     }
-                }, 
-                "description": "Update a user resource", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateUserRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "User Update Data", 
-                        "name": "user"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "UserID"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Update a user resource", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "update-user"
-            }, 
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Delete a user resource by ID", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "UserID"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "Refresh token to be invalidated", 
-                        "name": "RefreshToken"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Delete a user resource by ID", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "delete-user"
-            }, 
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Get a user resource", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Get a user resource", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-user"
-            }
-        }, 
-        "/auth/revoke": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Revoke token", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.RevokeTokenRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Revoke token data", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Revoke token", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "revoke-token"
-            }
-        }, 
-        "/transaction/{id}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.TransactionResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Get a transaction", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Transaction ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "transactions"
-                ], 
-                "summary": "Get a transaction", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-transaction"
-            }
-        }, 
-        "/activity/query": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.Post"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query activities of an account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "activities"
-                ], 
-                "summary": "Query activities of an account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-activities"
-            }
-        }, 
-        "/setting/socialMedia/link/{platform}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/entity.SocialMedia"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }, 
-                "description": "Get linked social media accounts", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "settings"
-                ], 
-                "summary": "Get linked social media accounts", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-linked-social-media"
-            }
-        }, 
-        "/address/recipient/:id": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.AddressResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Get addresses of a recipient", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID of recipient", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "addresses"
-                ], 
-                "summary": "Get addresses of a recipient", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-addresses-of-recipient"
-            }
-        }, 
-        "/referral/count/left": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.GetLeftInvitationNumberResponse"
-                        }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Count rest of the available referral codes", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Count rest of the available referral codes", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "count-left-referral"
-            }
-        }, 
-        "/search/user/{keyword}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.UserResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Search users by keyword", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "Keyword Data", 
-                        "name": "keyword"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "search"
-                ], 
-                "summary": "Search users by keyword", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "search-users"
-            }
-        }, 
-        "/auth/username/validate": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UsernameVerificationResponse"
-                        }
-                    }, 
-                    "409": {
-                        "description": "Conflict"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Validate whether username is unique", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UsernameVerificationRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Email", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Validate whether username is unique", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "username-validate"
-            }
-        }, 
-        "/account/uploadProfile": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "image url", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Upload user profile picture", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Upload user profile picture", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "multipart/form-data"
-                ], 
-                "operationId": "upload-profile"
-            }
-        }, 
-        "/referral/nextAvailable": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.GetNextInviteAvailableTimeResponse"
-                        }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Next invite available time", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.GetNextInviteAvailableTimeRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Timezone information", 
-                        "name": "address"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Next invite available time", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "next-invite-available-time"
-            }
-        }, 
-        "/whitelist/name/{name}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.WhitelistUserInfo"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Get whitelist user records by name", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "Name", 
-                        "name": "email"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "Get whitelist user records by name", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "get-record-by-name"
-            }
-        }, 
-        "/referral/create": {
-            "get": {
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/api.CreateInviteCodeResponse"
-                        }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Create a referral code", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Create a referral code", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "create-referral-code"
-            }
-        }, 
-        "/friend/list": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.FriendRequestResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }, 
-                "description": "List friends of requester", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "friends"
-                ], 
-                "summary": "List friends of requester", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-friends"
-            }
-        }, 
-        "/whitelist/{id}": {
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.WhitelistUserInfo"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Delete a whitelist user record", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Whitelist Record ID", 
-                        "name": "ID"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "Delete a whitelist user record", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "delete-whitelist-user"
-            }
-        }, 
-        "/transaction": {
-            "put": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.TransactionResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Update a transaction", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateTransactionRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Transaction Data", 
-                        "name": "transaction"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "transactions"
-                ], 
-                "summary": "Update a transaction", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "update-transaction"
-            }, 
-            "post": {
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/api.TransactionResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Add a transaction to account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddTransactionRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Transaction Data", 
-                        "name": "transaction"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "transactions"
-                ], 
-                "summary": "Add a transaction to account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "add-transaction"
-            }, 
-            "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.TransactionResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Delete a transaction", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Transaction ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "transactions"
-                ], 
-                "summary": "Delete a transaction", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "delete-transaction"
-            }, 
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.TransactionResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "List all transactions of requester", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "transactions"
-                ], 
-                "summary": "List all transactions of requester", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-transactions"
-            }
-        }, 
-        "/auth/logout": {
-            "post": {
+                ],
                 "responses": {
                     "202": {
-                        "description": "Accepted", 
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Log out an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Log out an account",
+                "operationId": "logout",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Device Information",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.LogoutUserRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Refresh Token to be invalidated",
+                        "name": "refresh_token",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
                         "schema": {
                             "$ref": "#/definitions/api.LogoutUserResponse"
                         }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
+                    },
                     "400": {
                         "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Log out an account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.LogoutUserRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Device Information", 
-                        "name": "request"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "Refresh Token to be invalidated", 
-                        "name": "refresh_token"
-                    }
-                ], 
+                }
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "description": "Refresh access token",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
-                ], 
+                ],
                 "tags": [
                     "auth"
-                ], 
-                "summary": "Log out an account", 
-                "security": [
+                ],
+                "summary": "Refresh access token",
+                "operationId": "refresh-access-token",
+                "parameters": [
                     {
-                        "ApiKeyAuth": []
+                        "description": "Client refresh token",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RefreshTokenRequest"
+                        }
                     }
-                ], 
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RefreshTokenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/auth/resetPassword": {
+            "post": {
+                "description": "Reset password API resets user password by using the password reset token",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "logout"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Reset password",
+                "operationId": "reset-password",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The password reset code allows user to reset password",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Reset user password API request contains the new password and its confirmed password",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.ResetUserPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "reset password successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "422": {
+                        "description": "reset password code is used or expired",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
-        }, 
-        "/account/self": {
+        },
+        "/auth/revoke": {
+            "post": {
+                "description": "Revoke token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Revoke token",
+                "operationId": "revoke-token",
+                "parameters": [
+                    {
+                        "description": "Revoke token data",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RevokeTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/auth/username/validate": {
+            "post": {
+                "description": "Validate whether username is unique",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Validate whether username is unique",
+                "operationId": "username-validate",
+                "parameters": [
+                    {
+                        "description": "Email",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UsernameVerificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.UsernameVerificationResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    }
+                }
+            }
+        },
+        "/friend/list": {
             "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Get self user resource", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Get self user resource", 
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "List friends of requester",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "get-self"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "friends"
+                ],
+                "summary": "List friends of requester",
+                "operationId": "list-friends",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.FriendRequestResponse"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
             }
-        }, 
-        "/notification/{id}": {
+        },
+        "/friend/list/user/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List friend of a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "friends"
+                ],
+                "summary": "List friend of a user",
+                "operationId": "list-friend-request-of-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.UserResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/friend/query": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query friends of requester",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "friends"
+                ],
+                "summary": "Query friends of requester",
+                "operationId": "query-friends",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.FriendRequestResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/friend/query/user/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query friend of a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "friends"
+                ],
+                "summary": "Query friend of a user",
+                "operationId": "query-friend-request-of-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.UserResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/friend/{id}": {
             "delete": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.DeleteNotificationResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Delete notifications", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Notification ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "notifications"
-                ], 
-                "summary": "Delete notification", 
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "Remove a friend by ID",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "delete-notifications"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "friends"
+                ],
+                "summary": "Remove a friend by ID",
+                "operationId": "delete-friend",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
             }
-        }, 
+        },
         "/notification/": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List notifications",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notifications"
+                ],
+                "summary": "List notifications",
+                "operationId": "list-notifications",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.ListNotificationResponse"
                         }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
+                    },
                     "401": {
                         "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
-                }, 
-                "description": "List notifications", 
-                "parameters": [
+                }
+            }
+        },
+        "/notification/query": {
+            "get": {
+                "security": [
                     {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
+                        "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "Query notifications of an account by pages",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
-                ], 
+                ],
                 "tags": [
                     "notifications"
-                ], 
-                "summary": "List notifications", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-notifications"
-            }
-        }, 
-        "/request": {
-            "post": {
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/api.FriendRequestResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "409": {
-                        "description": "Conflict"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Add friendship with another user", 
+                ],
+                "summary": "Query notifications of an account by pages",
+                "operationId": "query-notifications-by-page",
                 "parameters": [
                     {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddFriendRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "FriendRequest Data", 
-                        "name": "friend_request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "requests"
-                ], 
-                "summary": "Add friend", 
-                "security": [
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
                     {
-                        "ApiKeyAuth": []
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
                     }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "add-friend"
-            }, 
-            "get": {
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "OK",
                         "schema": {
+                            "type": "array",
                             "items": {
-                                "$ref": "#/definitions/api.FriendRequestResponse"
-                            }, 
-                            "type": "array"
+                                "$ref": "#/definitions/api.ListNotificationResponse"
+                            }
                         }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
                     "401": {
                         "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "List friend requests of an account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "requests"
-                ], 
-                "summary": "List friend requests of an account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-friend-request"
-            }
-        }, 
-        "/whitelist/email/generate": {
-            "post": {
-                "responses": {
-                    "200": {
-                        "description": "Email verification was sent to user email", 
-                        "schema": {
-                            "type": "string"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "409": {
-                        "description": "Conflict"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Generate email verification passcode and send passcode to user email", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.GenerateEmailPasscodeRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Email", 
-                        "name": "request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "Generate email verification passcode", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "whitelist-email-generate"
-            }
-        }, 
-        "/account/security/{id}": {
-            "put": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
+                    },
                     "403": {
                         "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Update the password for a user resource", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "UserID"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateUserPasswordRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Update password request metadata", 
-                        "name": "UpdateUserPasswordRequest"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Update the password for a user resource", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "update-password"
-            }
-        }, 
-        "/whitelist/phone/{phone}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.WhitelistUserInfo"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
+                    },
                     "404": {
                         "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Get whitelist user records by phone", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "string", 
-                        "description": "Phone Number", 
-                        "name": "phone"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "Get whitelist user records by phone", 
+                }
+            }
+        },
+        "/notification/{id}": {
+            "delete": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
-                ], 
+                ],
+                "description": "Delete notifications",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "get-record-by-phone"
-            }
-        }, 
-        "/referral/count/accept": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.GetAcceptedReferralResponse"
-                        }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Count the accepted referral codes", 
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notifications"
+                ],
+                "summary": "Delete notification",
+                "operationId": "delete-notifications",
                 "parameters": [
                     {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Count the accepted referral codes", 
-                "security": [
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
-                        "ApiKeyAuth": []
+                        "type": "integer",
+                        "description": "Notification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "count-accepted-referral"
-            }
-        }, 
-        "/auth/google/callback": {
-            "get": {
+                ],
                 "responses": {
                     "200": {
-                        "description": "redirect to google oauth login page", 
+                        "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/api.DeleteNotificationResponse"
                         }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Google OAuth callback", 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "auth"
-                ], 
-                "summary": "Google OAuth callback", 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "google-oauth-callback"
-            }
-        }, 
-        "/request/follow": {
-            "post": {
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/api.FollowResponse"
-                        }
-                    }, 
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "description": "Not Found"
-                    }, 
-                    "409": {
-                        "description": "Conflict"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Follow friend", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "Other User ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "requests"
-                ], 
-                "summary": "Follow friend", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "follow-friend"
+                }
             }
-        }, 
-        "/whitelist/query": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.WhitelistUserInfo"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Query all whitelist user records", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page number", 
-                        "name": "page"
-                    }, 
-                    {
-                        "in": "query", 
-                        "type": "string", 
-                        "description": "page size", 
-                        "name": "per_page"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "Query all whitelist user records", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "query-records"
-            }
-        }, 
-        "/request/reject/{id}": {
-            "put": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.FriendRequestResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Reject a friend request by ID", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Notification ID", 
-                        "name": "friend_status_request"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "requests"
-                ], 
-                "summary": "Reject a friend request by ID", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "reject-friend-request"
-            }
-        }, 
-        "/friend/list/user/{id}": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.UserResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "List friend of a user", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "in": "path", 
-                        "type": "integer", 
-                        "description": "User ID", 
-                        "name": "id"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "friends"
-                ], 
-                "summary": "List friend of a user", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-friend-request-of-user"
-            }
-        }, 
-        "/address": {
-            "post": {
-                "responses": {
-                    "201": {
-                        "description": "Created", 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddressResponse"
-                        }
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "Add an address to account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.AddAddressRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Address Data", 
-                        "name": "address"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "addresses"
-                ], 
-                "summary": "Add an address to account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "add-address"
-            }, 
-            "get": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.AddressesResponse"
-                            }, 
-                            "type": "array"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }, 
-                "description": "List addresses of an account", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "addresses"
-                ], 
-                "summary": "List addresses of an account", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-addresses"
-            }
-        }, 
+        },
         "/referral/accept": {
             "post": {
+                "description": "Accept a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Accept a referral code",
+                "operationId": "accept-referral",
+                "parameters": [
+                    {
+                        "description": "Referral Code Data",
+                        "name": "accept_invite_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AcceptInviteRequest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.AcceptInviteResponse"
                         }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "409": {
-                        "description": "Conflict"
-                    }, 
+                    },
                     "401": {
                         "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Accept a referral code", 
-                "parameters": [
+                }
+            }
+        },
+        "/referral/acceptor": {
+            "get": {
+                "security": [
                     {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.AcceptInviteRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Referral Code Data", 
-                        "name": "accept_invite_request"
+                        "ApiKeyAuth": []
                     }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "referral"
-                ], 
-                "summary": "Accept a referral code", 
+                ],
+                "description": "View referral status by acceptor",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "accept-referral"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "View referral status by acceptor",
+                "operationId": "view-referral-status-by-acceptor",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetInvitationResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
             }
-        }, 
-        "/whitelist": {
-            "post": {
+        },
+        "/referral/count/accept": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Count the accepted referral codes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Count the accepted referral codes",
+                "operationId": "count-accepted-referral",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetAcceptedReferralResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/referral/count/left": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Count rest of the available referral codes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Count rest of the available referral codes",
+                "operationId": "count-left-referral",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetLeftInvitationNumberResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/referral/create": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Create a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Create a referral code",
+                "operationId": "create-referral-code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
-                        "description": "Created", 
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.CreateInviteCodeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/referral/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all invite codes of a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "List all invite codes of a user",
+                "operationId": "list-invitations",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ListInvitationResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/referral/nextAvailable": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Next invite available time",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Next invite available time",
+                "operationId": "next-invite-available-time",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Timezone information",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.GetNextInviteAvailableTimeRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GetNextInviteAvailableTimeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/referral/revoke": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Revoke a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Revoke a referral code",
+                "operationId": "revoke-referral-code",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Referral Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RevokeInviteCodeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/referral/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get the referral code status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Get the referral code status",
+                "operationId": "get-referral-status",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Referral Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.RevokeInviteCodeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete a referral code",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "referral"
+                ],
+                "summary": "Delete a referral code",
+                "operationId": "delete-referral",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Referral Code ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.DeleteInvitationResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/request": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List friend requests of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "List friend requests of an account",
+                "operationId": "list-friend-request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.FriendRequestResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add friendship with another user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Add friend",
+                "operationId": "add-friend",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "FriendRequest Data",
+                        "name": "friend_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AddFriendRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.FriendRequestResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/request/confirm/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Confirm a friend request by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Confirm a friend request by ID",
+                "operationId": "confirm-friend-request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.FriendRequestResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/request/follow": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Follow friend",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Follow friend",
+                "operationId": "follow-friend",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Other User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.FollowResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/request/query": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query friend requests of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Query friend requests of an account",
+                "operationId": "query-friend-request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.FriendRequestResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/request/reject/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Reject a friend request by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Reject a friend request by ID",
+                "operationId": "reject-friend-request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.FriendRequestResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/request/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Drop a friend request by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "requests"
+                ],
+                "summary": "Drop a friend request by ID",
+                "operationId": "drop-friend-request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Notification ID",
+                        "name": "friend_status_request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateFriendStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/search/user/{keyword}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Search users by keyword",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "search"
+                ],
+                "summary": "Search users by keyword",
+                "operationId": "search-users",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Keyword Data",
+                        "name": "keyword",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.UserResponse"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/setting/device": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List devices",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "List devices",
+                "operationId": "list-devices",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.ListDevicesResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/setting/socialMedia/link": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List linked social media accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "List linked social media accounts",
+                "operationId": "list-linked-social-media",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.SocialMedia"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add linked social media accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "Add linked social media accounts",
+                "operationId": "add-linked-social-media",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "The linked social media metadata includes platform and username",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AddLinkedSocialMedia"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.SocialMedia"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Remove linked social media accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "Remove linked social media accounts",
+                "operationId": "remove-linked-social-media",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "The linked social media platform name",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RemoveLinkedSocialMedia"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.SocialMedia"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/setting/socialMedia/link/{platform}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get linked social media accounts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings"
+                ],
+                "summary": "Get linked social media accounts",
+                "operationId": "get-linked-social-media",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.SocialMedia"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/whitelist": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all whitelist user records",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "List all whitelist user records",
+                "operationId": "list-records",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.WhitelistUserInfo"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Create a whitelist user record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Create a whitelist user record",
+                "operationId": "create-whitelist-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "RegistrationSession",
+                        "name": "RegistrationSession",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Record Data",
+                        "name": "record",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.CreateWhiteListUserInfoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/api.WhitelistUserInfo"
                         }
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
+                    },
                     "400": {
                         "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Create a whitelist user record", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "RegistrationSession", 
-                        "name": "RegistrationSession"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.CreateWhiteListUserInfoRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Record Data", 
-                        "name": "record"
-                    }
-                ], 
+                }
+            }
+        },
+        "/whitelist/email/generate": {
+            "post": {
+                "description": "Generate email verification passcode and send passcode to user email",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
-                ], 
+                ],
                 "tags": [
                     "whitelist"
-                ], 
-                "summary": "Create a whitelist user record", 
-                "security": [
+                ],
+                "summary": "Generate email verification passcode",
+                "operationId": "whitelist-email-generate",
+                "parameters": [
                     {
-                        "ApiKeyAuth": []
+                        "description": "Email",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.GenerateEmailPasscodeRequest"
+                        }
                     }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "create-whitelist-user"
-            }, 
-            "get": {
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "Email verification was sent to user email",
                         "schema": {
-                            "items": {
-                                "$ref": "#/definitions/api.WhitelistUserInfo"
-                            }, 
-                            "type": "array"
+                            "type": "string"
                         }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
+                    },
                     "400": {
                         "description": "Bad Request"
-                    }, 
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     }
-                }, 
-                "description": "List all whitelist user records", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "List all whitelist user records", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "list-records"
+                }
             }
-        }, 
-        "/account/activate": {
-            "put": {
-                "responses": {
-                    "200": {
-                        "description": "OK", 
-                        "schema": {
-                            "$ref": "#/definitions/api.UserResponse"
-                        }
-                    }, 
-                    "404": {
-                        "description": "Not Found"
-                    }, 
-                    "403": {
-                        "description": "Forbidden"
-                    }, 
-                    "401": {
-                        "description": "Unauthorized"
-                    }, 
-                    "400": {
-                        "description": "Bad Request"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }, 
-                "description": "Activate a user resource", 
-                "parameters": [
-                    {
-                        "required": true, 
-                        "in": "header", 
-                        "type": "string", 
-                        "description": "Authorization", 
-                        "name": "Authorization"
-                    }, 
-                    {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.UpdateUserStatusRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Update user status request metadata", 
-                        "name": "UpdateUserStatusRequest"
-                    }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "users"
-                ], 
-                "summary": "Activate a user resource", 
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ], 
-                "consumes": [
-                    "application/json"
-                ], 
-                "operationId": "activate-user"
-            }
-        }, 
+        },
         "/whitelist/email/verify": {
             "post": {
+                "description": "Verify email passcode",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Verify email passcode",
+                "operationId": "whitelist-email-verify",
+                "parameters": [
+                    {
+                        "description": "Verify information",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.VerifyEmailPasscodeRequest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK", 
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/api.RegistrationSessionResponse"
                         }
-                    }, 
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    }, 
-                    "500": {
-                        "description": "Internal Server Error"
-                    }, 
+                    },
                     "400": {
                         "description": "Bad Request"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
-                }, 
-                "description": "Verify email passcode", 
-                "parameters": [
+                }
+            }
+        },
+        "/whitelist/email/{email}": {
+            "get": {
+                "security": [
                     {
-                        "required": true, 
-                        "schema": {
-                            "$ref": "#/definitions/api.VerifyEmailPasscodeRequest"
-                        }, 
-                        "in": "body", 
-                        "description": "Verify information", 
-                        "name": "request"
+                        "ApiKeyAuth": []
                     }
-                ], 
-                "produces": [
-                    "application/json"
-                ], 
-                "tags": [
-                    "whitelist"
-                ], 
-                "summary": "Verify email passcode", 
+                ],
+                "description": "Get whitelist user records by email",
                 "consumes": [
                     "application/json"
-                ], 
-                "operationId": "whitelist-email-verify"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Get whitelist user records by email",
+                "operationId": "get-record-by-email",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Email Address",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.WhitelistUserInfo"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/whitelist/name/{name}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get whitelist user records by name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Get whitelist user records by name",
+                "operationId": "get-record-by-name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.WhitelistUserInfo"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/whitelist/phone/{phone}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get whitelist user records by phone",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Get whitelist user records by phone",
+                "operationId": "get-record-by-phone",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Phone Number",
+                        "name": "phone",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.WhitelistUserInfo"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/whitelist/query": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query all whitelist user records",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Query all whitelist user records",
+                "operationId": "query-records",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.WhitelistUserInfo"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/whitelist/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete a whitelist user record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "whitelist"
+                ],
+                "summary": "Delete a whitelist user record",
+                "operationId": "delete-whitelist-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Whitelist Record ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.WhitelistUserInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/activity": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List activities of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "activities"
+                ],
+                "summary": "List activities of an account",
+                "operationId": "list-activities",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.ActivityResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/activity/query": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query activities of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "activities"
+                ],
+                "summary": "Query activities of an account",
+                "operationId": "query-activities",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.Post"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/news/query": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query news by page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "news"
+                ],
+                "summary": "Query news by page",
+                "operationId": "query-news",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entity.News"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/transaction": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all transactions of requester",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "List all transactions of requester",
+                "operationId": "list-transactions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.TransactionResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update a transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Update a transaction",
+                "operationId": "update-transaction",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Transaction Data",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UpdateTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.TransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Add a transaction to account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Add a transaction to account",
+                "operationId": "add-transaction",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Transaction Data",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AddTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.TransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete a transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Delete a transaction",
+                "operationId": "delete-transaction",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.TransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/transaction/query/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Query requester's transactions by page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Query requester's transactions by page",
+                "operationId": "query-transactions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "page size",
+                        "name": "per_page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.TransactionResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/transaction/user/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "List all transactions of an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "List all transactions of an account",
+                "operationId": "list-transactions-by-user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.TransactionResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/transaction/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get a transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Get a transaction",
+                "operationId": "get-transaction",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Transaction ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.TransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
             }
         }
     },
     "definitions": {
-        "api.RevokeInviteCodeResponse": {
-            "type": "object", 
-            "properties": {
-                "left_invite_number": {
-                    "type": "integer"
-                }, 
-                "invite_code": {
-                    "$ref": "#/definitions/entity.InviteCode"
-                }
-            }
-        }, 
-        "gorm.DeletedAt": {
-            "type": "object", 
-            "properties": {
-                "valid": {
-                    "type": "boolean", 
-                    "description": "Valid is true if Time is not NULL"
-                }, 
-                "time": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.ListDevicesResponse": {
-            "type": "object", 
-            "properties": {
-                "devices": {
-                    "items": {
-                        "$ref": "#/definitions/api.DeviceInfo"
-                    }, 
-                    "type": "array"
-                }
-            }
-        }, 
-        "api.LogoutUserResponse": {
-            "type": "object", 
-            "properties": {
-                "device": {
-                    "$ref": "#/definitions/api.DeviceInfo"
-                }
-            }
-        }, 
-        "api.VerifyEmailPasscodeRequest": {
-            "required": [
-                "email", 
-                "passcode"
-            ], 
-            "type": "object", 
-            "properties": {
-                "passcode": {
-                    "type": "string"
-                }, 
-                "email": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.LogoutUserRequest": {
-            "type": "object", 
-            "properties": {
-                "device_info": {
-                    "$ref": "#/definitions/api.DeviceInfo"
-                }
-            }
-        }, 
-        "api.UpdateUserStatusRequest": {
-            "type": "object", 
-            "properties": {
-                "id": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.AcceptInviteResponse": {
-            "type": "object", 
-            "properties": {
-                "invitation": {
-                    "$ref": "#/definitions/entity.InviteCode"
-                }
-            }
-        }, 
-        "api.GetInvitationResponse": {
-            "type": "object", 
-            "properties": {
-                "invitation": {
-                    "$ref": "#/definitions/entity.InviteCode"
-                }
-            }
-        }, 
-        "api.AddAddressRequest": {
-            "required": [
-                "blockchain", 
-                "name", 
-                "pubkey", 
-                "symbol"
-            ], 
-            "type": "object", 
-            "properties": {
-                "name": {
-                    "minLength": 2, 
-                    "type": "string", 
-                    "maxLength": 30
-                }, 
-                "is_primary": {
-                    "type": "boolean"
-                }, 
-                "symbol": {
-                    "minLength": 1, 
-                    "type": "string", 
-                    "maxLength": 10
-                }, 
-                "blockchain": {
-                    "enum": [
-                        "bitcoin", 
-                        "ethereum", 
-                        "solana", 
-                        "polygon", 
-                        "binance"
-                    ], 
-                    "type": "string"
-                }, 
-                "currency": {
-                    "type": "string"
-                }, 
-                "pubkey": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "entity.SocialMedia": {
-            "type": "object", 
-            "properties": {
-                "user_refer": {
-                    "type": "integer"
-                }, 
-                "social_media": {
-                    "type": "string"
-                }, 
-                "social_media_username": {
-                    "type": "string"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.DeleteInvitationResponse": {
-            "type": "object", 
-            "properties": {
-                "deleted_invitation": {
-                    "$ref": "#/definitions/entity.InviteCode"
-                }
-            }
-        }, 
-        "api.RevokeTokenRequest": {
-            "required": [
-                "token"
-            ], 
-            "type": "object", 
-            "properties": {
-                "token_type_hint": {
-                    "type": "string"
-                }, 
-                "token": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.GetLeftInvitationNumberResponse": {
-            "type": "object", 
-            "properties": {
-                "left_invite_number": {
-                    "type": "integer"
-                }
-            }
-        }, 
-        "entity.Device": {
-            "type": "object", 
-            "properties": {
-                "device_token": {
-                    "type": "string"
-                }, 
-                "name": {
-                    "type": "string"
-                }, 
-                "device_model": {
-                    "type": "string"
-                }, 
-                "user_refer": {
-                    "type": "integer"
-                }, 
-                "is_disabled": {
-                    "type": "boolean"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "os": {
-                    "type": "string"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.RegistrationSessionResponse": {
-            "type": "object", 
-            "properties": {
-                "access_token": {
-                    "type": "string"
-                }, 
-                "email": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.AddressesResponse": {
-            "type": "object", 
-            "properties": {
-                "addresses": {
-                    "items": {
-                        "$ref": "#/definitions/entity.Address"
-                    }, 
-                    "type": "array"
-                }
-            }
-        }, 
-        "api.LoginUserRequest": {
-            "required": [
-                "login_info", 
-                "password"
-            ], 
-            "type": "object", 
-            "properties": {
-                "login_info": {
-                    "type": "string"
-                }, 
-                "device_info": {
-                    "$ref": "#/definitions/api.DeviceInfo"
-                }, 
-                "password": {
-                    "minLength": 8, 
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.ActivityResponse": {
-            "type": "object", 
-            "properties": {
-                "posts": {
-                    "items": {
-                        "$ref": "#/definitions/api.Post"
-                    }, 
-                    "type": "array"
-                }
-            }
-        }, 
-        "api.RefreshTokenResponse": {
-            "type": "object", 
-            "properties": {
-                "access_token": {
-                    "type": "string"
-                }, 
-                "token_type": {
-                    "type": "string"
-                }, 
-                "expires": {
-                    "type": "integer"
-                }, 
-                "refresh_token": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.Transaction": {
-            "type": "object", 
-            "properties": {
-                "status": {
-                    "type": "string"
-                }, 
-                "receiver_url": {
-                    "type": "string"
-                }, 
-                "receiver_id": {
-                    "type": "integer"
-                }, 
-                "sender_url": {
-                    "type": "string"
-                }, 
-                "name": {
-                    "type": "string"
-                }, 
-                "receiver_username": {
-                    "type": "string"
-                }, 
-                "sender_id": {
-                    "type": "integer"
-                }, 
-                "symbol": {
-                    "type": "string"
-                }, 
-                "blockchain": {
-                    "type": "string"
-                }, 
-                "receiver_pk": {
-                    "type": "string"
-                }, 
-                "sender_username": {
-                    "type": "string"
-                }, 
-                "currency": {
-                    "type": "string"
-                }, 
-                "amount": {
-                    "type": "string"
-                }, 
-                "sender_pk": {
-                    "type": "string"
-                }, 
-                "message": {
-                    "type": "string"
-                }, 
-                "transaction_type": {
-                    "type": "string"
-                }, 
-                "id": {
-                    "type": "integer"
-                }
-            }
-        }, 
-        "api.RestoreCloudBackupResponse": {
-            "type": "object", 
-            "properties": {
-                "last_access": {
-                    "type": "string"
-                }, 
-                "backup_name": {
-                    "type": "string"
-                }, 
-                "secret": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "entity.CloudBackup": {
-            "required": [
-                "name", 
-                "passcode", 
-                "secret"
-            ], 
-            "type": "object", 
-            "properties": {
-                "name": {
-                    "type": "string"
-                }, 
-                "last_access_time": {
-                    "type": "string"
-                }, 
-                "user_refer": {
-                    "type": "integer"
-                }, 
-                "secret": {
-                    "type": "string"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "passcode": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.AddTransactionRequest": {
-            "required": [
-                "amount", 
-                "blockchain", 
-                "name", 
-                "show_type", 
-                "symbol"
-            ], 
-            "type": "object", 
-            "properties": {
-                "status": {
-                    "type": "string"
-                }, 
-                "receiver_id": {
-                    "type": "integer"
-                }, 
-                "name": {
-                    "type": "string"
-                }, 
-                "sender_id": {
-                    "type": "integer"
-                }, 
-                "symbol": {
-                    "type": "string"
-                }, 
-                "blockchain": {
-                    "type": "string"
-                }, 
-                "receiver_pk": {
-                    "type": "string"
-                }, 
-                "show_type": {
-                    "enum": [
-                        "Public", 
-                        "Private", 
-                        "Friend"
-                    ], 
-                    "type": "string"
-                }, 
-                "currency": {
-                    "type": "string"
-                }, 
-                "amount": {
-                    "type": "number"
-                }, 
-                "sender_pk": {
-                    "type": "string"
-                }, 
-                "message": {
-                    "type": "string", 
-                    "maxLength": 200
-                }, 
-                "transaction_type": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "entity.News": {
-            "required": [
-                "source", 
-                "title", 
-                "url"
-            ], 
-            "type": "object", 
-            "properties": {
-                "title": {
-                    "type": "string"
-                }, 
-                "url": {
-                    "type": "string"
-                }, 
-                "preview_url": {
-                    "type": "string"
-                }, 
-                "source": {
-                    "type": "string"
-                }, 
-                "preview_name": {
-                    "type": "string"
-                }, 
-                "preview_description": {
-                    "type": "string"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
-                }, 
-                "preview_image": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.UpdateAddressRequest": {
-            "type": "object", 
-            "properties": {
-                "is_primary": {
-                    "type": "boolean"
-                }, 
-                "name": {
-                    "type": "string", 
-                    "maxLength": 30
-                }
-            }
-        }, 
         "api.AcceptInviteRequest": {
+            "type": "object",
             "required": [
                 "code"
-            ], 
-            "type": "object", 
+            ],
             "properties": {
-                "phone": {
-                    "type": "string"
-                }, 
                 "code": {
                     "type": "string"
-                }, 
+                },
                 "email": {
                     "type": "string"
+                },
+                "phone": {
+                    "type": "string"
                 }
             }
-        }, 
-        "api.Moment": {
-            "type": "object", 
+        },
+        "api.AcceptInviteResponse": {
+            "type": "object",
             "properties": {
-                "url": {
-                    "type": "string"
-                }, 
-                "message": {
-                    "type": "string"
-                }, 
-                "user_ref": {
-                    "type": "integer"
-                }, 
-                "id": {
-                    "type": "integer"
+                "invitation": {
+                    "$ref": "#/definitions/entity.InviteCode"
                 }
             }
-        }, 
-        "api.DeviceInfo": {
-            "type": "object", 
+        },
+        "api.AddAddressRequest": {
+            "type": "object",
+            "required": [
+                "blockchain",
+                "name",
+                "pubkey",
+                "symbol"
+            ],
             "properties": {
-                "model": {
+                "blockchain": {
+                    "type": "string",
+                    "enum": [
+                        "bitcoin",
+                        "ethereum",
+                        "solana",
+                        "polygon",
+                        "binance"
+                    ]
+                },
+                "currency": {
                     "type": "string"
-                }, 
-                "os": {
-                    "type": "string"
-                }, 
+                },
+                "is_primary": {
+                    "type": "boolean"
+                },
                 "name": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                },
+                "pubkey": {
                     "type": "string"
-                }, 
-                "token": {
-                    "type": "string"
+                },
+                "symbol": {
+                    "type": "string",
+                    "maxLength": 10,
+                    "minLength": 1
                 }
             }
-        }, 
-        "api.FriendRequestResponse": {
-            "type": "object", 
-            "properties": {
-                "status": {
-                    "type": "string"
-                }, 
-                "receiver_ref": {
-                    "type": "integer"
-                }, 
-                "receiver_url": {
-                    "type": "string"
-                }, 
-                "creatr_url": {
-                    "type": "string"
-                }, 
-                "creator_ref": {
-                    "type": "integer"
-                }, 
-                "creator_username": {
-                    "type": "string"
-                }, 
-                "receiver_username": {
-                    "type": "string"
-                }, 
-                "id": {
-                    "type": "integer"
-                }
-            }
-        }, 
-        "entity.Notification": {
+        },
+        "api.AddCloudBackupRequest": {
+            "type": "object",
             "required": [
-                "actor_type", 
-                "device_id", 
-                "title", 
-                "type", 
+                "backup_name",
+                "passcode",
                 "user_id"
-            ], 
-            "type": "object", 
+            ],
             "properties": {
-                "user_id": {
-                    "type": "integer"
-                }, 
-                "title": {
-                    "type": "string"
-                }, 
-                "template_id": {
-                    "type": "integer"
-                }, 
-                "actor_type": {
-                    "type": "integer"
-                }, 
-                "actor_id": {
-                    "type": "integer"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "message": {
-                    "type": "string"
-                }, 
-                "type": {
-                    "type": "integer"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
-                }, 
-                "device_id": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.RefreshTokenRequest": {
-            "required": [
-                "grant_type", 
-                "refresh_token"
-            ], 
-            "type": "object", 
-            "properties": {
-                "client_secret": {
-                    "type": "string"
-                }, 
-                "grant_type": {
-                    "type": "string"
-                }, 
-                "refresh_token": {
-                    "type": "string"
-                }, 
-                "client_id": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.UpdateUserPasswordRequest": {
-            "required": [
-                "password"
-            ], 
-            "type": "object", 
-            "properties": {
-                "password": {
-                    "minLength": 8, 
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.AddCloudBackupResponse": {
-            "type": "object", 
-            "properties": {
-                "last_access": {
-                    "type": "string"
-                }, 
                 "backup_name": {
                     "type": "string"
-                }, 
+                },
+                "passcode": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                }
+            }
+        },
+        "api.AddCloudBackupResponse": {
+            "type": "object",
+            "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
+                "last_access": {
+                    "type": "string"
+                },
                 "secret": {
                     "type": "string"
                 }
             }
-        }, 
-        "entity.InviteCode": {
-            "required": [
-                "code", 
-                "expired_at", 
-                "owner", 
-                "owner_ref", 
-                "status"
-            ], 
-            "type": "object", 
-            "properties": {
-                "status": {
-                    "enum": [
-                        "Initialized", 
-                        "Accepted", 
-                        "Used", 
-                        "Revoked"
-                    ], 
-                    "type": "string"
-                }, 
-                "accepted_user_id": {
-                    "type": "integer"
-                }, 
-                "code": {
-                    "type": "string"
-                }, 
-                "acceptor_phone": {
-                    "type": "string"
-                }, 
-                "acceptor_email": {
-                    "type": "string"
-                }, 
-                "owner_ref": {
-                    "type": "integer"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "owner": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "expired_at": {
-                    "type": "string"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
-                }, 
-                "acceptor_username": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.ListNotificationResponse": {
-            "type": "object", 
-            "properties": {
-                "notifications": {
-                    "items": {
-                        "$ref": "#/definitions/entity.Notification"
-                    }, 
-                    "type": "array"
-                }
-            }
-        }, 
-        "api.UsernameVerificationRequest": {
+        },
+        "api.AddFriendRequest": {
+            "type": "object",
             "required": [
                 "username"
-            ], 
-            "type": "object", 
+            ],
             "properties": {
+                "user_id": {
+                    "type": "string"
+                },
                 "username": {
-                    "minLength": 2, 
-                    "type": "string", 
-                    "maxLength": 30
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
                 }
             }
-        }, 
-        "api.ListInvitationResponse": {
-            "type": "object", 
+        },
+        "api.AddLinkedSocialMedia": {
+            "type": "object",
             "properties": {
-                "left_invite_number": {
-                    "type": "integer"
-                }, 
-                "invitations": {
-                    "items": {
-                        "$ref": "#/definitions/entity.InviteCode"
-                    }, 
-                    "type": "array"
-                }
-            }
-        }, 
-        "entity.Address": {
-            "type": "object", 
-            "properties": {
-                "name": {
-                    "type": "string"
-                }, 
-                "is_primary": {
-                    "type": "boolean"
-                }, 
-                "symbol": {
-                    "type": "string"
-                }, 
-                "blockchain": {
-                    "type": "string"
-                }, 
-                "currency": {
-                    "type": "string"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "pubkey": {
-                    "type": "string"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
-                }, 
-                "owner_id": {
-                    "type": "integer"
-                }
-            }
-        }, 
-        "api.UserResponse": {
-            "required": [
-                "phone"
-            ], 
-            "type": "object", 
-            "properties": {
-                "username": {
-                    "type": "string"
-                }, 
                 "social_media": {
-                    "items": {
-                        "$ref": "#/definitions/entity.SocialMedia"
-                    }, 
-                    "type": "array"
-                }, 
-                "cloud_backups": {
-                    "items": {
-                        "$ref": "#/definitions/entity.CloudBackup"
-                    }, 
-                    "type": "array"
-                }, 
-                "display_name": {
                     "type": "string"
-                }, 
-                "phone": {
-                    "type": "string"
-                }, 
-                "access_token": {
-                    "type": "string"
-                }, 
-                "token_type": {
-                    "type": "string"
-                }, 
-                "expires": {
-                    "type": "integer"
-                }, 
-                "is_disabled": {
-                    "type": "boolean"
-                }, 
-                "devices": {
-                    "items": {
-                        "$ref": "#/definitions/entity.Device"
-                    }, 
-                    "type": "array"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "refresh_token": {
-                    "type": "string"
-                }, 
-                "bios": {
-                    "type": "string"
-                }, 
-                "last_login": {
-                    "type": "string"
-                }, 
-                "avatar": {
-                    "type": "string"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "friend_status": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "password": {
-                    "type": "string"
-                }, 
-                "email": {
-                    "type": "string"
-                }, 
-                "createdAt": {
+                },
+                "social_media_username": {
                     "type": "string"
                 }
             }
-        }, 
+        },
         "api.AddressResponse": {
-            "type": "object", 
+            "type": "object",
             "properties": {
                 "address": {
                     "$ref": "#/definitions/entity.Address"
                 }
             }
-        }, 
-        "api.CreateInviteCodeResponse": {
-            "type": "object", 
+        },
+        "api.AddressesResponse": {
+            "type": "object",
             "properties": {
-                "left_invite_number": {
-                    "type": "integer"
-                }, 
-                "invite_code": {
-                    "$ref": "#/definitions/entity.InviteCode"
+                "addresses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Address"
+                    }
                 }
             }
-        }, 
-        "api.Post": {
-            "type": "object", 
+        },
+        "api.CreateInviteCodeResponse": {
+            "type": "object",
             "properties": {
-                "moment": {
-                    "$ref": "#/definitions/api.Moment"
-                }, 
-                "transaction": {
-                    "$ref": "#/definitions/api.Transaction"
-                }, 
-                "type": {
+                "invite_code": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                },
+                "left_invite_number": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.CreateUserRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "bios": {
+                    "type": "string"
+                },
+                "device_info": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                },
+                "display_name": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                }
+            }
+        },
+        "api.CreateWhiteListUserInfoRequest": {
+            "type": "object",
+            "required": [
+                "email",
+                "name"
+            ],
+            "properties": {
+                "discord": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "twitter": {
                     "type": "string"
                 }
             }
-        }, 
+        },
+        "api.DeleteInvitationResponse": {
+            "type": "object",
+            "properties": {
+                "deleted_invitation": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                }
+            }
+        },
         "api.DeleteNotificationResponse": {
-            "type": "object", 
+            "type": "object",
             "properties": {
                 "notification": {
                     "$ref": "#/definitions/entity.Notification"
                 }
             }
-        }, 
-        "api.AddFriendRequest": {
-            "required": [
-                "username"
-            ], 
-            "type": "object", 
+        },
+        "api.DeviceInfo": {
+            "type": "object",
             "properties": {
+                "model": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "os": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.FollowResponse": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
                 "username": {
-                    "minLength": 2, 
-                    "type": "string", 
-                    "maxLength": 30
-                }, 
-                "user_id": {
                     "type": "string"
                 }
             }
-        }, 
-        "api.UpdateFriendStatusRequest": {
-            "type": "object", 
+        },
+        "api.FriendRequestResponse": {
+            "type": "object",
             "properties": {
-                "notification_id": {
+                "creator_ref": {
+                    "type": "integer"
+                },
+                "creator_username": {
+                    "type": "string"
+                },
+                "creatr_url": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "receiver_ref": {
+                    "type": "integer"
+                },
+                "receiver_url": {
+                    "type": "string"
+                },
+                "receiver_username": {
+                    "type": "string"
+                },
+                "status": {
                     "type": "string"
                 }
             }
-        }, 
+        },
         "api.GenerateEmailPasscodeRequest": {
+            "type": "object",
             "required": [
                 "email"
-            ], 
-            "type": "object", 
+            ],
             "properties": {
                 "email": {
                     "type": "string"
                 }
             }
-        }, 
+        },
         "api.GetAcceptedReferralResponse": {
-            "type": "object", 
+            "type": "object",
             "properties": {
                 "accepted_invitations": {
                     "type": "integer"
                 }
             }
-        }, 
-        "api.RemoveLinkedSocialMedia": {
-            "type": "object", 
+        },
+        "api.GetInvitationResponse": {
+            "type": "object",
             "properties": {
-                "social_media": {
-                    "type": "string"
+                "invitation": {
+                    "$ref": "#/definitions/entity.InviteCode"
                 }
             }
-        }, 
-        "api.WhitelistUserInfo": {
-            "type": "object", 
+        },
+        "api.GetLeftInvitationNumberResponse": {
+            "type": "object",
             "properties": {
-                "name": {
-                    "type": "string"
-                }, 
-                "discord": {
-                    "type": "string"
-                }, 
-                "twitter": {
-                    "type": "string"
-                }, 
-                "email": {
-                    "type": "string"
-                }, 
-                "phone": {
-                    "type": "string"
-                }, 
+                "left_invite_number": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.GetNextInviteAvailableTimeRequest": {
+            "type": "object",
+            "properties": {
                 "location": {
                     "type": "string"
-                }, 
-                "updatedAt": {
-                    "type": "string"
-                }, 
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                }, 
-                "id": {
-                    "type": "integer"
-                }, 
-                "createdAt": {
-                    "type": "string"
                 }
             }
-        }, 
-        "api.RestoreCloudBackupRequest": {
-            "required": [
-                "backup_name", 
-                "passcode", 
-                "user_id"
-            ], 
-            "type": "object", 
-            "properties": {
-                "passcode": {
-                    "type": "string"
-                }, 
-                "backup_name": {
-                    "type": "string"
-                }, 
-                "user_id": {
-                    "minLength": 2, 
-                    "type": "string", 
-                    "maxLength": 30
-                }
-            }
-        }, 
-        "api.CreateUserRequest": {
-            "required": [
-                "email", 
-                "password", 
-                "username"
-            ], 
-            "type": "object", 
-            "properties": {
-                "username": {
-                    "minLength": 2, 
-                    "type": "string", 
-                    "maxLength": 30
-                }, 
-                "display_name": {
-                    "type": "string", 
-                    "maxLength": 50
-                }, 
-                "phone": {
-                    "type": "string"
-                }, 
-                "bios": {
-                    "type": "string"
-                }, 
-                "device_info": {
-                    "$ref": "#/definitions/api.DeviceInfo"
-                }, 
-                "avatar": {
-                    "type": "string"
-                }, 
-                "password": {
-                    "minLength": 8, 
-                    "type": "string"
-                }, 
-                "email": {
-                    "type": "string"
-                }
-            }
-        }, 
-        "api.FollowResponse": {
-            "type": "object", 
-            "properties": {
-                "username": {
-                    "type": "string"
-                }, 
-                "avatar": {
-                    "type": "string"
-                }, 
-                "id": {
-                    "type": "integer"
-                }
-            }
-        }, 
+        },
         "api.GetNextInviteAvailableTimeResponse": {
-            "type": "object", 
+            "type": "object",
             "properties": {
                 "next_available_time": {
                     "type": "string"
                 }
             }
-        }, 
-        "api.GetNextInviteAvailableTimeRequest": {
-            "type": "object", 
+        },
+        "api.ListDevicesResponse": {
+            "type": "object",
             "properties": {
-                "location": {
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.DeviceInfo"
+                    }
+                }
+            }
+        },
+        "api.ListInvitationResponse": {
+            "type": "object",
+            "properties": {
+                "invitations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.InviteCode"
+                    }
+                },
+                "left_invite_number": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.ListNotificationResponse": {
+            "type": "object",
+            "properties": {
+                "notifications": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Notification"
+                    }
+                }
+            }
+        },
+        "api.LoginUserRequest": {
+            "type": "object",
+            "required": [
+                "login_info",
+                "password"
+            ],
+            "properties": {
+                "device_info": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                },
+                "login_info": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8
+                }
+            }
+        },
+        "api.LogoutUserRequest": {
+            "type": "object",
+            "properties": {
+                "device_info": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                }
+            }
+        },
+        "api.LogoutUserResponse": {
+            "type": "object",
+            "properties": {
+                "device": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                }
+            }
+        },
+        "api.RefreshTokenRequest": {
+            "type": "object",
+            "required": [
+                "grant_type",
+                "refresh_token"
+            ],
+            "properties": {
+                "client_id": {
+                    "type": "string"
+                },
+                "client_secret": {
+                    "type": "string"
+                },
+                "grant_type": {
+                    "type": "string"
+                },
+                "refresh_token": {
                     "type": "string"
                 }
             }
-        }, 
-        "api.AddLinkedSocialMedia": {
-            "type": "object", 
+        },
+        "api.RefreshTokenResponse": {
+            "type": "object",
             "properties": {
-                "social_media": {
+                "access_token": {
                     "type": "string"
-                }, 
-                "social_media_username": {
+                },
+                "expires": {
+                    "type": "integer"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "token_type": {
                     "type": "string"
                 }
             }
-        }, 
-        "api.TransactionResponse": {
-            "type": "object", 
+        },
+        "api.RegistrationSessionResponse": {
+            "type": "object",
             "properties": {
-                "transaction": {
-                    "$ref": "#/definitions/api.Transaction"
-                }
-            }
-        }, 
-        "api.UpdateUserRequest": {
-            "type": "object", 
-            "properties": {
-                "username": {
-                    "type": "string", 
-                    "maxLength": 30
-                }, 
-                "bios": {
+                "access_token": {
                     "type": "string"
-                }, 
-                "avatar": {
-                    "type": "string"
-                }, 
-                "phone": {
-                    "type": "string"
-                }, 
+                },
                 "email": {
                     "type": "string"
                 }
             }
-        }, 
-        "api.AddCloudBackupRequest": {
-            "required": [
-                "backup_name", 
-                "passcode", 
-                "user_id"
-            ], 
-            "type": "object", 
+        },
+        "api.RemoveLinkedSocialMedia": {
+            "type": "object",
             "properties": {
-                "passcode": {
+                "social_media": {
                     "type": "string"
-                }, 
+                }
+            }
+        },
+        "api.ResetUserPasswordRequest": {
+            "type": "object",
+            "required": [
+                "confirm_password",
+                "password"
+            ],
+            "properties": {
+                "confirm_password": {
+                    "type": "string",
+                    "minLength": 8
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 8
+                }
+            }
+        },
+        "api.RestoreCloudBackupRequest": {
+            "type": "object",
+            "required": [
+                "backup_name",
+                "passcode",
+                "user_id"
+            ],
+            "properties": {
                 "backup_name": {
                     "type": "string"
-                }, 
+                },
+                "passcode": {
+                    "type": "string"
+                },
                 "user_id": {
-                    "minLength": 2, 
-                    "type": "string", 
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                }
+            }
+        },
+        "api.RestoreCloudBackupResponse": {
+            "type": "object",
+            "properties": {
+                "backup_name": {
+                    "type": "string"
+                },
+                "last_access": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.RevokeInviteCodeResponse": {
+            "type": "object",
+            "properties": {
+                "invite_code": {
+                    "$ref": "#/definitions/entity.InviteCode"
+                },
+                "left_invite_number": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.RevokeTokenRequest": {
+            "type": "object",
+            "required": [
+                "token"
+            ],
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "token_type_hint": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.UpdateAddressRequest": {
+            "type": "object",
+            "properties": {
+                "is_primary": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string",
                     "maxLength": 30
                 }
             }
-        }, 
-        "api.ResetUserPasswordRequest": {
+        },
+        "api.UpdateFriendStatusRequest": {
+            "type": "object",
+            "properties": {
+                "notification_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.UpdateUserPasswordRequest": {
+            "type": "object",
             "required": [
-                "confirm_password", 
                 "password"
-            ], 
-            "type": "object", 
+            ],
             "properties": {
-                "confirm_password": {
-                    "minLength": 8, 
-                    "type": "string"
-                }, 
                 "password": {
-                    "minLength": 8, 
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 8
                 }
             }
-        }, 
-        "api.UpdateTransactionRequest": {
-            "required": [
-                "name", 
-                "show_type"
-            ], 
-            "type": "object", 
+        },
+        "api.UpdateUserRequest": {
+            "type": "object",
             "properties": {
-                "status": {
+                "avatar": {
                     "type": "string"
-                }, 
-                "message": {
-                    "type": "string", 
-                    "maxLength": 200
-                }, 
-                "name": {
+                },
+                "bios": {
                     "type": "string"
-                }, 
-                "show_type": {
-                    "enum": [
-                        "Public", 
-                        "Private", 
-                        "Friend"
-                    ], 
+                },
+                "email": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 30
+                }
+            }
+        },
+        "api.UpdateUserStatusRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
                     "type": "string"
                 }
             }
-        }, 
+        },
+        "api.UserResponse": {
+            "type": "object",
+            "required": [
+                "phone"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "bios": {
+                    "type": "string"
+                },
+                "cloud_backups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.CloudBackup"
+                    }
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Device"
+                    }
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "expires": {
+                    "type": "integer"
+                },
+                "friend_status": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_disabled": {
+                    "type": "boolean"
+                },
+                "last_login": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "social_media": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.SocialMedia"
+                    }
+                },
+                "token_type": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.UsernameVerificationRequest": {
+            "type": "object",
+            "required": [
+                "username"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 2
+                }
+            }
+        },
         "api.UsernameVerificationResponse": {
-            "type": "object", 
+            "type": "object",
             "properties": {
                 "unique": {
                     "type": "boolean"
                 }
             }
-        }, 
-        "api.CreateWhiteListUserInfoRequest": {
+        },
+        "api.VerifyEmailPasscodeRequest": {
+            "type": "object",
             "required": [
-                "email", 
-                "name"
-            ], 
-            "type": "object", 
+                "email",
+                "passcode"
+            ],
             "properties": {
-                "name": {
-                    "minLength": 2, 
-                    "type": "string", 
-                    "maxLength": 30
-                }, 
+                "email": {
+                    "type": "string"
+                },
+                "passcode": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.WhitelistUserInfo": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
                 "discord": {
                     "type": "string"
-                }, 
-                "twitter": {
+                },
+                "email": {
                     "type": "string"
-                }, 
-                "phone": {
-                    "type": "string"
-                }, 
+                },
+                "id": {
+                    "type": "integer"
+                },
                 "location": {
                     "type": "string"
-                }, 
-                "email": {
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "twitter": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Address": {
+            "type": "object",
+            "properties": {
+                "blockchain": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_primary": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "owner_id": {
+                    "type": "integer"
+                },
+                "pubkey": {
+                    "type": "string"
+                },
+                "symbol": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.CloudBackup": {
+            "type": "object",
+            "required": [
+                "name",
+                "passcode",
+                "secret"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_access_time": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "passcode": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_refer": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.Device": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "device_model": {
+                    "type": "string"
+                },
+                "device_token": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_disabled": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "os": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_refer": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.InviteCode": {
+            "type": "object",
+            "required": [
+                "code",
+                "expired_at",
+                "owner",
+                "owner_ref",
+                "status"
+            ],
+            "properties": {
+                "accepted_user_id": {
+                    "type": "integer"
+                },
+                "acceptor_email": {
+                    "type": "string"
+                },
+                "acceptor_phone": {
+                    "type": "string"
+                },
+                "acceptor_username": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "expired_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "owner_ref": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "Initialized",
+                        "Accepted",
+                        "Used",
+                        "Revoked"
+                    ]
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Notification": {
+            "type": "object",
+            "required": [
+                "actor_type",
+                "device_id",
+                "title",
+                "type",
+                "user_id"
+            ],
+            "properties": {
+                "actor_id": {
+                    "type": "integer"
+                },
+                "actor_type": {
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "device_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "template_id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.SocialMedia": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "social_media": {
+                    "type": "string"
+                },
+                "social_media_username": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_refer": {
+                    "type": "integer"
+                }
+            }
+        },
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "api.ActivityResponse": {
+            "type": "object",
+            "properties": {
+                "posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.Post"
+                    }
+                }
+            }
+        },
+        "api.AddTransactionRequest": {
+            "type": "object",
+            "required": [
+                "blockchain",
+                "name",
+                "show_type",
+                "symbol"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "blockchain": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "receiver_pk": {
+                    "type": "string"
+                },
+                "sender_id": {
+                    "type": "integer"
+                },
+                "sender_pk": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string",
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
+                },
+                "status": {
+                    "type": "string"
+                },
+                "symbol": {
+                    "type": "string"
+                },
+                "transaction_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.Moment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "user_ref": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.Post": {
+            "type": "object",
+            "properties": {
+                "moment": {
+                    "$ref": "#/definitions/api.Moment"
+                },
+                "transaction": {
+                    "$ref": "#/definitions/api.Transaction"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.Transaction": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "string"
+                },
+                "blockchain": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "receiver_id": {
+                    "type": "integer"
+                },
+                "receiver_pk": {
+                    "type": "string"
+                },
+                "receiver_url": {
+                    "type": "string"
+                },
+                "receiver_username": {
+                    "type": "string"
+                },
+                "sender_id": {
+                    "type": "integer"
+                },
+                "sender_pk": {
+                    "type": "string"
+                },
+                "sender_url": {
+                    "type": "string"
+                },
+                "sender_username": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "symbol": {
+                    "type": "string"
+                },
+                "transaction_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.TransactionResponse": {
+            "type": "object",
+            "properties": {
+                "transaction": {
+                    "$ref": "#/definitions/api.Transaction"
+                }
+            }
+        },
+        "api.UpdateTransactionRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "show_type"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "name": {
+                    "type": "string"
+                },
+                "show_type": {
+                    "type": "string",
+                    "enum": [
+                        "Public",
+                        "Private",
+                        "Friend"
+                    ]
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.News": {
+            "type": "object",
+            "required": [
+                "source",
+                "title",
+                "url"
+            ],
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "preview_description": {
+                    "type": "string"
+                },
+                "preview_image": {
+                    "type": "string"
+                },
+                "preview_name": {
+                    "type": "string"
+                },
+                "preview_url": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "url": {
                     "type": "string"
                 }
             }
         }
-    }, 
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it

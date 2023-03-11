@@ -40,4 +40,4 @@ dependency: ## update all bazel file with necessary dependency
 
 .PHONE: doc
 doc: ## update swagger document
-	python ../NestedJsonMerger/merge.py ../account-service/docs/swagger.json ../payment-service/docs/swagger.json ../gateway-service/docs/swagger.json
+	python3 ../NestedJsonMerger/merge.py ../account-service/docs/swagger.json ../payment-service/docs/swagger.json ../gateway-service/docs/swagger.json
