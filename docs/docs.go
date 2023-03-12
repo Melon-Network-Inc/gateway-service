@@ -1312,7 +1312,7 @@ const docTemplate = `{
                     "200": {
                         "description": "sign in successfully",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/api.UserResponse"
                         }
                     },
                     "201": {
