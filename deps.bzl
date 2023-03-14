@@ -490,8 +490,8 @@ def go_dependencies():
         name = "com_github_melon_network_inc_common",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/Melon-Network-Inc/common",
-        sum = "h1:BSQRKAT+YYOwRf1lUWL5sJY2ykkexps34tfDoehJDKw=",
-        version = "v1.0.134",
+        sum = "h1:YZaAr3PTSWEqtXtJ5ZZlnr4ckBTm7a1GfRXm2F7KZ6U=",
+        version = "v1.0.136",
     )
     go_repository(
         name = "com_github_mitchellh_mapstructure",
@@ -967,8 +967,8 @@ def go_dependencies():
         name = "org_golang_x_crypto",
         build_file_proto_mode = "disable_global",
         importpath = "golang.org/x/crypto",
-        sum = "h1:T8NU3HyQ8ClP4SEE+KbFlg6n0NhuTsN4MyznaarGsZM=",
-        version = "v0.0.0-20220525230936-793ad666bf5e",
+        sum = "h1:sK3txAijHtOK88l68nt020reeT1ZdKLIYetKl95FzVY=",
+        version = "v0.0.0-20220622213112-05595931fe9d",
     )
 
     go_repository(
@@ -1087,4 +1087,11 @@ def go_repositories():
         importpath = "golang.org/x/time",
         sum = "h1:xYY+Bajn2a7VBmTM5GikTmnK8ZuX8YgnQCqZpbBNtmA=",
         version = "v0.1.0",
+    )
+    go_repository(
+        name = "com_gitlab_blockdaemon_ubiquity_ubiquity_go_client",
+        build_file_proto_mode = "disable_global",
+        importpath = "gitlab.com/Blockdaemon/ubiquity/ubiquity-go-client",
+        sum = "h1:tDFLfuVe/XtAxr9+c2s5Ek65rEJ0bzZYKF322ovWdh4=",
+        version = "v1.4.0",
     )
