@@ -5,6 +5,7 @@ go_library(
     srcs = [
         "account.go",
         "client.go",
+        "maintenance.go",
         "payment.go",
     ],
     importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/service",
