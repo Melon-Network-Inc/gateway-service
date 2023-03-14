@@ -6,6 +6,7 @@ go_library(
         "accessor.go",
         "account.go",
         "lb.go",
+        "maintenance.go",
         "payment.go",
     ],
     importpath = "github.com/Melon-Network-Inc/gateway-service/pkg/lb",

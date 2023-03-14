@@ -243,6 +243,8 @@ func (s *Server) SetupRouter() *gin.Engine {
 	news := v1.Group("/news")
 	news.GET("/query", authenticator, paymentService.HandleGetRequest)
 
+	
+
 	if !utils.IsProdEnvironment() && swagHandler != nil {
 		s.buildSwagger()
 		s.App.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
