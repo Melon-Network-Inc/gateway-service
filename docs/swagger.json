@@ -1459,6 +1459,65 @@
                 }
             }
         },
+        "/auth/google/openIdConnect": {
+            "post": {
+                "description": "Open ID Connect",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Open ID Connect",
+                "operationId": "open-id",
+                "parameters": [
+                    {
+                        "description": "Open ID Connect request contains the id token and device informaton.",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.OpenIDConnectRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sign in successfully",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "201": {
+                        "description": "created new user",
+                        "schema": {
+                            "$ref": "#/definitions/api.UserResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "user not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "cannot extract correct user information from auth token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/auth/login": {
             "post": {
                 "description": "Login an account",
@@ -4976,6 +5035,20 @@
             "properties": {
                 "device": {
                     "$ref": "#/definitions/api.DeviceInfo"
+                }
+            }
+        },
+        "api.OpenIDConnectRequest": {
+            "type": "object",
+            "required": [
+                "id_token"
+            ],
+            "properties": {
+                "device_info": {
+                    "$ref": "#/definitions/api.DeviceInfo"
+                },
+                "id_token": {
+                    "type": "string"
                 }
             }
         },
