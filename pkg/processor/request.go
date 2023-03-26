@@ -17,7 +17,7 @@ const (
 	AuthorizationKey            = "Authorization"
 	RegistrationKey             = "RegistrationSession"
 	ContextRoleKey              = "UserRole"
-	ContextRegistrationTokenKey = "RegistrationSessionToken"
+	ContextRegistrationTokenKey = "Registration-Session-Token"
 	ContextClientIP             = "X-Forwarded-For"
 	ContextRequestID            = "X-Request-ID"
 	ContextCorrelationID        = "X-Correlation-ID"
