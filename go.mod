@@ -3,7 +3,7 @@ module github.com/Melon-Network-Inc/gateway-service
 go 1.20
 
 require (
-	github.com/Melon-Network-Inc/common v1.0.136
+	github.com/Melon-Network-Inc/common v1.0.150
 	github.com/davecgh/go-spew v1.1.1
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.8.1
