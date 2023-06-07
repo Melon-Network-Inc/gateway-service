@@ -490,8 +490,8 @@ def go_dependencies():
         name = "com_github_melon_network_inc_common",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/Melon-Network-Inc/common",
-        sum = "h1:o56fn9EtaXqGIY+MjWh/phO7bA+OIHxJLA38QeyglpY=",
-        version = "v1.0.150",
+        sum = "h1:ejU5gvODfbnO64hG49FBIyw3Y+XSJoC64k68uytha0k=",
+        version = "v1.0.158",
     )
     go_repository(
         name = "com_github_mitchellh_mapstructure",
@@ -1092,6 +1092,13 @@ def go_repositories():
         name = "com_gitlab_blockdaemon_ubiquity_ubiquity_go_client",
         build_file_proto_mode = "disable_global",
         importpath = "gitlab.com/Blockdaemon/ubiquity/ubiquity-go-client",
-        sum = "h1:tDFLfuVe/XtAxr9+c2s5Ek65rEJ0bzZYKF322ovWdh4=",
-        version = "v1.4.0",
+        sum = "h1:p0aM0SO35YIsD91k0lDDUs0x5+Szn8hiUNoEMdhnYRA=",
+        version = "v1.5.0",
+    )
+    go_repository(
+        name = "com_github_gorilla_websocket",
+        build_file_proto_mode = "disable_global",
+        importpath = "github.com/gorilla/websocket",
+        sum = "h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc=",
+        version = "v1.5.0",
     )
